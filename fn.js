@@ -8,7 +8,7 @@ FN.prototype.any = function(lst, cb) {
     });
   }
 
-  if(cb !== undefined && result) cb();
+  if(cb !== undefined && result) cb(true);
   else return result;
 };
 
@@ -19,7 +19,7 @@ FN.prototype.all = function(lst, cb) {
       if(!element) result = false;
     });
 
-    if(cb !== undefined && result) cb();
+    if(cb !== undefined && result) cb(true);
     else return result;
   }
   else return false;
