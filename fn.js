@@ -44,7 +44,7 @@ FN.prototype.last = function(lst, cb) {
 // Stick with zero indexing.
 FN.prototype.nth = function(lst, nth, cb) {
   if(lst instanceof Array && nth <= lst.length) {
-    if(cb !== undefined) cb(lst[nth])
+    if(cb !== undefined) cb(lst[nth]);
     else return lst[nth];
   }
   return undefined;
