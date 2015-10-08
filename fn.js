@@ -28,7 +28,7 @@ FN.prototype.all = function(lst, cb) {
 FN.prototype.first = function(lst, cb) {
   if(lst instanceof Array) {
     if(cb !== undefined && lst[0] !== undefined) cb(lst[0]);
-    else return (lst instanceof Array) ? lst[0] : undefined;
+    else return (lst[0] !== undefined) ? lst[0] : undefined;
   }
   return undefined;
 };
