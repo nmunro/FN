@@ -1,67 +1,46 @@
-function FN() { return this; }
+/**
+ * FN is a functional library for LISP like operations.
+ * This is designed to be used from within ES6.
+ * Other older versions of ES may not work properly.
+ * Copyright (c) Neil Munro 2015
+ */
 
-FN.prototype.any = function(lst, cb) {
-  var result = false;
-  if(lst instanceof Array) {
-    lst.forEach(function(element, index, array) {
+var FN = Object.create({
+  "any": function(cb, ...lst) {
+    var result = false;
+
+    lst.forEach(function(element) {
       if(element) result = true;
     });
-  }
 
-  if(cb !== undefined && result) cb(true);
-  else return result;
-};
+    return(cb !== undefined) ? cb(result) : result;
+  },
 
-FN.prototype.all = function(lst, cb) {
-  var result = true;
-  if(lst instanceof Array && lst.length > 0) {
-    lst.forEach(function(element, index, array) {
+  "all": function(cb, ...lst) {
+    var result = true;
+
+    lst.forEach(function(element) {
       if(!element) result = false;
     });
 
-    if(cb !== undefined && result) cb(true);
-    else return result;
-  }
-  else return false;
-};
+    return(cb !== undefined) ? cb(result) : result;
+  },
 
-FN.prototype.first = function(lst, cb) {
-  if(lst instanceof Array) {
-    if(cb !== undefined && lst[0] !== undefined) cb(lst[0]);
-    else return (lst[0] !== undefined) ? lst[0] : undefined;
-  }
-  return undefined;
-};
+  "first": function(cb, ...lst) {
+    if(cb !== undefined && lst[0] !== undefined) return cb(lst[0]);
+    else return(lst[0] !== undefined) ? lst[0] : undefined;
+  },
 
-FN.prototype.last = function(lst, cb) {
-  if(lst instanceof Array && lst.length > 0) {
-    if(cb !== undefined) cb(lst[lst.length-1]);
-    else return lst[lst.length-1];
-  }
-  return undefined;
-};
+  "last": function(cb, ...lst) {
+    if(cb !== undefined && lst[0] !== undefined) cb(lst[lst.length-1]);
+    else return(lst[lst.length-1] !== undefined) ? lst[lst.length-1] : undefined;
+  },
 
-// Stick with zero indexing.
-FN.prototype.nth = function(lst, nth, cb) {
-  if(lst instanceof Array && nth <= lst.length) {
-    if(cb !== undefined) cb(lst[nth]);
-    else return lst[nth];
-  }
-  return undefined;
-};
+  "nth": function(cb, nth, ...lst) {
+    return (cb !== undefined) ? cb(lst[nth]) : lst[nth];
+  },
 
-FN.prototype.rest = function(lst, cb) {
-  if(lst instanceof Array && lst.length > 0) {
-    if(cb !== undefined) cb(lst.slice(1));
-    else return lst.slice(1);
+  "rest": function(cb, ...lst) {
+    return(cb !== undefined) ? cb(lst.slice(1)) : lst.slice(1);
   }
-  return undefined;
-};
-
-var fn = new FN();
-var all = fn.all;
-var any = fn.any;
-var first = fn.first;
-var last = fn.last;
-var nth = fn.nth;
-var rest = fn.rest;
+});

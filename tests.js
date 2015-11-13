@@ -1,73 +1,101 @@
 QUnit.test("Any function", function(assert) {
   var done1 = assert.async();
+  var done2 = assert.async();
+  var done3 = assert.async();
   
-  assert.ok(any([true, true, true]) === true, "[true, true, true] passes.");
-  assert.ok(any([false, true, false]) === true, "[false, true, false] passes.");
-  assert.notOk(any([false, false, false]) === true, "[false, false, false] passes.");
-  
-  any([true, true], function(ok) {
-    assert.ok(ok, "Callback executed.");
+  FN.any(function(result) {
+    assert.ok(result, "Result true if all the rest params evaluate to true.");
     done1();
-  });
+  }, true, true);
+
+  FN.any(function(result) {
+    assert.ok(result, "Result true if only one of the rest params evaluates to true.");
+    done2();
+  }, true, false);
+
+  FN.any(function(result) {
+    assert.notOk(result, "Result false when all rest params evaluate to false.");
+    done3();
+  }, false, false);
 });
 
 QUnit.test("All function", function(assert) {
   var done1 = assert.async();
-  
-  assert.ok(all([true, true, true]) === true, "[true, true, true] passes.");
-  assert.ok(all([1 === 1, 2 === 2]) === true, "[1 === 1, 2 === 2] passes.");
-  assert.notOk(all([true, true, false]) === true, "[true, true, false] passes.");
-  
-  all([true, true], function(ok) {
-    assert.ok(ok, "Callback executed.");
+  var done2 = assert.async();
+  var done3 = assert.async();
+
+  FN.all(function(result) {
+    assert.ok(result, "Result true if all rest params evaluate to true.");
     done1();
-  });
+  }, true, true);
+
+  FN.all(function(result) {
+    assert.notOk(result, "Result false if even one of the rest params evaluate to false.");
+    done2();
+  }, true, false);
+
+  FN.all(function(result) {
+    assert.notOk(result, "Result false if all of the rest params evaluate to false.");
+    done3();
+  }, false, false);
 });
 
 QUnit.test("First function", function(assert) {
   var done1 = assert.async();
+  var done2 = assert.async();
   
-  assert.ok(first([1, 2, 3]) === 1, "first [1, 2, 3] === 1 passed.");
-  assert.notOk(first([1, 2, 3]) === 2, "first [1, 2, 3] === 2 passed.");
-  
-  first([1, 2, 3], function(f) {
-    assert.ok(f === 1, "First element is 1.");
+  FN.first(function(element) {
+    assert.ok(element === 1, "First element in the list [1, 2, 3, 4, 5] is 1.");
     done1();
-  });
+  }, 1, 2, 3, 4, 5);
+
+  FN.first(function(element) {
+    assert.notOk(element === 2, "First element in the list [1, 2, 3, 4, 5] is NOT 2.");
+    done2();
+  }, 1, 2, 3, 4, 5);
 });
 
 QUnit.test("Nth function", function(assert) {
   var done1 = assert.async();
-  
-  assert.ok(nth([1, 2, 3], 1) === 2, "nth [1, 2, 3] === 1 passed.");
-  assert.notOk(nth([1, 2, 3], 1) === 3, "nth [1, 2, 3] === 3 passed.");
+  var done2 = assert.async();
 
-  nth([1, 2, 3], 1, function(n) {
-    assert.ok(n === 2, "Correct nth value.");
-    done1();
-  });
+  FN.nth(function(element) {
+    assert.ok(element === 3, "The nth element '2' is '3' in the list [1, 2, 3, 4, 5].")
+    done1(); 
+  }, 2, 1, 2, 3, 4, 5);
+
+  FN.nth(function(element) {
+    assert.notOk(element === 0, "The nth element '2' is not '0' in the list [1, 2, 3, 4, 5].")
+    done2(); 
+  }, 2, 1, 2, 3, 4, 5);
 });
 
 QUnit.test("Last function", function(assert) {
   var done1 = assert.async();
-  
-  assert.ok(last([1, 2, 3]) === 3, "last [1, 2, 3] === 3 passed.");
-  assert.notOk(last([1, 2, 3]) === 2, "last [1, 2, 3] === 2 passed.");
-  
-  last([1, 2, 3], function(l) {
-    assert.ok(l === 3, "Last element found.");
+  var done2 = assert.async();
+
+  FN.last(function(element) {
+    assert.ok(element === 5, "Last element in the list [1, 2, 3, 4, 5] is 5.");
     done1();
-  });
+  }, 1, 2, 3, 4, 5);
+
+  FN.last(function(element) {
+    assert.notOk(element === 0, "Last element in the list [1, 2, 3, 4, 5] is not 0.");
+    done2();
+  }, 1, 2, 3, 4, 5);
 });
 
 QUnit.test("Rest function", function(assert) {
   var done1 = assert.async();
-  
-  assert.ok(rest([1, 2, 3]).join('') === [2, 3].join(''), "rest [1, 2, 3] === [2, 3] passed.");
-  assert.notOk(rest([1, 2, 3]).join('') === [1, 2, 3].join(''), "rest [1, 2, 3] === [1, 2, 3] passed.");
+  var done2 = assert.async();
 
-  rest([1, 2, 3], function(r) {
-    assert.ok(r.join('') === [2, 3].join(''), "Arrays appear to be the same.");
-    done1();
-  });
+  FN.rest(function(rest) {
+    assert.ok(rest.toString() === [2, 3, 4, 5].toString(), "Remainder of the array [1, 2, 3, 4, 5] is equal to [2, 3, 4, 5].");
+    done1();  
+  }, 1, 2, 3, 4, 5);
+
+  FN.rest(function(rest) {
+    assert.notOk(rest.toString() === [4, 5].toString(), "Remainder of the array [1, 2, 3, 4, 5] is not equal to [4, 5].");
+    done2();  
+  }, 1, 2, 3, 4, 5);
 });
