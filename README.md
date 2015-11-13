@@ -1,37 +1,76 @@
 # FN
 A collection of useful kinda, sorta functional... Functions for JavaScript.
+FN takes advantage of ES6 specific features and to be used with versions
+before ES6 some sort of transpiler will be used.
 
-## any(arr, function() { ... });
+## FN.any(function(result) { ... }, ...params);
 
-any is a function which takes an array of statements and optional callback, each statement is evaluated and if
-any of the statements are true the function returns true OR if passed a callback executes the callback.
+### Description
+any takes a callback which is passed the result of evaluating each of the rest parameters, result is true
+if even only one of the rest parameters evaluates to true.
 
-## all(arr, function() { ... });
+### Example 1
+FN.any(function(result) {
+  if(result) console.log("Was true!"); 
+  else console.log("Was false!");
+}, 1 === 1, 2 === 2);
 
-all is a function which takes an array of statements and an optional callback, each statement is evaluated and
-only if ALL of the statements evaluate to true does the function return true, of if passed a callback executes the callback.
+## FN.all(function(result) { ... }, ...params);
 
-## first(arr, function(firstElement) { ... });
 
-first is a function which takes an array and an optional callback, if the list has at least one element in it
-then first will return the first element, or execute the callback with the first element as its parameter.
-Otherwise undefined will be returned.
+### Description
+all takes a callback which is passed the result of evaluating each of the rest paramters in turn,
+if even one of the rest parameters evaluates to false result will be false.
 
-## nth(arr, n, function(nthElement) { ... });
+### Example 1
+FN.all(function(result) {
+  if(result) console.log("Was true!"); 
+  else console.log("Was false!");
+}, 1 === 1, 2 === 2);
 
-nth is a function which takes an array and an optional callback, if the list is at least as long as the value
-of n then n will return the nth element, or execute the callback with the nth element as its parameter.
-Otherwise undefined will be returned. Please note nth is zero indexed, so if you want the third element, for
-example, pass in 2 as the value to n.
+## FN.first(function(element) { ... }, ...params);
 
-## last(arr, function(lastElement) { ... });
+### Description
+first is passed a callback and a list of parameters, the first of these parameters is passed into the callback.
+first returns the RESULT of executing the callback, or if the callback argument was undefined the first element or undefined.
 
-last is a function which takes an array and an optional callback, if the list has at least one element in it
-then first will return the last element, or execute the callback with the last element as its parameter.
-Otherwise undefined will be returned.
+### Example 1
+FN.first(function(element) {
+  console.log("First element: " + element);
+}, 1, 2);
 
-## rest(arr, function(newList) { ... });
 
-rest is a function which takes an array and an optional callback, if the list has at least two elements in it
-then rest will remove the first element from the list and return the remaining elements as a new list. If a callback
-was passed in then the callback will be executed with the new list as its parameter. Otherwise undefined will be returned.
+## FN.nth(function(n, element) { ... }, n, ...params);
+
+### Description
+nth is passed a callback, an index and a list of parameters, the callback is passed the element found at index n.
+nth returns the RESULT of executing the callback, or if the callback argument was undefined, the nth element, or undefined.
+
+### Example 1
+FN.nth(function(n, element) {
+  console.log("Element " + n + " is " + element);
+}, 0, 1, 2);
+
+## FN.last(function(element) { ... }, ...params);
+
+### Description
+last is the logical opposite of first and behaves in the same way. The last element in the rest parameters is passed
+to the callback.
+last returns the RESULT of running the callback, or if the callback argument was undefined the last element or undefined.
+
+### Example 1
+FN.last(function(element) {
+  console.log("Last element: " + element);
+}, 1, 2);
+
+## FN.rest(function(newList) { ... }, ...params);
+
+### Description
+rest is passed a callback and a list of parameters, a new list is passed to the callback, this new list is
+a copy of the old list without the first element.
+rest returns the RESULT of running the callback, or if the callback argument was undefined the new list, or undefined.
+
+### Example 1
+FN.rest(function(lst) {
+  console.log("New list: " + lst.toString());  
+}, 1, 2, 3, 4, 5);

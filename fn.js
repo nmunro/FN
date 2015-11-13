@@ -36,8 +36,8 @@ var FN = Object.create({
     else return(lst[lst.length-1] !== undefined) ? lst[lst.length-1] : undefined;
   },
 
-  "nth": function(cb, nth, ...lst) {
-    return (cb !== undefined) ? cb(lst[nth]) : lst[nth];
+  "nth": function(cb, n, ...lst) {
+    return (cb !== undefined) ? cb(nth, lst[n]) : lst[n];
   },
 
   "rest": function(cb, ...lst) {
