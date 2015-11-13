@@ -59,13 +59,13 @@ QUnit.test("Nth function", function(assert) {
   var done1 = assert.async();
   var done2 = assert.async();
 
-  FN.nth(function(element) {
-    assert.ok(element === 3, "The nth element '2' is '3' in the list [1, 2, 3, 4, 5].")
+  FN.nth(function(n, element) {
+    assert.ok(element === 3, "The nth element '" + n + "' is '3' in the list [1, 2, 3, 4, 5].")
     done1(); 
   }, 2, 1, 2, 3, 4, 5);
 
-  FN.nth(function(element) {
-    assert.notOk(element === 0, "The nth element '2' is not '0' in the list [1, 2, 3, 4, 5].")
+  FN.nth(function(n, element) {
+    assert.notOk(element === 0, "The nth element '" + n + "' is not '0' in the list [1, 2, 3, 4, 5].")
     done2(); 
   }, 2, 1, 2, 3, 4, 5);
 });
