@@ -10,6 +10,7 @@ any takes a callback which is passed the result of evaluating each of the rest p
 if even only one of the rest parameters evaluates to true.
 
 ### Example 1
+
   FN.any(function(result) {
     if(result) console.log("Was true!"); 
     else console.log("Was false!");
@@ -23,6 +24,7 @@ all takes a callback which is passed the result of evaluating each of the rest p
 if even one of the rest parameters evaluates to false result will be false.
 
 ### Example 1
+
   FN.all(function(result) {
     if(result) console.log("Was true!"); 
     else console.log("Was false!");
@@ -35,6 +37,7 @@ first is passed a callback and a list of parameters, the first of these paramete
 first returns the RESULT of executing the callback, or if the callback argument was undefined the first element or undefined.
 
 ### Example 1
+
   FN.first(function(element) {
     console.log("First element: " + element);
   }, 1, 2);
@@ -47,6 +50,7 @@ nth is passed a callback, an index and a list of parameters, the callback is pas
 nth returns the RESULT of executing the callback, or if the callback argument was undefined, the nth element, or undefined.
 
 ### Example 1
+
   FN.nth(function(n, element) {
     console.log("Element " + n + " is " + element);
   }, 0, 1, 2);
@@ -59,6 +63,7 @@ to the callback.
 last returns the RESULT of running the callback, or if the callback argument was undefined the last element or undefined.
 
 ### Example 1
+
   FN.last(function(element) {
     console.log("Last element: " + element);
   }, 1, 2);
@@ -71,6 +76,7 @@ a copy of the old list without the first element.
 rest returns the RESULT of running the callback, or if the callback argument was undefined the new list, or undefined.
 
 ### Example 1
+
   FN.rest(function(lst) {
     console.log("New list: " + lst.toString());  
   }, 1, 2, 3, 4, 5);
