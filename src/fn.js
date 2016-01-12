@@ -9,6 +9,7 @@
  * keep working on it.
  *
  * Copyright (c) Neil Munro 2015-2016.
+ * @author Neil Munro <neilmunro@gmail.com>
  */
 
 "use strict";
@@ -24,16 +25,16 @@ const FN = Object.create({
    *  // Do something important.
    * }, 1 === 1, 5 === 5);
    *
-   * @param cb The callback to execute in the form: () =>  {...}
-   * @param ...lst The arguments to any. Any takes a variable number of
+   * @param {function} cb - The callback to execute in the form: () =>  {...}
+   * @param {boolean} lst - The arguments to any. Any takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined if no expressions
    * evaluated to true or the users didn't pass in a callback.
    */
   "any": (cb, ...lst) => {
-    let result = false;
+    var result = false;
 
-    lst.forEach((element) => if(element) result = true;);
+    lst.forEach((element) => { if(element) result = true; });
 
     return(cb !== undefined && result) ? cb() : undefined;
   },
@@ -48,16 +49,16 @@ const FN = Object.create({
    *  // Do something important.
    * }, 1 === 1, 5 === 5);
    *
-   * @param cb The callback to execute in the form: () =>  {...}
-   * @param ...lst The arguments to all. All takes a variable number of
+   * @param {function} cb - The callback to execute in the form: () =>  {...}
+   * @param {boolean} lst - The arguments to all. All takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined if even one
    * expression evaluated to false or the user didn't pass in a callback.
    */
   "all": (cb, ...lst) => {
-    let result = true;
+    var result = true;
 
-    lst.forEach((element) => if(!element) result = false;);
+    lst.forEach((element) => { if(!element) result = false; });
 
     return(cb !== undefined && result) ? cb() : undefined;
   },
@@ -71,8 +72,8 @@ const FN = Object.create({
    * Example:
    * FN.first((firstElement) => console.log(firstElement));
    *
-   * @param cb The callback to execute in the form: (firstElement) =>  {...}
-   * @param ...lst The arguments to first. First takes a variable number of
+   * @param {function} cb - The callback to execute in the form: (firstElement) =>  {...}
+   * @param {boolean} lst - The arguments to first. First takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined if there wasn't
    * a callback or at least one element passed into first.
@@ -90,8 +91,8 @@ const FN = Object.create({
    * Example:
    * FN.last((lastElement) => console.log(lastElement));
    *
-   * @param cb The callback to execute in the form: (lastElement) =>  {...}
-   * @param ...lst The arguments to last. Last takes a variable number of
+   * @param {function} cb - The callback to execute in the form: (lastElement) =>  {...}
+   * @param {boolean} lst - The arguments to last. Last takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined if there wasn't
    * a callback or at least one element passed into last.
@@ -110,9 +111,9 @@ const FN = Object.create({
    * Example:
    * FN.nth((nthElement) => console.log(nthElement));
    *
-   * @param cb The callback to execute in the form: (nthElement) =>  {...}
-   * @param n The nth element in the list to try and get.
-   * @param ...lst The arguments to nth. Nth takes a variable number of
+   * @param {function} cb - The callback to execute in the form: (nthElement) =>  {...}
+   * @param {number} n - The nth element in the list to try and get.
+   * @param {boolean} lst - The arguments to nth. Nth takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined if there wasn't
    * a callback or the nth element does not exist.
@@ -135,8 +136,8 @@ const FN = Object.create({
    *   });
    * });
    *
-   * @param cb The callback to execute in the form: (remainingElements) =>  {...}
-   * @param ...lst The arguments to rest. Rest takes a variable number of
+   * @param {function} cb - The callback to execute in the form: (remainingElements) =>  {...}
+   * @param {boolean} lst - The arguments to rest. Rest takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined if there wasn't
    * a callback or the argument list is smaller than one.
@@ -158,13 +159,13 @@ const FN = Object.create({
    *   });
    * }, 2, "Lions", "Tigers", "Bears");
    *
-   * @param cb The callback to execute in the form: (elements) =>  {...}
-   * @param n The number of elements to take from the remaining arguments.
-   * @param ...lst The arguments to rest. Rest takes a variable number of
+   * @param {function} cb - The callback to execute in the form: (elements) =>  {...}
+   * @param {number} n - The number of elements to take from the remaining arguments.
+   * @param {boolean} lst - The arguments to rest. Rest takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback.
    */
   "take": (cb, n, ...lst) => {
-    return(cb !== undefined && n !== undefined) ? cb(lst.slice(n))) : undefined;
+    return(cb !== undefined && n !== undefined) ? cb(lst.slice(0, n)) : undefined;
   }
 });

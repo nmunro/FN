@@ -1,101 +1,111 @@
-QUnit.test("Any function", function(assert) {
+QUnit.test("Any function", (assert) => {
   var done1 = assert.async();
   var done2 = assert.async();
-  var done3 = assert.async();
   
-  FN.any(function(result) {
-    assert.ok(result, "Result true if all the rest params evaluate to true.");
+  FN.any(() => {
+    assert.ok(true, "Result true if all the rest params evaluate to true.");
     done1();
   }, true, true);
 
-  FN.any(function(result) {
-    assert.ok(result, "Result true if only one of the rest params evaluates to true.");
+  FN.any(() => {
+    assert.ok(true, "Result true if only one of the rest params evaluates to true.");
     done2();
   }, true, false);
 
-  FN.any(function(result) {
-    assert.notOk(result, "Result false when all rest params evaluate to false.");
+  FN.any(() => {
+    var done3 = assert.async();
+    assert.notOk(false, "This test shouldn't run, if you see this something has gone wrong.");
     done3();
   }, false, false);
 });
 
-QUnit.test("All function", function(assert) {
+QUnit.test("All function", (assert) => {
   var done1 = assert.async();
-  var done2 = assert.async();
-  var done3 = assert.async();
 
-  FN.all(function(result) {
-    assert.ok(result, "Result true if all rest params evaluate to true.");
+  FN.all(() => {
+    assert.ok(true, "Result true if all rest params evaluate to true.");
     done1();
   }, true, true);
 
-  FN.all(function(result) {
-    assert.notOk(result, "Result false if even one of the rest params evaluate to false.");
+  FN.all(() => {
+    var done2 = assert.async();
+    assert.notOk(false, "Result false if even one of the rest params evaluate to false, if working this test shouldn't be executed.");
     done2();
   }, true, false);
 
-  FN.all(function(result) {
-    assert.notOk(result, "Result false if all of the rest params evaluate to false.");
+  FN.all(() => {
+    var done3 = assert.async();
+    assert.notOk(false, "This test shouldn't run, if you see this something has gone wrong.");
     done3();
   }, false, false);
 });
 
-QUnit.test("First function", function(assert) {
+QUnit.test("First function", (assert) => {
   var done1 = assert.async();
   var done2 = assert.async();
   
-  FN.first(function(element) {
+  FN.first((element) => {
     assert.ok(element === 1, "First element in the list [1, 2, 3, 4, 5] is 1.");
     done1();
   }, 1, 2, 3, 4, 5);
 
-  FN.first(function(element) {
+  FN.first((element) => {
     assert.notOk(element === 2, "First element in the list [1, 2, 3, 4, 5] is NOT 2.");
     done2();
   }, 1, 2, 3, 4, 5);
 });
 
-QUnit.test("Nth function", function(assert) {
+QUnit.test("Nth function", (assert) => {
   var done1 = assert.async();
   var done2 = assert.async();
 
-  FN.nth(function(n, element) {
+  FN.nth((n, element) => {
     assert.ok(element === 3, "The nth element '" + n + "' is '3' in the list [1, 2, 3, 4, 5].")
     done1(); 
   }, 2, 1, 2, 3, 4, 5);
 
-  FN.nth(function(n, element) {
+  FN.nth((n, element) => {
     assert.notOk(element === 0, "The nth element '" + n + "' is not '0' in the list [1, 2, 3, 4, 5].")
     done2(); 
   }, 2, 1, 2, 3, 4, 5);
 });
 
-QUnit.test("Last function", function(assert) {
+QUnit.test("Last function", (assert) => {
   var done1 = assert.async();
   var done2 = assert.async();
 
-  FN.last(function(element) {
+  FN.last((element) => {
     assert.ok(element === 5, "Last element in the list [1, 2, 3, 4, 5] is 5.");
     done1();
   }, 1, 2, 3, 4, 5);
 
-  FN.last(function(element) {
+  FN.last((element) => {
     assert.notOk(element === 0, "Last element in the list [1, 2, 3, 4, 5] is not 0.");
     done2();
   }, 1, 2, 3, 4, 5);
 });
 
-QUnit.test("Rest function", function(assert) {
+QUnit.test("Rest function", (assert) => {
   var done1 = assert.async();
   var done2 = assert.async();
 
-  FN.rest(function(rest) {
+  FN.rest((rest) => {
     assert.ok(rest.toString() === [2, 3, 4, 5].toString(), "Remainder of the array [1, 2, 3, 4, 5] is equal to [2, 3, 4, 5].");
     done1();  
   }, 1, 2, 3, 4, 5);
 
-  FN.rest(function(rest) {
+  FN.rest((rest) => {
     assert.notOk(rest.toString() === [4, 5].toString(), "Remainder of the array [1, 2, 3, 4, 5] is not equal to [4, 5].");
     done2();  
   }, 1, 2, 3, 4, 5);
+});
+
+QUnit.test("Take function", (assert) => {
+  var done1 = assert.async();
+
+  FN.take((lst) => {
+    lst.forEach((element) => console.log(element));
+    assert.ok(lst.toString() === ["Lions", "Tigers"].toString(), "Take got the first two elements of the list.");
+    done1();
+  }, 2, "Lions", "Tigers", "Bears");  
 });
