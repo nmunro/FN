@@ -1,0 +1,212 @@
+{
+    "project": {},
+    "files": {
+        "fn.js": {
+            "name": "fn.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {},
+    "elements": {},
+    "classitems": [
+        {
+            "file": "fn.js",
+            "line": 1,
+            "description": "FN is a functional library for LISP like operations.\nThis is designed to be used from within ES6.\nOther older versions of ES may not work properly.\n\nThis is kinda just research, experimenting with\nfunctional programming in JS. If you however\nfind this library useful let me know and I'll\nkeep working on it.\n\nCopyright (c) Neil Munro 2015-2016.",
+            "class": ""
+        },
+        {
+            "file": "fn.js",
+            "line": 17,
+            "description": "Any expects a callback and any number of expressions.\nThe expressions are evaluated and if any one of them\nare true then the callback is executed. \n\nExample:\nFN.any(() => {\n // Do something important.\n}, 1 === 1, 5 === 5);",
+            "params": [
+                {
+                    "name": "cb",
+                    "description": "The callback to execute in the form: () =>",
+                    "type": "..."
+                },
+                {
+                    "name": "lst",
+                    "description": "The arguments to any. Any takes a variable number of\narguments and processes them all as if they were an array.",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "The result of the callback or undefined if no expressions\nevaluated to true or the users didn't pass in a callback."
+            },
+            "class": ""
+        },
+        {
+            "file": "fn.js",
+            "line": 41,
+            "description": "All expects a callback and any number of expressions.\nThe expressions are evaluated and if all of them\nare true then the callback is executed. \n\nExample:\nFN.all(() => {\n // Do something important.\n}, 1 === 1, 5 === 5);",
+            "params": [
+                {
+                    "name": "cb",
+                    "description": "The callback to execute in the form: () =>",
+                    "type": "..."
+                },
+                {
+                    "name": "lst",
+                    "description": "The arguments to all. All takes a variable number of\narguments and processes them all as if they were an array.",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "The result of the callback or undefined if even one\nexpression evaluated to false or the user didn't pass in a callback."
+            },
+            "class": ""
+        },
+        {
+            "file": "fn.js",
+            "line": 65,
+            "description": "First expects a callback and any number of values.\nThe values are treated as if they were a list and\nthe callback is executed with the first element\nfrom this list as its only argument. \n\nExample:\nFN.first((firstElement) => console.log(firstElement));",
+            "params": [
+                {
+                    "name": "cb",
+                    "description": "The callback to execute in the form: (firstElement) =>",
+                    "type": "..."
+                },
+                {
+                    "name": "lst",
+                    "description": "The arguments to first. First takes a variable number of\narguments and processes them all as if they were an array.",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "The result of the callback or undefined if there wasn't\na callback or at least one element passed into first."
+            },
+            "class": ""
+        },
+        {
+            "file": "fn.js",
+            "line": 84,
+            "description": "Last expects a callback and any number of values.\nThe values are treated as if they were a list and\nthe callback is executed with the last element\nfrom this list as its only argument. \n\nExample:\nFN.last((lastElement) => console.log(lastElement));",
+            "params": [
+                {
+                    "name": "cb",
+                    "description": "The callback to execute in the form: (lastElement) =>",
+                    "type": "..."
+                },
+                {
+                    "name": "lst",
+                    "description": "The arguments to last. Last takes a variable number of\narguments and processes them all as if they were an array.",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "The result of the callback or undefined if there wasn't\na callback or at least one element passed into last."
+            },
+            "class": ""
+        },
+        {
+            "file": "fn.js",
+            "line": 104,
+            "description": "Nth expects a callback and any number of values.\nThe values are treated as if they were a list and\nthe callback is executed with the nth element\nfrom this list as its only argument. \n\nExample:\nFN.nth((nthElement) => console.log(nthElement));",
+            "params": [
+                {
+                    "name": "cb",
+                    "description": "The callback to execute in the form: (nthElement) =>",
+                    "type": "..."
+                },
+                {
+                    "name": "n",
+                    "description": "The nth element in the list to try and get."
+                },
+                {
+                    "name": "lst",
+                    "description": "The arguments to nth. Nth takes a variable number of\narguments and processes them all as if they were an array.",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "The result of the callback or undefined if there wasn't\na callback or the nth element does not exist."
+            },
+            "class": ""
+        },
+        {
+            "file": "fn.js",
+            "line": 124,
+            "description": "Rest expects a callback and any number of values.\nThe values are treated as if they were a list and\nthe callback is executed with the all but the first\nelement from this list passed in as an array as its\nonly argument. \n\nExample:\nFN.rest((remainingElements) => {\n  remainingElements.forEach((element) => {\n   console.log(element); \n  });\n});",
+            "params": [
+                {
+                    "name": "cb",
+                    "description": "The callback to execute in the form: (remainingElements) =>",
+                    "type": "..."
+                },
+                {
+                    "name": "lst",
+                    "description": "The arguments to rest. Rest takes a variable number of\narguments and processes them all as if they were an array.",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "The result of the callback or undefined if there wasn't\na callback or the argument list is smaller than one."
+            },
+            "class": ""
+        },
+        {
+            "file": "fn.js",
+            "line": 148,
+            "description": "Take expects a callback, an index and any number of values.\nThe values are treated as if they were a list and\nthe callback is executed with as many elements as could be\ntake from the rest params up to the value of n.\n\nExample:\nFN.take((elements) => {\n  elements.forEach((element) => {\n    console.log(element);\n  });\n}, 2, \"Lions\", \"Tigers\", \"Bears\");",
+            "params": [
+                {
+                    "name": "cb",
+                    "description": "The callback to execute in the form: (elements) =>",
+                    "type": "..."
+                },
+                {
+                    "name": "n",
+                    "description": "The number of elements to take from the remaining arguments."
+                },
+                {
+                    "name": "lst",
+                    "description": "The arguments to rest. Rest takes a variable number of\narguments and processes them all as if they were an array.",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "The result of the callback."
+            },
+            "class": ""
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nFN is a functional library for LISP like operations.\nThis is designed to be used from within ES6.\nOther older versions of ES may not work properly.\n\nThis is kinda just research, experimenting with\nfunctional programming in JS. If you however\nfind this library useful let me know and I'll\nkeep working on it.\n\nCopyright (c) Neil Munro 2015-2016.",
+            "line": " fn.js:1"
+        },
+        {
+            "message": "Missing item type\nAny expects a callback and any number of expressions.\nThe expressions are evaluated and if any one of them\nare true then the callback is executed. \n\nExample:\nFN.any(() => {\n // Do something important.\n}, 1 === 1, 5 === 5);",
+            "line": " fn.js:17"
+        },
+        {
+            "message": "Missing item type\nAll expects a callback and any number of expressions.\nThe expressions are evaluated and if all of them\nare true then the callback is executed. \n\nExample:\nFN.all(() => {\n // Do something important.\n}, 1 === 1, 5 === 5);",
+            "line": " fn.js:41"
+        },
+        {
+            "message": "Missing item type\nFirst expects a callback and any number of values.\nThe values are treated as if they were a list and\nthe callback is executed with the first element\nfrom this list as its only argument. \n\nExample:\nFN.first((firstElement) => console.log(firstElement));",
+            "line": " fn.js:65"
+        },
+        {
+            "message": "Missing item type\nLast expects a callback and any number of values.\nThe values are treated as if they were a list and\nthe callback is executed with the last element\nfrom this list as its only argument. \n\nExample:\nFN.last((lastElement) => console.log(lastElement));",
+            "line": " fn.js:84"
+        },
+        {
+            "message": "Missing item type\nNth expects a callback and any number of values.\nThe values are treated as if they were a list and\nthe callback is executed with the nth element\nfrom this list as its only argument. \n\nExample:\nFN.nth((nthElement) => console.log(nthElement));",
+            "line": " fn.js:104"
+        },
+        {
+            "message": "Missing item type\nRest expects a callback and any number of values.\nThe values are treated as if they were a list and\nthe callback is executed with the all but the first\nelement from this list passed in as an array as its\nonly argument. \n\nExample:\nFN.rest((remainingElements) => {\n  remainingElements.forEach((element) => {\n   console.log(element); \n  });\n});",
+            "line": " fn.js:124"
+        },
+        {
+            "message": "Missing item type\nTake expects a callback, an index and any number of values.\nThe values are treated as if they were a list and\nthe callback is executed with as many elements as could be\ntake from the rest params up to the value of n.\n\nExample:\nFN.take((elements) => {\n  elements.forEach((element) => {\n    console.log(element);\n  });\n}, 2, \"Lions\", \"Tigers\", \"Bears\");",
+            "line": " fn.js:148"
+        }
+    ]
+}
