@@ -104,11 +104,19 @@
     <h4 class="name" id="all"><span class="type-signature"></span>all<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
+    <p class="summary">All expects a callback and any number of expressions.</p>
+    
 
 
 
 <div class="description">
-    All expects a callback and any number of expressions.The expressions are evaluated and if all of themare true then the callback is executed.
+    <p>All expects a callback and any number of expressions.
+The expressions are evaluated and if all of them
+are true then the callback is executed. </p>
+<p>Example:
+FN.all(() =&gt; {
+ // Do something important.
+}, 1 === 1, 5 === 5);</p>
 </div>
 
 
@@ -160,7 +168,7 @@
 
             
 
-            <td class="description last">The callback to execute in the form: () =>  {...}</td>
+            <td class="description last"><p>The callback to execute in the form: () =&gt;  {...}</p></td>
         </tr>
 
     
@@ -183,7 +191,8 @@
 
             
 
-            <td class="description last">The arguments to all. All takes a variable number ofarguments and processes them all as if they were an array.</td>
+            <td class="description last"><p>The arguments to all. All takes a variable number of
+arguments and processes them all as if they were an array.</p></td>
         </tr>
 
     
@@ -224,17 +233,10 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line59">line 59</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line58">line 58</a>
     </li></ul></dd>
     
 
-    
-    <dt class="tag-tutorial">Tutorials:</dt>
-    <dd class="tag-tutorial">
-        <ul>
-            <li><em class="disabled">Tutorial: Example:FN.all(() => { // Do something important.}, 1 === 1, 5 === 5);</em></li>
-        </ul>
-    </dd>
     
 
     
@@ -258,7 +260,8 @@
 
         
 <div class="param-desc">
-    The result of the callback or undefined if even oneexpression evaluated to false or the user didn't pass in a callback.
+    <p>The result of the callback or undefined if even one
+expression evaluated to false or the user didn't pass in a callback.</p>
 </div>
 
 
@@ -275,11 +278,19 @@
     <h4 class="name" id="any"><span class="type-signature"></span>any<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
+    <p class="summary">Any expects a callback and any number of expressions.</p>
+    
 
 
 
 <div class="description">
-    Any expects a callback and any number of expressions.The expressions are evaluated and if any one of themare true then the callback is executed. Example:FN.any(() => { // Do something important.}, 1 === 1, 5 === 5);
+    <p>Any expects a callback and any number of expressions.
+The expressions are evaluated and if any one of them
+are true then the callback is executed. </p>
+<p>Example:
+FN.any(() =&gt; {
+ // Do something important.
+}, 1 === 1, 5 === 5);</p>
 </div>
 
 
@@ -331,7 +342,7 @@
 
             
 
-            <td class="description last">The callback to execute in the form: () =>  {...}</td>
+            <td class="description last"><p>The callback to execute in the form: () =&gt;  {...}</p></td>
         </tr>
 
     
@@ -354,7 +365,8 @@
 
             
 
-            <td class="description last">The arguments to any. Any takes a variable number ofarguments and processes them all as if they were an array.</td>
+            <td class="description last"><p>The arguments to any. Any takes a variable number of
+arguments and processes them all as if they were an array.</p></td>
         </tr>
 
     
@@ -422,7 +434,8 @@
 
         
 <div class="param-desc">
-    The result of the callback or undefined if no expressionsevaluated to true or the users didn't pass in a callback.
+    <p>The result of the callback or undefined if no expressions
+evaluated to true or the users didn't pass in a callback.</p>
 </div>
 
 
@@ -439,11 +452,18 @@
     <h4 class="name" id="first"><span class="type-signature"></span>first<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
+    <p class="summary">First expects a callback and any number of values.</p>
+    
 
 
 
 <div class="description">
-    First expects a callback and any number of values.The values are treated as if they were a list andthe callback is executed with the first elementfrom this list as its only argument. Example:FN.first((firstElement) => console.log(firstElement));
+    <p>First expects a callback and any number of values.
+The values are treated as if they were a list and
+the callback is executed with the first element
+from this list as its only argument. </p>
+<p>Example:
+FN.first((firstElement) =&gt; console.log(firstElement));</p>
 </div>
 
 
@@ -495,7 +515,7 @@
 
             
 
-            <td class="description last">The callback to execute in the form: (firstElement) =>  {...}</td>
+            <td class="description last"><p>The callback to execute in the form: (firstElement) =&gt;  {...}</p></td>
         </tr>
 
     
@@ -518,7 +538,8 @@
 
             
 
-            <td class="description last">The arguments to first. First takes a variable number ofarguments and processes them all as if they were an array.</td>
+            <td class="description last"><p>The arguments to first. First takes a variable number of
+arguments and processes them all as if they were an array.</p></td>
         </tr>
 
     
@@ -559,7 +580,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line82">line 82</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -586,7 +607,8 @@
 
         
 <div class="param-desc">
-    The result of the callback or undefined if there wasn'ta callback or at least one element passed into first.
+    <p>The result of the callback or undefined if there wasn't
+a callback or at least one element passed into first.</p>
 </div>
 
 
@@ -603,11 +625,18 @@
     <h4 class="name" id="last"><span class="type-signature"></span>last<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
+    <p class="summary">Last expects a callback and any number of values.</p>
+    
 
 
 
 <div class="description">
-    Last expects a callback and any number of values.The values are treated as if they were a list andthe callback is executed with the last elementfrom this list as its only argument. Example:FN.last((lastElement) => console.log(lastElement));
+    <p>Last expects a callback and any number of values.
+The values are treated as if they were a list and
+the callback is executed with the last element
+from this list as its only argument. </p>
+<p>Example:
+FN.last((lastElement) =&gt; console.log(lastElement));</p>
 </div>
 
 
@@ -659,7 +688,7 @@
 
             
 
-            <td class="description last">The callback to execute in the form: (lastElement) =>  {...}</td>
+            <td class="description last"><p>The callback to execute in the form: (lastElement) =&gt;  {...}</p></td>
         </tr>
 
     
@@ -682,7 +711,8 @@
 
             
 
-            <td class="description last">The arguments to last. Last takes a variable number ofarguments and processes them all as if they were an array.</td>
+            <td class="description last"><p>The arguments to last. Last takes a variable number of
+arguments and processes them all as if they were an array.</p></td>
         </tr>
 
     
@@ -723,7 +753,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line101">line 101</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line100">line 100</a>
     </li></ul></dd>
     
 
@@ -750,7 +780,8 @@
 
         
 <div class="param-desc">
-    The result of the callback or undefined if there wasn'ta callback or at least one element passed into last.
+    <p>The result of the callback or undefined if there wasn't
+a callback or at least one element passed into last.</p>
 </div>
 
 
@@ -767,11 +798,18 @@
     <h4 class="name" id="nth"><span class="type-signature"></span>nth<span class="signature">(cb, n, lst)</span><span class="type-signature"></span></h4>
 
     
+    <p class="summary">Nth expects a callback and any number of values.</p>
+    
 
 
 
 <div class="description">
-    Nth expects a callback and any number of values.The values are treated as if they were a list andthe callback is executed with the nth elementfrom this list as its only argument. Example:FN.nth((nthElement) => console.log(nthElement));
+    <p>Nth expects a callback and any number of values.
+The values are treated as if they were a list and
+the callback is executed with the nth element
+from this list as its only argument. </p>
+<p>Example:
+FN.nth((nthElement) =&gt; console.log(nthElement));</p>
 </div>
 
 
@@ -823,7 +861,7 @@
 
             
 
-            <td class="description last">The callback to execute in the form: (nthElement) =>  {...}</td>
+            <td class="description last"><p>The callback to execute in the form: (nthElement) =&gt;  {...}</p></td>
         </tr>
 
     
@@ -846,7 +884,7 @@
 
             
 
-            <td class="description last">The nth element in the list to try and get.</td>
+            <td class="description last"><p>The nth element in the list to try and get.</p></td>
         </tr>
 
     
@@ -869,7 +907,8 @@
 
             
 
-            <td class="description last">The arguments to nth. Nth takes a variable number ofarguments and processes them all as if they were an array.</td>
+            <td class="description last"><p>The arguments to nth. Nth takes a variable number of
+arguments and processes them all as if they were an array.</p></td>
         </tr>
 
     
@@ -910,7 +949,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line122">line 122</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -937,7 +976,8 @@
 
         
 <div class="param-desc">
-    The result of the callback or undefined if there wasn'ta callback or the nth element does not exist.
+    <p>The result of the callback or undefined if there wasn't
+a callback or the nth element does not exist.</p>
 </div>
 
 
@@ -954,11 +994,23 @@
     <h4 class="name" id="rest"><span class="type-signature"></span>rest<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
+    <p class="summary">Rest expects a callback and any number of values.</p>
+    
 
 
 
 <div class="description">
-    Rest expects a callback and any number of values.The values are treated as if they were a list andthe callback is executed with the all but the firstelement from this list passed in as an array as itsonly argument. Example:FN.rest((remainingElements) => {  remainingElements.forEach((element) => {   console.log(element);   });});
+    <p>Rest expects a callback and any number of values.
+The values are treated as if they were a list and
+the callback is executed with the all but the first
+element from this list passed in as an array as its
+only argument. </p>
+<p>Example:
+FN.rest((remainingElements) =&gt; {
+  remainingElements.forEach((element) =&gt; {
+   console.log(element); 
+  });
+});</p>
 </div>
 
 
@@ -1010,7 +1062,7 @@
 
             
 
-            <td class="description last">The callback to execute in the form: (remainingElements) =>  {...}</td>
+            <td class="description last"><p>The callback to execute in the form: (remainingElements) =&gt;  {...}</p></td>
         </tr>
 
     
@@ -1033,7 +1085,8 @@
 
             
 
-            <td class="description last">The arguments to rest. Rest takes a variable number ofarguments and processes them all as if they were an array.</td>
+            <td class="description last"><p>The arguments to rest. Rest takes a variable number of
+arguments and processes them all as if they were an array.</p></td>
         </tr>
 
     
@@ -1074,7 +1127,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line146">line 146</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line145">line 145</a>
     </li></ul></dd>
     
 
@@ -1101,7 +1154,8 @@
 
         
 <div class="param-desc">
-    The result of the callback or undefined if there wasn'ta callback or the argument list is smaller than one.
+    <p>The result of the callback or undefined if there wasn't
+a callback or the argument list is smaller than one.</p>
 </div>
 
 
@@ -1118,11 +1172,22 @@
     <h4 class="name" id="take"><span class="type-signature"></span>take<span class="signature">(cb, n, lst)</span><span class="type-signature"></span></h4>
 
     
+    <p class="summary">Take expects a callback, an index and any number of values.</p>
+    
 
 
 
 <div class="description">
-    Take expects a callback, an index and any number of values.The values are treated as if they were a list andthe callback is executed with as many elements as could betake from the rest params up to the value of n.Example:FN.take((elements) => {  elements.forEach((element) => {    console.log(element);  });}, 2, "Lions", "Tigers", "Bears");
+    <p>Take expects a callback, an index and any number of values.
+The values are treated as if they were a list and
+the callback is executed with as many elements as could be
+take from the rest params up to the value of n.</p>
+<p>Example:
+FN.take((elements) =&gt; {
+  elements.forEach((element) =&gt; {
+    console.log(element);
+  });
+}, 2, &quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;);</p>
 </div>
 
 
@@ -1174,7 +1239,7 @@
 
             
 
-            <td class="description last">The callback to execute in the form: (elements) =>  {...}</td>
+            <td class="description last"><p>The callback to execute in the form: (elements) =&gt;  {...}</p></td>
         </tr>
 
     
@@ -1197,7 +1262,7 @@
 
             
 
-            <td class="description last">The number of elements to take from the remaining arguments.</td>
+            <td class="description last"><p>The number of elements to take from the remaining arguments.</p></td>
         </tr>
 
     
@@ -1220,7 +1285,8 @@
 
             
 
-            <td class="description last">The arguments to rest. Rest takes a variable number ofarguments and processes them all as if they were an array.</td>
+            <td class="description last"><p>The arguments to rest. Rest takes a variable number of
+arguments and processes them all as if they were an array.</p></td>
         </tr>
 
     
@@ -1261,7 +1327,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line169">line 169</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line168">line 168</a>
     </li></ul></dd>
     
 
@@ -1288,7 +1354,7 @@
 
         
 <div class="param-desc">
-    The result of the callback.
+    <p>The result of the callback.</p>
 </div>
 
 
@@ -1319,7 +1385,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jan 12 2016 12:03:37 GMT+0000 (GMT Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jan 12 2016 12:12:12 GMT+0000 (GMT Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
