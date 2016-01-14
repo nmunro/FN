@@ -1,18 +1,26 @@
 /**
- * FN is a functional library for LISP like operations.
- * This is designed to be used from within ES6.
- * Other older versions of ES may not work properly.
+ * FN is a functional library providing functions
+ * inspired (ripped off) by LISP/Clojure.
+ *
+ * No, I have no shame.
  *
  * This is kinda just research, experimenting with
  * functional programming in JS. If you however
  * find this library useful let me know and I'll
- * keep working on it.
+ * keep working on it, if you have suggestions, I
+ * might even incorporate your ideas.
+ *
+ * This is designed to be used from within ES6.
+ * Other older versions of ES may not work properly.
  *
  * Copyright (c) Neil Munro 2015-2016.
  * @author Neil Munro <neilmunro@gmail.com>
  */
 
-// Throw FN into it's own frozen constant variable.
+/* 
+ * Throw FN into it's own frozen constant variable.
+ * Hopefully this means users can't fiddle with it.
+ */
 const FN = Object.freeze(Object.create({
   /**
    * FN.any is a function which evaluates a number of
@@ -202,7 +210,7 @@ const FN = Object.freeze(Object.create({
     "use strict";
     var result = true;
 
-    lst.forEach((element) => { if(!element) result = false;});
+    lst.forEach((element) => { if(!element) result = false; });
 
     return(cb !== undefined && lst !== undefined && lst.length > 0 && result) ? cb() : undefined;
   },
@@ -232,7 +240,7 @@ const FN = Object.freeze(Object.create({
     "use strict";
     var result = true;
 
-    lst.forEach((element) => { if(!element) result = false;});
+    lst.forEach((element) => { if(!element) result = false; });
 
     return(cb1 !== undefined && cb2 !== undefined && lst !== undefined && lst.length > 0 && result) ? cb1() : cb2();
   },
@@ -245,7 +253,7 @@ const FN = Object.freeze(Object.create({
    * Example:
    * FN.let(() => {
 	 *   console.log(`Hi my name is ${name} and I am ${age} years old.`);
-	 * },{"age": 29, "name": "Neil Munro"});
+	 * }, {"age": 29, "name": "Neil Munro"});
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}.
    * @param {object} objectContext - An object containing the key/value pairs
