@@ -23,7 +23,7 @@ const FN = Object.freeze(Object.create({
    *
    * Example:
    * FN.any(() => {
-   *  // Do something important.
+   *   console.log("One of the expressions is true.");
    * }, 1 === 1, 5 === 5);
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}
@@ -47,7 +47,7 @@ const FN = Object.freeze(Object.create({
    *
    * Example:
    * FN.all(() => {
-   *  // Do something important.
+   *   console.log("All of the expressions are true.");
    * }, 1 === 1, 5 === 5);
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}
@@ -70,7 +70,9 @@ const FN = Object.freeze(Object.create({
    * in question is just a set of values passed to first.
    *
    * Example:
-   * FN.first((firstElement) => console.log(firstElement), 1, 2, 3, 4, 5);
+   * FN.first((firstElement) => {
+   *   console.log(firstElement);
+   * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (firstElement) =>  {...}
    * @param {array} lst - The arguments to first. First takes a variable number of
@@ -88,7 +90,9 @@ const FN = Object.freeze(Object.create({
    * passes the last element passed to FN.last.
    *
    * Example:
-   * FN.last((lastElement) => console.log(lastElement), 1, 2, 3, 4, 5);
+   * FN.last((lastElement) => {
+   *   console.log(lastElement);
+   * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (lastElement) =>  {...}
    * @param {array} lst - The arguments to last. Last takes a variable number of
@@ -110,7 +114,9 @@ const FN = Object.freeze(Object.create({
    * to the list of items to grab the index of.
    *
    * Example:
-   * FN.nth((nthElement) => console.log(nthElement), 2, 1, 2, 3, 4, 5);
+   * FN.nth((nthElement) => {
+   *   console.log(nthElement);
+   * }, 2, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (nthElement) =>  {...}
    * @param {number} n - The nth element in the list to try and get.
@@ -205,11 +211,9 @@ const FN = Object.freeze(Object.create({
    * Example:
    * FN.ifElse(() => {
    *   console.log("Is true");
-   * },
-   * () => {
+   * }, () => {
    *  console.log("Is false");
-   * },
-   * 1 === 1, 2 === 2);
+   * }, 1 === 1, 2 === 2);
    *
    * @param {function} cb1 - The callback to execute in the form: () =>  {...} if true.
    * @param {function} cb2 - The callback to execute in the form: () =>  {...} if false.
@@ -227,9 +231,9 @@ const FN = Object.freeze(Object.create({
   },
 
   /**
-   * FN.let created a new isolated execution context with a set of values
-	 initilised within the context and visible only for the duration of the
-	 callback function.
+   * FN.let created a new isolated execution context with a set of values initilised
+   * within the context and visible only for the duration of the callback function.
+   * Note that it acts as a closure and does have access to outer variables.
    *
    * Example:
    * FN.let(() => {
