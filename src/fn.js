@@ -246,26 +246,26 @@ const FN = Object.freeze(Object.create({
   },
 
   /**
-   * FN.let creates a new isolated execution context with a set of values initilised
-   * within the context and visible only for the duration of the callback function.
-   * Note that it acts as a closure and does have access to outer variables.
-   *
-   * Example:
-   * FN.let(() => {
-	 *   console.log(`Hi my name is ${name} and I am ${age} years old.`);
-	 * }, {"age": 29, "name": "Neil Munro"});
-   *
-   * @param {function} cb - The callback to execute in the form: () =>  {...}.
-   * @param {object} objectContext - An object containing the key/value pairs
-	 * that are to be created inside the execution context.
-	 * @return The return value of the callback function.
-   * @see FN.if
-   */
-	"let": (cb, objectContext) => {
+  * FN.let creates a new isolated execution context with a set of values initilised
+  * within the context and visible only for the duration of the callback function.
+  * Note that it acts as a closure and does have access to outer variables.
+  *
+  * Example:
+  * FN.let(() => {
+  *   console.log(`Hi my name is ${name} and I am ${age} years old.`);
+  * }, {"age": 29, "name": "Neil Munro"});
+  *
+  * @param {function} cb - The callback to execute in the form: () =>  {...}.
+  * @param {object} objectContext - An object containing the key/value pairs
+  * that are to be created inside the execution context.
+  * @return The return value of the callback function.
+  * @see FN.if
+  */
+  "let": (cb, objectContext) => {
     "use strict";
-		return(() => {
-			Object.keys(objectContext).forEach((key) => this[key] = objectContext[key]);
-			return cb.call(this);
-		})();
-	}
+    return(() => {
+      Object.keys(objectContext).forEach((key) => this[key] = objectContext[key]);
+      return cb.call(this);
+    })();
+  }
 }));
