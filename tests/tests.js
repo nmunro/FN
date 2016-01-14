@@ -136,3 +136,15 @@ QUnit.test("If-else function", (assert) => {
     done2();
   }, 1 === 1, 2 === 3);
 });
+
+QUnit.test("Let function", (assert) => {
+  var done1 = assert.async();
+  var done2 = assert.async();
+
+  FN.let(() => {
+    assert.ok(age === 29, "FN.let callback function detects the correct age value");  
+    done1();
+    assert.notOk(name !== "John Smith", "FN.let callback function detects name is NOT 'John Smith'.");
+    done2();
+  }, { "age": 29, "name": "Neil Munro" });
+});
