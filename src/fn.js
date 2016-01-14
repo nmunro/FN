@@ -243,13 +243,9 @@ const FN = Object.freeze(Object.create({
    * @see FN.if
    */
 	"let": (cb, objectContext) => {
-		var tmp;
-		(() => {
-			Object.keys(objectContext).forEach((key) => {
-				this[key] = objectContext[key];
-			});
-			tmp = cb.call(this);
+		return(() => {
+			Object.keys(objectContext).forEach((key) => this[key] = objectContext[key]);
+			return cb.call(this);
 		})();
-		return tmp;
 	}
 }));
