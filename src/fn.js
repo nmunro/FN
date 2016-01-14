@@ -132,7 +132,7 @@ const FN = Object.freeze(Object.create({
    * Example:
    * FN.rest((remainingElements) => {
    *   remainingElements.forEach((element) => {
-   *    console.log(element); 
+   *    console.log(element);
    *   });
    * }, 1, 2, 3, 4, 5);
    *
@@ -169,7 +169,7 @@ const FN = Object.freeze(Object.create({
   "take": (cb, n, ...lst) => {
     return(cb !== undefined && n !== undefined) ? cb(lst.slice(0, n)) : undefined;
   },
-  
+
   /**
    * FN.if is a single branch function. It expects a
    * callback and any number of values. The values
@@ -189,17 +189,17 @@ const FN = Object.freeze(Object.create({
    */
   "if": (cb, ...lst) => {
     var result = true;
-    
+
     lst.forEach((element) => { if(!element) result = false});
-    
-    return(cb !== undefined && lst !== undefined && lst.length > 0 && result) ? cb() : undefined;  
+
+    return(cb !== undefined && lst !== undefined && lst.length > 0 && result) ? cb() : undefined;
   },
-  
+
   /**
    * FN.ifElse expands upon FN.if by permitting the user
    * to provide a second callback function to be executed
    * in the event that the if expression evaluates to false.
-   * 
+   *
    * NOTE: Multiple FNi.fElse can be nested inside of the callback functions.
    *
    * Example:
@@ -220,9 +220,36 @@ const FN = Object.freeze(Object.create({
    */
   "ifElse": (cb1, cb2, ...lst) => {
     var result = true;
-    
+
     lst.forEach((element) => { if(!element) result = false});
 
-    return(cb1 !== undefined && cb2 !== undefined && lst !== undefined && lst.length > 0 && result) ? cb1() : cb2();  
-  }
+    return(cb1 !== undefined && cb2 !== undefined && lst !== undefined && lst.length > 0 && result) ? cb1() : cb2();
+  },
+
+  /**
+   * FN.let created a new isolated execution context with a set of values
+	 initilised within the context and visible only for the duration of the
+	 callback function.
+   *
+   * Example:
+   * FN.let(() => {
+	 *   console.log(`Hi my name is ${name} and I am ${age} years old.`);
+	 * },{"age": 29, "name": "Neil Munro"});
+   *
+   * @param {function} cb - The callback to execute in the form: () =>  {...}.
+   * @param {object} objectContext - An object containing the key/value pairs
+	 * that are to be created inside the execution context.
+	 * @return The return value of the callback function.
+   * @see FN.if
+   */
+	"let": (cb, objectContext) => {
+		var tmp;
+		(() => {
+			Object.keys(objectContext).forEach((key) => {
+				this[key] = objectContext[key];
+			});
+			tmp = cb.call(this);
+		})();
+		return tmp;
+	}
 }));
