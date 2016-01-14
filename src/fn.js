@@ -13,9 +13,6 @@
  * This is designed to be used from within ES6.
  * Other older versions of ES may not work properly.
  *
- * Throw FN into it's own frozen constant variable.
- * Hopefully this means users can't fiddle with it.
- *
  * Copyright (c) Neil Munro 2015-2016.
  * @constructor
  * @author Neil Munro <neilmunro@gmail.com>
@@ -32,10 +29,9 @@ const FN = Object.freeze(Object.create({
    * }, 1 === 1, 5 === 5);
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}
-   * @param {array} lst - The arguments to any. Any takes a variable number of
+   * @param {array} lst - The arguments to FN.any. FN.any takes a variable number of
    * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined if no expressions
-   * evaluated to true or the users didn't pass in a callback.
+   * @return The result of the callback or undefined.
    */
   "any": (cb, ...lst) => {
     "use strict";
@@ -57,10 +53,9 @@ const FN = Object.freeze(Object.create({
    * }, 1 === 1, 5 === 5);
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}
-   * @param {array} lst - The arguments to all. All takes a variable number of
+   * @param {array} lst - The arguments to FN.all. FN.all takes a variable number of
    * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined if even one
-   * expression evaluated to false or the user didn't pass in a callback.
+   * @return The result of the callback or undefined.
    */
   "all": (cb, ...lst) => {
     "use strict";
@@ -82,10 +77,9 @@ const FN = Object.freeze(Object.create({
    * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (firstElement) =>  {...}
-   * @param {array} lst - The arguments to first. First takes a variable number of
+   * @param {array} lst - The arguments to FN.first. FN.first takes a variable number of
    * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined if there wasn't
-   * a callback or at least one element passed into first.
+   * @return The result of the callback or undefined.
    */
   "first": (cb, ...lst) => {
     "use strict";
@@ -103,10 +97,9 @@ const FN = Object.freeze(Object.create({
    * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (lastElement) =>  {...}
-   * @param {array} lst - The arguments to last. Last takes a variable number of
+   * @param {array} lst - The arguments to FN.last. FN.last takes a variable number of
    * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined if there wasn't
-   * a callback or at least one element passed into last.
+   * @return The result of the callback or undefined.
    * @see FN.first
    */
   "last": (cb, ...lst) => {
@@ -129,10 +122,9 @@ const FN = Object.freeze(Object.create({
    *
    * @param {function} cb - The callback to execute in the form: (nthElement) =>  {...}
    * @param {number} n - The nth element in the list to try and get.
-   * @param {array} lst - The arguments to nth. Nth takes a variable number of
+   * @param {array} lst - The arguments to FN.nth. FN.nth takes a variable number of
    * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined if there wasn't
-   * a callback or the nth element does not exist.
+   * @return The result of the callback or undefined.
    * @see FN.first
    * @see FN.last
    */
@@ -153,10 +145,9 @@ const FN = Object.freeze(Object.create({
    * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (remainingElements) =>  {...}
-   * @param {array} lst - The arguments to rest. Rest takes a variable number of
+   * @param {array} lst - The arguments to FN.rest. FN.rest takes a variable number of
    * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined if there wasn't
-   * a callback, a list or the argument list is smaller than one.
+   * @return The result of the callback or undefined.
    * @see FN.first
    */
   "rest": (cb, ...lst) => {
@@ -179,9 +170,9 @@ const FN = Object.freeze(Object.create({
    *
    * @param {function} cb - The callback to execute in the form: (elements) =>  {...}
    * @param {number} n - The number of elements to take from the remaining arguments.
-   * @param {array} lst - The arguments to rest. Rest takes a variable number of
+   * @param {array} lst - The arguments to FN.take. FN.take takes a variable number of
    * arguments and processes them all as if they were an array.
-   * @return The result of the callback.
+   * @return The result of the callback or undefined.
    */
   "take": (cb, n, ...lst) => {
     "use strict";
@@ -200,9 +191,9 @@ const FN = Object.freeze(Object.create({
    * }, 1 === 1, 2 === 2);
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}
-   * @param {array} lst - The arguments to rest. Rest takes a variable number of
+   * @param {array} lst - The arguments to FN.if. FN.if takes a variable number of
    * arguments and processes them all as if they were an array.
-   * @return The result of the callback.
+   * @return The result of the callback or undefined.
    * @see FN.ifElse
    */
   "if": (cb, ...lst) => {
@@ -230,9 +221,9 @@ const FN = Object.freeze(Object.create({
    *
    * @param {function} cb1 - The callback to execute in the form: () =>  {...} if true.
    * @param {function} cb2 - The callback to execute in the form: () =>  {...} if false.
-   * @param {array} lst - The arguments to rest. Rest takes a variable number of
+   * @param {array} lst - The arguments to FN.ifElse. FN.ifElse takes a variable number of
    * arguments and processes them all as if they were an array.
-   * @return The result of the callback.
+   * @return The result of the callback or undefined.
    * @see FN.if
    */
   "ifElse": (cb1, cb2, ...lst) => {
@@ -251,7 +242,7 @@ const FN = Object.freeze(Object.create({
   *
   * Example:
   * FN.let(() => {
-  *   console.log(`Hi my name is ${name} and I am ${age} years old.`);
+  *   console.log("Hi my name is " + name + " and I am " + age + " years old.");
   * }, {"age": 29, "name": "Neil Munro"});
   *
   * @param {function} cb - The callback to execute in the form: () =>  {...}.
