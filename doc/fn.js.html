@@ -27,22 +27,27 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * FN is a functional library for LISP like operations.
- * This is designed to be used from within ES6.
- * Other older versions of ES may not work properly.
+ * FN is a functional library providing functions
+ * inspired (ripped off) by LISP/Clojure.
+ *
+ * No, I have no shame.
  *
  * This is kinda just research, experimenting with
  * functional programming in JS. If you however
  * find this library useful let me know and I'll
- * keep working on it.
+ * keep working on it, if you have suggestions, I
+ * might even incorporate your ideas.
+ *
+ * This is designed to be used from within ES6.
+ * Other older versions of ES may not work properly.
+ *
+ * Throw FN into it's own frozen constant variable.
+ * Hopefully this means users can't fiddle with it.
  *
  * Copyright (c) Neil Munro 2015-2016.
+ * @constructor
  * @author Neil Munro &lt;neilmunro@gmail.com>
  */
-
-"use strict";
-
-// Throw FN into it's own frozen constant variable.
 const FN = Object.freeze(Object.create({
   /**
    * FN.any is a function which evaluates a number of
@@ -51,7 +56,7 @@ const FN = Object.freeze(Object.create({
    *
    * Example:
    * FN.any(() => {
-   *  // Do something important.
+   *   console.log("One of the expressions is true.");
    * }, 1 === 1, 5 === 5);
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}
@@ -61,6 +66,7 @@ const FN = Object.freeze(Object.create({
    * evaluated to true or the users didn't pass in a callback.
    */
   "any": (cb, ...lst) => {
+    "use strict";
     var result = false;
 
     lst.forEach((element) => { if(element) result = true; });
@@ -75,7 +81,7 @@ const FN = Object.freeze(Object.create({
    *
    * Example:
    * FN.all(() => {
-   *  // Do something important.
+   *   console.log("All of the expressions are true.");
    * }, 1 === 1, 5 === 5);
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}
@@ -85,6 +91,7 @@ const FN = Object.freeze(Object.create({
    * expression evaluated to false or the user didn't pass in a callback.
    */
   "all": (cb, ...lst) => {
+    "use strict";
     var result = true;
 
     lst.forEach((element) => { if(!element) result = false; });
@@ -98,7 +105,9 @@ const FN = Object.freeze(Object.create({
    * in question is just a set of values passed to first.
    *
    * Example:
-   * FN.first((firstElement) => console.log(firstElement), 1, 2, 3, 4, 5);
+   * FN.first((firstElement) => {
+   *   console.log(firstElement);
+   * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (firstElement) =>  {...}
    * @param {array} lst - The arguments to first. First takes a variable number of
@@ -107,6 +116,7 @@ const FN = Object.freeze(Object.create({
    * a callback or at least one element passed into first.
    */
   "first": (cb, ...lst) => {
+    "use strict";
     return(cb !== undefined &amp;&amp; lst[0] !== undefined) ? cb(lst[0]) : undefined;
   },
 
@@ -116,7 +126,9 @@ const FN = Object.freeze(Object.create({
    * passes the last element passed to FN.last.
    *
    * Example:
-   * FN.last((lastElement) => console.log(lastElement), 1, 2, 3, 4, 5);
+   * FN.last((lastElement) => {
+   *   console.log(lastElement);
+   * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (lastElement) =>  {...}
    * @param {array} lst - The arguments to last. Last takes a variable number of
@@ -126,6 +138,7 @@ const FN = Object.freeze(Object.create({
    * @see FN.first
    */
   "last": (cb, ...lst) => {
+    "use strict";
     return(cb !== undefined &amp;&amp; lst[0] !== undefined) ? cb(lst[lst.length-1]) :
       (lst[lst.length-1] !== undefined) ? lst[lst.length-1] : undefined;
   },
@@ -138,7 +151,9 @@ const FN = Object.freeze(Object.create({
    * to the list of items to grab the index of.
    *
    * Example:
-   * FN.nth((nthElement) => console.log(nthElement), 2, 1, 2, 3, 4, 5);
+   * FN.nth((nthElement) => {
+   *   console.log(nthElement);
+   * }, 2, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (nthElement) =>  {...}
    * @param {number} n - The nth element in the list to try and get.
@@ -150,6 +165,7 @@ const FN = Object.freeze(Object.create({
    * @see FN.last
    */
   "nth": (cb, n, ...lst) => {
+    "use strict";
     return(cb !== undefined &amp;&amp; lst[n] !== undefined) ? cb(n, lst[n]) : undefined;
   },
 
@@ -172,6 +188,7 @@ const FN = Object.freeze(Object.create({
    * @see FN.first
    */
   "rest": (cb, ...lst) => {
+    "use strict";
     return(cb !== undefined &amp;&amp; lst !== undefined &amp;&amp; lst.length > 1) ? cb(lst.slice(1)) : undefined;
   },
 
@@ -195,6 +212,7 @@ const FN = Object.freeze(Object.create({
    * @return The result of the callback.
    */
   "take": (cb, n, ...lst) => {
+    "use strict";
     return(cb !== undefined &amp;&amp; n !== undefined) ? cb(lst.slice(0, n)) : undefined;
   },
 
@@ -216,9 +234,10 @@ const FN = Object.freeze(Object.create({
    * @see FN.ifElse
    */
   "if": (cb, ...lst) => {
+    "use strict";
     var result = true;
 
-    lst.forEach((element) => { if(!element) result = false});
+    lst.forEach((element) => { if(!element) result = false; });
 
     return(cb !== undefined &amp;&amp; lst !== undefined &amp;&amp; lst.length > 0 &amp;&amp; result) ? cb() : undefined;
   },
@@ -233,11 +252,9 @@ const FN = Object.freeze(Object.create({
    * Example:
    * FN.ifElse(() => {
    *   console.log("Is true");
-   * },
-   * () => {
+   * }, () => {
    *  console.log("Is false");
-   * },
-   * 1 === 1, 2 === 2);
+   * }, 1 === 1, 2 === 2);
    *
    * @param {function} cb1 - The callback to execute in the form: () =>  {...} if true.
    * @param {function} cb2 - The callback to execute in the form: () =>  {...} if false.
@@ -247,39 +264,37 @@ const FN = Object.freeze(Object.create({
    * @see FN.if
    */
   "ifElse": (cb1, cb2, ...lst) => {
+    "use strict";
     var result = true;
 
-    lst.forEach((element) => { if(!element) result = false});
+    lst.forEach((element) => { if(!element) result = false; });
 
     return(cb1 !== undefined &amp;&amp; cb2 !== undefined &amp;&amp; lst !== undefined &amp;&amp; lst.length > 0 &amp;&amp; result) ? cb1() : cb2();
   },
 
   /**
-   * FN.let created a new isolated execution context with a set of values
-	 initilised within the context and visible only for the duration of the
-	 callback function.
-   *
-   * Example:
-   * FN.let(() => {
-	 *   console.log(`Hi my name is ${name} and I am ${age} years old.`);
-	 * },{"age": 29, "name": "Neil Munro"});
-   *
-   * @param {function} cb - The callback to execute in the form: () =>  {...}.
-   * @param {object} objectContext - An object containing the key/value pairs
-	 * that are to be created inside the execution context.
-	 * @return The return value of the callback function.
-   * @see FN.if
-   */
-	"let": (cb, objectContext) => {
-		var tmp;
-		(() => {
-			Object.keys(objectContext).forEach((key) => {
-				this[key] = objectContext[key];
-			});
-			tmp = cb.call(this);
-		})();
-		return tmp;
-	}
+  * FN.let creates a new isolated execution context with a set of values initilised
+  * within the context and visible only for the duration of the callback function.
+  * Note that it acts as a closure and does have access to outer variables.
+  *
+  * Example:
+  * FN.let(() => {
+  *   console.log(`Hi my name is ${name} and I am ${age} years old.`);
+  * }, {"age": 29, "name": "Neil Munro"});
+  *
+  * @param {function} cb - The callback to execute in the form: () =>  {...}.
+  * @param {object} objectContext - An object containing the key/value pairs
+  * that are to be created inside the execution context.
+  * @return The return value of the callback function.
+  * @see FN.if
+  */
+  "let": (cb, objectContext) => {
+    "use strict";
+    return(() => {
+      Object.keys(objectContext).forEach((key) => this[key] = objectContext[key]);
+      return cb.call(this);
+    })();
+  }
 }));
 </code></pre>
         </article>
@@ -291,13 +306,13 @@ const FN = Object.freeze(Object.create({
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#all">all</a></li><li><a href="global.html#any">any</a></li><li><a href="global.html#first">first</a></li><li><a href="global.html#if">if</a></li><li><a href="global.html#ifElse">ifElse</a></li><li><a href="global.html#last">last</a></li><li><a href="global.html#let">let</a></li><li><a href="global.html#nth">nth</a></li><li><a href="global.html#rest">rest</a></li><li><a href="global.html#take">take</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FN.html">FN</a></li></ul><h3>Global</h3><ul><li><a href="global.html#all">all</a></li><li><a href="global.html#any">any</a></li><li><a href="global.html#first">first</a></li><li><a href="global.html#if">if</a></li><li><a href="global.html#ifElse">ifElse</a></li><li><a href="global.html#last">last</a></li><li><a href="global.html#let">let</a></li><li><a href="global.html#nth">nth</a></li><li><a href="global.html#rest">rest</a></li><li><a href="global.html#take">take</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jan 14 2016 12:49:39 GMT+0000 (GMT Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jan 14 2016 22:32:20 GMT+0000 (GMT)
 </footer>
 
 <script> prettyPrint(); </script>

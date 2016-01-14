@@ -13,13 +13,12 @@
  * This is designed to be used from within ES6.
  * Other older versions of ES may not work properly.
  *
- * Copyright (c) Neil Munro 2015-2016.
- * @author Neil Munro <neilmunro@gmail.com>
- */
-
-/* 
  * Throw FN into it's own frozen constant variable.
  * Hopefully this means users can't fiddle with it.
+ *
+ * Copyright (c) Neil Munro 2015-2016.
+ * @constructor
+ * @author Neil Munro <neilmunro@gmail.com>
  */
 const FN = Object.freeze(Object.create({
   /**

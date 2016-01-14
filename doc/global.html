@@ -117,7 +117,7 @@ expressions and runs a callback function if
 all of the expressions are true.</p>
 <p>Example:
 FN.all(() =&gt; {
- // Do something important.
+  console.log(&quot;All of the expressions are true.&quot;);
 }, 1 === 1, 5 === 5);</p>
 </div>
 
@@ -235,7 +235,7 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line59">line 59</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line65">line 65</a>
     </li></ul></dd>
     
 
@@ -293,7 +293,7 @@ expressions and runs a callback function if
 any of the expressions are true.</p>
 <p>Example:
 FN.any(() =&gt; {
- // Do something important.
+  console.log(&quot;One of the expressions is true.&quot;);
 }, 1 === 1, 5 === 5);</p>
 </div>
 
@@ -411,7 +411,7 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line35">line 35</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -467,7 +467,9 @@ a list as its one and only parameter.</p></p>
 a list as its one and only parameter. The list
 in question is just a set of values passed to first.</p>
 <p>Example:
-FN.first((firstElement) =&gt; console.log(firstElement), 1, 2, 3, 4, 5);</p>
+FN.first((firstElement) =&gt; {
+  console.log(firstElement);
+}, 1, 2, 3, 4, 5);</p>
 </div>
 
 
@@ -584,7 +586,7 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line81">line 81</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line90">line 90</a>
     </li></ul></dd>
     
 
@@ -759,7 +761,7 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line190">line 190</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line208">line 208</a>
     </li></ul></dd>
     
 
@@ -825,11 +827,9 @@ in the event that the if expression evaluates to false.</p>
 <p>Example:
 FN.ifElse(() =&gt; {
   console.log(&quot;Is true&quot;);
-},
-() =&gt; {
+}, () =&gt; {
  console.log(&quot;Is false&quot;);
-},
-1 === 1, 2 === 2);</p>
+}, 1 === 1, 2 === 2);</p>
 </div>
 
 
@@ -969,7 +969,7 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line221">line 221</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line238">line 238</a>
     </li></ul></dd>
     
 
@@ -1032,7 +1032,9 @@ passes the last element passed to FN.last.</p></p>
 passing the first element of a list into a callback
 passes the last element passed to FN.last.</p>
 <p>Example:
-FN.last((lastElement) =&gt; console.log(lastElement), 1, 2, 3, 4, 5);</p>
+FN.last((lastElement) =&gt; {
+  console.log(lastElement);
+}, 1, 2, 3, 4, 5);</p>
 </div>
 
 
@@ -1149,7 +1151,7 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line100">line 100</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line112">line 112</a>
     </li></ul></dd>
     
 
@@ -1201,21 +1203,20 @@ a callback or at least one element passed into last.</p>
     <h4 class="name" id="let"><span class="type-signature"></span>let<span class="signature">(cb, objectContext)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary"><p>FN.let created a new isolated execution context with a set of values
-     initilised within the context and visible only for the duration of the
-     callback function.</p></p>
+    <p class="summary"><p>FN.let creates a new isolated execution context with a set of values initilised
+within the context and visible only for the duration of the callback function.</p></p>
     
 
 
 
 <div class="description">
-    <p>FN.let created a new isolated execution context with a set of values
-     initilised within the context and visible only for the duration of the
-     callback function.</p>
+    <p>FN.let creates a new isolated execution context with a set of values initilised
+within the context and visible only for the duration of the callback function.
+Note that it acts as a closure and does have access to outer variables.</p>
 <p>Example:
 FN.let(() =&gt; {
   console.log(<code>Hi my name is ${name} and I am ${age} years old.</code>);
-},{&quot;age&quot;: 29, &quot;name&quot;: &quot;Neil Munro&quot;});</p>
+}, {&quot;age&quot;: 29, &quot;name&quot;: &quot;Neil Munro&quot;});</p>
 </div>
 
 
@@ -1332,7 +1333,7 @@ that are to be created inside the execution context.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line245">line 245</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line263">line 263</a>
     </li></ul></dd>
     
 
@@ -1397,7 +1398,9 @@ index. The callback is executed with the second argument to
 FN.nth being the index and the rest of the arguments converted
 to the list of items to grab the index of.</p>
 <p>Example:
-FN.nth((nthElement) =&gt; console.log(nthElement), 2, 1, 2, 3, 4, 5);</p>
+FN.nth((nthElement) =&gt; {
+  console.log(nthElement);
+}, 2, 1, 2, 3, 4, 5);</p>
 </div>
 
 
@@ -1537,7 +1540,7 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line124">line 124</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line139">line 139</a>
     </li></ul></dd>
     
 
@@ -1722,7 +1725,7 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line146">line 146</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -1930,7 +1933,7 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line169">line 169</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line186">line 186</a>
     </li></ul></dd>
     
 
@@ -1982,13 +1985,13 @@ arguments and processes them all as if they were an array.</p></td>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#all">all</a></li><li><a href="global.html#any">any</a></li><li><a href="global.html#first">first</a></li><li><a href="global.html#if">if</a></li><li><a href="global.html#ifElse">ifElse</a></li><li><a href="global.html#last">last</a></li><li><a href="global.html#let">let</a></li><li><a href="global.html#nth">nth</a></li><li><a href="global.html#rest">rest</a></li><li><a href="global.html#take">take</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FN.html">FN</a></li></ul><h3>Global</h3><ul><li><a href="global.html#all">all</a></li><li><a href="global.html#any">any</a></li><li><a href="global.html#first">first</a></li><li><a href="global.html#if">if</a></li><li><a href="global.html#ifElse">ifElse</a></li><li><a href="global.html#last">last</a></li><li><a href="global.html#let">let</a></li><li><a href="global.html#nth">nth</a></li><li><a href="global.html#rest">rest</a></li><li><a href="global.html#take">take</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jan 14 2016 12:49:39 GMT+0000 (GMT Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jan 14 2016 22:32:20 GMT+0000 (GMT)
 </footer>
 
 <script> prettyPrint(); </script>
