@@ -104,8 +104,35 @@ QUnit.test("Take function", (assert) => {
   var done1 = assert.async();
 
   FN.take((lst) => {
-    lst.forEach((element) => console.log(element));
     assert.ok(lst.toString() === ["Lions", "Tigers"].toString(), "Take got the first two elements of the list.");
     done1();
   }, 2, "Lions", "Tigers", "Bears");  
+});
+
+QUnit.test("If function", (assert) => {
+  var done1 = assert.async();
+  
+  FN.if(() => {
+    assert.ok(1 === 1, "FN.if callback function has executed correctly.");
+    done1();
+  }, 1 === 1, 2 === 2);
+}); 
+
+QUnit.test("If-else function", (assert) => {
+  var done1 = assert.async();
+  var done2 = assert.async();
+  
+  FN.ifElse(() => {
+    assert.ok(1 === 1, "FN.ifElse callback function has executed correctly for true.");
+    done1();
+  }, () => {
+    return false;
+  }, 1 === 1, 2 === 2);
+  
+  FN.ifElse(() => {
+    return false;
+  }, () => {
+    assert.ok(1 === 1, "FN.ifElse callback function has executed correctly for false.");
+    done2();
+  }, 1 === 1, 2 === 3);
 });

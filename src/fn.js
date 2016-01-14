@@ -168,5 +168,58 @@ const FN = Object.freeze(Object.create({
    */
   "take": (cb, n, ...lst) => {
     return(cb !== undefined && n !== undefined) ? cb(lst.slice(0, n)) : undefined;
+  },
+  
+  /**
+   * If expects a callback and any number of values.
+   * The values are treated as if they were a list and
+   * the callback is executed with no arguments.
+   *
+   * Example:
+   * FN.if(() => {
+   *   console.log("Is true");
+   * }, 1 === 1, 2 === 2);
+   *
+   * @param {function} cb - The callback to execute in the form: () =>  {...}
+   * @param {array} lst - The arguments to rest. Rest takes a variable number of
+   * arguments and processes them all as if they were an array.
+   * @return The result of the callback.
+   */
+  "if": (cb, ...lst) => {
+    var result = true;
+    
+    lst.forEach((element) => { if(!element) result = false});
+    
+    return(cb !== undefined && lst !== undefined && lst.length > 0 && result) ? cb() : undefined;  
+  },
+  
+  /**
+   * If-else expects two callbacks and any number of values.
+   * The values are treated as if they were a list and
+   * the callback is executed with no arguments.
+   * 
+   * NOTE: Multiple if-elses can be nested inside of the callback functions.
+   *
+   * Example:
+   * FN.ifElse(() => {
+   *   console.log("Is true");
+   * },
+   * () => {
+   *  console.log("Is false");
+   * },
+   * 1 === 1, 2 === 2);
+   *
+   * @param {function} cb1 - The callback to execute in the form: () =>  {...} if true.
+   * @param {function} cb2 - The callback to execute in the form: () =>  {...} if false.
+   * @param {array} lst - The arguments to rest. Rest takes a variable number of
+   * arguments and processes them all as if they were an array.
+   * @return The result of the callback.
+   */
+  "ifElse": (cb1, cb2, ...lst) => {
+    var result = true;
+    
+    lst.forEach((element) => { if(!element) result = false});
+
+    return(cb1 !== undefined && cb2 !== undefined && lst !== undefined && lst.length > 0 && result) ? cb1() : cb2();  
   }
 }));
