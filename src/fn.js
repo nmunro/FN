@@ -12,8 +12,6 @@
  * @author Neil Munro <neilmunro@gmail.com>
  */
 
-"use strict";
-
 // Throw FN into it's own frozen constant variable.
 const FN = Object.freeze(Object.create({
   /**
@@ -33,6 +31,7 @@ const FN = Object.freeze(Object.create({
    * evaluated to true or the users didn't pass in a callback.
    */
   "any": (cb, ...lst) => {
+    "use strict";
     var result = false;
 
     lst.forEach((element) => { if(element) result = true; });
@@ -57,6 +56,7 @@ const FN = Object.freeze(Object.create({
    * expression evaluated to false or the user didn't pass in a callback.
    */
   "all": (cb, ...lst) => {
+    "use strict";
     var result = true;
 
     lst.forEach((element) => { if(!element) result = false; });
@@ -81,6 +81,7 @@ const FN = Object.freeze(Object.create({
    * a callback or at least one element passed into first.
    */
   "first": (cb, ...lst) => {
+    "use strict";
     return(cb !== undefined && lst[0] !== undefined) ? cb(lst[0]) : undefined;
   },
 
@@ -102,6 +103,7 @@ const FN = Object.freeze(Object.create({
    * @see FN.first
    */
   "last": (cb, ...lst) => {
+    "use strict";
     return(cb !== undefined && lst[0] !== undefined) ? cb(lst[lst.length-1]) :
       (lst[lst.length-1] !== undefined) ? lst[lst.length-1] : undefined;
   },
@@ -128,6 +130,7 @@ const FN = Object.freeze(Object.create({
    * @see FN.last
    */
   "nth": (cb, n, ...lst) => {
+    "use strict";
     return(cb !== undefined && lst[n] !== undefined) ? cb(n, lst[n]) : undefined;
   },
 
@@ -150,6 +153,7 @@ const FN = Object.freeze(Object.create({
    * @see FN.first
    */
   "rest": (cb, ...lst) => {
+    "use strict";
     return(cb !== undefined && lst !== undefined && lst.length > 1) ? cb(lst.slice(1)) : undefined;
   },
 
@@ -173,6 +177,7 @@ const FN = Object.freeze(Object.create({
    * @return The result of the callback.
    */
   "take": (cb, n, ...lst) => {
+    "use strict";
     return(cb !== undefined && n !== undefined) ? cb(lst.slice(0, n)) : undefined;
   },
 
@@ -194,9 +199,10 @@ const FN = Object.freeze(Object.create({
    * @see FN.ifElse
    */
   "if": (cb, ...lst) => {
+    "use strict";
     var result = true;
 
-    lst.forEach((element) => { if(!element) result = false});
+    lst.forEach((element) => { if(!element) result = false;});
 
     return(cb !== undefined && lst !== undefined && lst.length > 0 && result) ? cb() : undefined;
   },
@@ -223,15 +229,16 @@ const FN = Object.freeze(Object.create({
    * @see FN.if
    */
   "ifElse": (cb1, cb2, ...lst) => {
+    "use strict";
     var result = true;
 
-    lst.forEach((element) => { if(!element) result = false});
+    lst.forEach((element) => { if(!element) result = false;});
 
     return(cb1 !== undefined && cb2 !== undefined && lst !== undefined && lst.length > 0 && result) ? cb1() : cb2();
   },
 
   /**
-   * FN.let created a new isolated execution context with a set of values initilised
+   * FN.let creates a new isolated execution context with a set of values initilised
    * within the context and visible only for the duration of the callback function.
    * Note that it acts as a closure and does have access to outer variables.
    *
@@ -247,6 +254,7 @@ const FN = Object.freeze(Object.create({
    * @see FN.if
    */
 	"let": (cb, objectContext) => {
+    "use strict";
 		return(() => {
 			Object.keys(objectContext).forEach((key) => this[key] = objectContext[key]);
 			return cb.call(this);
