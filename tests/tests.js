@@ -144,7 +144,7 @@ QUnit.test("Let function", (assert) => {
   FN.let(() => {
     assert.ok(age === 29, "FN.let callback function detects the correct age value");  
     done1();
-    assert.notOk(name !== "John Smith", "FN.let callback function detects name is NOT 'John Smith'.");
+    assert.notOk(name === "John Smith", "FN.let callback function detects name is NOT 'John Smith'.");
     done2();
   }, { "age": 29, "name": "Neil Munro" });
 });

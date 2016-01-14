@@ -34,7 +34,6 @@ const FN = Object.freeze(Object.create({
    * @return The result of the callback or undefined.
    */
   "any": (cb, ...lst) => {
-    "use strict";
     var result = false;
 
     lst.forEach((element) => { if(element) result = true; });
@@ -58,7 +57,6 @@ const FN = Object.freeze(Object.create({
    * @return The result of the callback or undefined.
    */
   "all": (cb, ...lst) => {
-    "use strict";
     var result = true;
 
     lst.forEach((element) => { if(!element) result = false; });
@@ -82,7 +80,6 @@ const FN = Object.freeze(Object.create({
    * @return The result of the callback or undefined.
    */
   "first": (cb, ...lst) => {
-    "use strict";
     return(cb !== undefined && lst[0] !== undefined) ? cb(lst[0]) : undefined;
   },
 
@@ -103,7 +100,6 @@ const FN = Object.freeze(Object.create({
    * @see FN.first
    */
   "last": (cb, ...lst) => {
-    "use strict";
     return(cb !== undefined && lst[0] !== undefined) ? cb(lst[lst.length-1]) :
       (lst[lst.length-1] !== undefined) ? lst[lst.length-1] : undefined;
   },
@@ -129,7 +125,6 @@ const FN = Object.freeze(Object.create({
    * @see FN.last
    */
   "nth": (cb, n, ...lst) => {
-    "use strict";
     return(cb !== undefined && lst[n] !== undefined) ? cb(n, lst[n]) : undefined;
   },
 
@@ -151,7 +146,6 @@ const FN = Object.freeze(Object.create({
    * @see FN.first
    */
   "rest": (cb, ...lst) => {
-    "use strict";
     return(cb !== undefined && lst !== undefined && lst.length > 1) ? cb(lst.slice(1)) : undefined;
   },
 
@@ -175,7 +169,6 @@ const FN = Object.freeze(Object.create({
    * @return The result of the callback or undefined.
    */
   "take": (cb, n, ...lst) => {
-    "use strict";
     return(cb !== undefined && n !== undefined) ? cb(lst.slice(0, n)) : undefined;
   },
 
@@ -197,7 +190,6 @@ const FN = Object.freeze(Object.create({
    * @see FN.ifElse
    */
   "if": (cb, ...lst) => {
-    "use strict";
     var result = true;
 
     lst.forEach((element) => { if(!element) result = false; });
@@ -227,7 +219,6 @@ const FN = Object.freeze(Object.create({
    * @see FN.if
    */
   "ifElse": (cb1, cb2, ...lst) => {
-    "use strict";
     var result = true;
 
     lst.forEach((element) => { if(!element) result = false; });
@@ -252,7 +243,6 @@ const FN = Object.freeze(Object.create({
   * @see FN.if
   */
   "let": (cb, objectContext) => {
-    "use strict";
     return(() => {
       Object.keys(objectContext).forEach((key) => this[key] = objectContext[key]);
       return cb.call(this);
