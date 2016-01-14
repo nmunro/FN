@@ -622,6 +622,380 @@ a callback or at least one element passed into first.</p>
 
     
 
+    <h4 class="name" id="if"><span class="type-signature"></span>if<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
+
+    
+    <p class="summary">If expects a callback and any number of values.</p>
+    
+
+
+
+<div class="description">
+    <p>If expects a callback and any number of values.
+The values are treated as if they were a list and
+the callback is executed with no arguments.</p>
+<p>Example:
+FN.if(() =&gt; {
+  console.log(&quot;Is true&quot;);
+}, 1 === 1, 2 === 2);</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The callback to execute in the form: () =&gt;  {...}</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lst</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The arguments to rest. Rest takes a variable number of
+arguments and processes them all as if they were an array.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line188">line 188</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The result of the callback.</p>
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="ifElse"><span class="type-signature"></span>ifElse<span class="signature">(cb1, cb2, lst)</span><span class="type-signature"></span></h4>
+
+    
+    <p class="summary">If-else expects two callbacks and any number of values.</p>
+    
+
+
+
+<div class="description">
+    <p>If-else expects two callbacks and any number of values.
+The values are treated as if they were a list and
+the callback is executed with no arguments.</p>
+<p>NOTE: Multiple if-elses can be nested inside of the callback functions.</p>
+<p>Example:
+FN.ifElse(() =&gt; {
+  console.log(&quot;Is true&quot;);
+},
+() =&gt; {
+ console.log(&quot;Is false&quot;);
+},
+1 === 1, 2 === 2);</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cb1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The callback to execute in the form: () =&gt;  {...} if true.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The callback to execute in the form: () =&gt;  {...} if false.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lst</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The arguments to rest. Rest takes a variable number of
+arguments and processes them all as if they were an array.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line218">line 218</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The result of the callback.</p>
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="last"><span class="type-signature"></span>last<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
@@ -1379,13 +1753,13 @@ arguments and processes them all as if they were an array.</p></td>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#all">all</a></li><li><a href="global.html#any">any</a></li><li><a href="global.html#first">first</a></li><li><a href="global.html#last">last</a></li><li><a href="global.html#nth">nth</a></li><li><a href="global.html#rest">rest</a></li><li><a href="global.html#take">take</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#all">all</a></li><li><a href="global.html#any">any</a></li><li><a href="global.html#first">first</a></li><li><a href="global.html#if">if</a></li><li><a href="global.html#ifElse">ifElse</a></li><li><a href="global.html#last">last</a></li><li><a href="global.html#nth">nth</a></li><li><a href="global.html#rest">rest</a></li><li><a href="global.html#take">take</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Jan 13 2016 23:40:16 GMT+0000 (GMT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jan 14 2016 00:23:25 GMT+0000 (GMT)
 </footer>
 
 <script> prettyPrint(); </script>
