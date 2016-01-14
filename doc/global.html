@@ -104,15 +104,17 @@
     <h4 class="name" id="all"><span class="type-signature"></span>all<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary">All expects a callback and any number of expressions.</p>
+    <p class="summary"><p>FN.all is a function which evaluates a number of
+expressions and runs a callback function if
+all of the expressions are true.</p></p>
     
 
 
 
 <div class="description">
-    <p>All expects a callback and any number of expressions.
-The expressions are evaluated and if all of them
-are true then the callback is executed. </p>
+    <p>FN.all is a function which evaluates a number of
+expressions and runs a callback function if
+all of the expressions are true.</p>
 <p>Example:
 FN.all(() =&gt; {
  // Do something important.
@@ -278,15 +280,17 @@ expression evaluated to false or the user didn't pass in a callback.</p>
     <h4 class="name" id="any"><span class="type-signature"></span>any<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary">Any expects a callback and any number of expressions.</p>
+    <p class="summary"><p>FN.any is a function which evaluates a number of
+expressions and runs a callback function if
+any of the expressions are true.</p></p>
     
 
 
 
 <div class="description">
-    <p>Any expects a callback and any number of expressions.
-The expressions are evaluated and if any one of them
-are true then the callback is executed. </p>
+    <p>FN.any is a function which evaluates a number of
+expressions and runs a callback function if
+any of the expressions are true.</p>
 <p>Example:
 FN.any(() =&gt; {
  // Do something important.
@@ -452,18 +456,18 @@ evaluated to true or the users didn't pass in a callback.</p>
     <h4 class="name" id="first"><span class="type-signature"></span>first<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary">First expects a callback and any number of values.</p>
+    <p class="summary"><p>FN.first runs a callback with the first element of
+a list as its one and only parameter.</p></p>
     
 
 
 
 <div class="description">
-    <p>First expects a callback and any number of values.
-The values are treated as if they were a list and
-the callback is executed with the first element
-from this list as its only argument. </p>
+    <p>FN.first runs a callback with the first element of
+a list as its one and only parameter. The list
+in question is just a set of values passed to first.</p>
 <p>Example:
-FN.first((firstElement) =&gt; console.log(firstElement));</p>
+FN.first((firstElement) =&gt; console.log(firstElement), 1, 2, 3, 4, 5);</p>
 </div>
 
 
@@ -580,7 +584,7 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line82">line 82</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -625,15 +629,16 @@ a callback or at least one element passed into first.</p>
     <h4 class="name" id="if"><span class="type-signature"></span>if<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary">If expects a callback and any number of values.</p>
+    <p class="summary">FN.if is a single branch function.</p>
     
 
 
 
 <div class="description">
-    <p>If expects a callback and any number of values.
-The values are treated as if they were a list and
-the callback is executed with no arguments.</p>
+    <p>FN.if is a single branch function. It expects a
+callback and any number of values. The values
+are treated as if they were a list and the
+callback is executed with no arguments.</p>
 <p>Example:
 FN.if(() =&gt; {
   console.log(&quot;Is true&quot;);
@@ -754,12 +759,19 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line188">line 188</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line190">line 190</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>FN.ifElse</li>
+        </ul>
+    </dd>
     
 
     
@@ -798,16 +810,18 @@ arguments and processes them all as if they were an array.</p></td>
     <h4 class="name" id="ifElse"><span class="type-signature"></span>ifElse<span class="signature">(cb1, cb2, lst)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary">If-else expects two callbacks and any number of values.</p>
+    <p class="summary"><p>FN.ifElse expands upon FN.if by permitting the user
+to provide a second callback function to be executed
+in the event that the if expression evaluates to false.</p></p>
     
 
 
 
 <div class="description">
-    <p>If-else expects two callbacks and any number of values.
-The values are treated as if they were a list and
-the callback is executed with no arguments.</p>
-<p>NOTE: Multiple if-elses can be nested inside of the callback functions.</p>
+    <p>FN.ifElse expands upon FN.if by permitting the user
+to provide a second callback function to be executed
+in the event that the if expression evaluates to false.</p>
+<p>NOTE: Multiple FNi.fElse can be nested inside of the callback functions.</p>
 <p>Example:
 FN.ifElse(() =&gt; {
   console.log(&quot;Is true&quot;);
@@ -955,12 +969,19 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line218">line 218</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line221">line 221</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>FN.if</li>
+        </ul>
+    </dd>
     
 
     
@@ -999,18 +1020,19 @@ arguments and processes them all as if they were an array.</p></td>
     <h4 class="name" id="last"><span class="type-signature"></span>last<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary">Last expects a callback and any number of values.</p>
+    <p class="summary"><p>FN.last is the inverse of FN.first and instead of
+passing the first element of a list into a callback
+passes the last element passed to FN.last.</p></p>
     
 
 
 
 <div class="description">
-    <p>Last expects a callback and any number of values.
-The values are treated as if they were a list and
-the callback is executed with the last element
-from this list as its only argument. </p>
+    <p>FN.last is the inverse of FN.first and instead of
+passing the first element of a list into a callback
+passes the last element passed to FN.last.</p>
 <p>Example:
-FN.last((lastElement) =&gt; console.log(lastElement));</p>
+FN.last((lastElement) =&gt; console.log(lastElement), 1, 2, 3, 4, 5);</p>
 </div>
 
 
@@ -1127,12 +1149,19 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line101">line 101</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line100">line 100</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>FN.first</li>
+        </ul>
+    </dd>
     
 
     
@@ -1172,18 +1201,21 @@ a callback or at least one element passed into last.</p>
     <h4 class="name" id="nth"><span class="type-signature"></span>nth<span class="signature">(cb, n, lst)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary">Nth expects a callback and any number of values.</p>
+    <p class="summary"><p>FN.nth complements FN.first and FN.last by providing
+a means to grab an arbitrary element in a list by numeric
+index.</p></p>
     
 
 
 
 <div class="description">
-    <p>Nth expects a callback and any number of values.
-The values are treated as if they were a list and
-the callback is executed with the nth element
-from this list as its only argument. </p>
+    <p>FN.nth complements FN.first and FN.last by providing
+a means to grab an arbitrary element in a list by numeric
+index. The callback is executed with the second argument to
+FN.nth being the index and the rest of the arguments converted
+to the list of items to grab the index of.</p>
 <p>Example:
-FN.nth((nthElement) =&gt; console.log(nthElement));</p>
+FN.nth((nthElement) =&gt; console.log(nthElement), 2, 1, 2, 3, 4, 5);</p>
 </div>
 
 
@@ -1323,12 +1355,21 @@ arguments and processes them all as if they were an array.</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line122">line 122</a>
+        <a href="fn.js.html">fn.js</a>, <a href="fn.js.html#line124">line 124</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>FN.first</li>
+        
+            <li>FN.last</li>
+        </ul>
+    </dd>
     
 
     
@@ -1368,23 +1409,21 @@ a callback or the nth element does not exist.</p>
     <h4 class="name" id="rest"><span class="type-signature"></span>rest<span class="signature">(cb, lst)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary">Rest expects a callback and any number of values.</p>
+    <p class="summary"><p>FN.rest complements FN.first by passing everything
+execept the first element into a callback.</p></p>
     
 
 
 
 <div class="description">
-    <p>Rest expects a callback and any number of values.
-The values are treated as if they were a list and
-the callback is executed with the all but the first
-element from this list passed in as an array as its
-only argument. </p>
+    <p>FN.rest complements FN.first by passing everything
+execept the first element into a callback.</p>
 <p>Example:
 FN.rest((remainingElements) =&gt; {
   remainingElements.forEach((element) =&gt; {
    console.log(element); 
   });
-});</p>
+}, 1, 2, 3, 4, 5);</p>
 </div>
 
 
@@ -1508,6 +1547,13 @@ arguments and processes them all as if they were an array.</p></td>
     
 
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>FN.first</li>
+        </ul>
+    </dd>
+    
 
     
 </dl>
@@ -1546,16 +1592,17 @@ a callback, a list or the argument list is smaller than one.</p>
     <h4 class="name" id="take"><span class="type-signature"></span>take<span class="signature">(cb, n, lst)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary">Take expects a callback, an index and any number of values.</p>
+    <p class="summary"><p>FN.take runs the supplied callback with a number and a
+list of items.</p></p>
     
 
 
 
 <div class="description">
-    <p>Take expects a callback, an index and any number of values.
-The values are treated as if they were a list and
-the callback is executed with as many elements as could be
-take from the rest params up to the value of n.</p>
+    <p>FN.take runs the supplied callback with a number and a
+list of items. The supplied callback is executed with
+an array containing the first n elements in the list of
+items passed into FN.take.</p>
 <p>Example:
 FN.take((elements) =&gt; {
   elements.forEach((element) =&gt; {
@@ -1759,7 +1806,7 @@ arguments and processes them all as if they were an array.</p></td>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jan 14 2016 00:32:00 GMT+0000 (GMT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jan 14 2016 00:54:12 GMT+0000 (GMT)
 </footer>
 
 <script> prettyPrint(); </script>

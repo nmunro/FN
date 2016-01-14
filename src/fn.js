@@ -17,9 +17,9 @@
 // Throw FN into it's own frozen constant variable.
 const FN = Object.freeze(Object.create({
   /**
-   * Any expects a callback and any number of expressions.
-   * The expressions are evaluated and if any one of them
-   * are true then the callback is executed. 
+   * FN.any is a function which evaluates a number of
+   * expressions and runs a callback function if
+   * any of the expressions are true.
    *
    * Example:
    * FN.any(() => {
@@ -41,9 +41,9 @@ const FN = Object.freeze(Object.create({
   },
 
   /**
-   * All expects a callback and any number of expressions.
-   * The expressions are evaluated and if all of them
-   * are true then the callback is executed. 
+   * FN.all is a function which evaluates a number of
+   * expressions and runs a callback function if
+   * all of the expressions are true.
    *
    * Example:
    * FN.all(() => {
@@ -65,13 +65,12 @@ const FN = Object.freeze(Object.create({
   },
 
   /**
-   * First expects a callback and any number of values.
-   * The values are treated as if they were a list and
-   * the callback is executed with the first element
-   * from this list as its only argument. 
+   * FN.first runs a callback with the first element of
+   * a list as its one and only parameter. The list
+   * in question is just a set of values passed to first.
    *
    * Example:
-   * FN.first((firstElement) => console.log(firstElement));
+   * FN.first((firstElement) => console.log(firstElement), 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (firstElement) =>  {...}
    * @param {array} lst - The arguments to first. First takes a variable number of
@@ -84,19 +83,19 @@ const FN = Object.freeze(Object.create({
   },
 
   /**
-   * Last expects a callback and any number of values.
-   * The values are treated as if they were a list and
-   * the callback is executed with the last element
-   * from this list as its only argument. 
+   * FN.last is the inverse of FN.first and instead of
+   * passing the first element of a list into a callback
+   * passes the last element passed to FN.last.
    *
    * Example:
-   * FN.last((lastElement) => console.log(lastElement));
+   * FN.last((lastElement) => console.log(lastElement), 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (lastElement) =>  {...}
    * @param {array} lst - The arguments to last. Last takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined if there wasn't
    * a callback or at least one element passed into last.
+   * @see FN.first
    */
   "last": (cb, ...lst) => {
     return(cb !== undefined && lst[0] !== undefined) ? cb(lst[lst.length-1]) :
@@ -104,13 +103,14 @@ const FN = Object.freeze(Object.create({
   },
 
   /**
-   * Nth expects a callback and any number of values.
-   * The values are treated as if they were a list and
-   * the callback is executed with the nth element
-   * from this list as its only argument. 
+   * FN.nth complements FN.first and FN.last by providing
+   * a means to grab an arbitrary element in a list by numeric
+   * index. The callback is executed with the second argument to
+   * FN.nth being the index and the rest of the arguments converted
+   * to the list of items to grab the index of.
    *
    * Example:
-   * FN.nth((nthElement) => console.log(nthElement));
+   * FN.nth((nthElement) => console.log(nthElement), 2, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (nthElement) =>  {...}
    * @param {number} n - The nth element in the list to try and get.
@@ -118,40 +118,40 @@ const FN = Object.freeze(Object.create({
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined if there wasn't
    * a callback or the nth element does not exist.
+   * @see FN.first
+   * @see FN.last
    */
   "nth": (cb, n, ...lst) => {
     return(cb !== undefined && lst[n] !== undefined) ? cb(n, lst[n]) : undefined;
   },
 
   /**
-   * Rest expects a callback and any number of values.
-   * The values are treated as if they were a list and
-   * the callback is executed with the all but the first
-   * element from this list passed in as an array as its
-   * only argument. 
+   * FN.rest complements FN.first by passing everything
+   * execept the first element into a callback.
    *
    * Example:
    * FN.rest((remainingElements) => {
    *   remainingElements.forEach((element) => {
    *    console.log(element); 
    *   });
-   * });
+   * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (remainingElements) =>  {...}
    * @param {array} lst - The arguments to rest. Rest takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined if there wasn't
    * a callback, a list or the argument list is smaller than one.
+   * @see FN.first
    */
   "rest": (cb, ...lst) => {
     return(cb !== undefined && lst !== undefined && lst.length > 1) ? cb(lst.slice(1)) : undefined;
   },
 
   /**
-   * Take expects a callback, an index and any number of values.
-   * The values are treated as if they were a list and
-   * the callback is executed with as many elements as could be
-   * take from the rest params up to the value of n.
+   * FN.take runs the supplied callback with a number and a
+   * list of items. The supplied callback is executed with
+   * an array containing the first n elements in the list of
+   * items passed into FN.take.
    *
    * Example:
    * FN.take((elements) => {
@@ -171,9 +171,10 @@ const FN = Object.freeze(Object.create({
   },
   
   /**
-   * If expects a callback and any number of values.
-   * The values are treated as if they were a list and
-   * the callback is executed with no arguments.
+   * FN.if is a single branch function. It expects a
+   * callback and any number of values. The values
+   * are treated as if they were a list and the
+   * callback is executed with no arguments.
    *
    * Example:
    * FN.if(() => {
@@ -184,6 +185,7 @@ const FN = Object.freeze(Object.create({
    * @param {array} lst - The arguments to rest. Rest takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback.
+   * @see FN.ifElse
    */
   "if": (cb, ...lst) => {
     var result = true;
@@ -194,11 +196,11 @@ const FN = Object.freeze(Object.create({
   },
   
   /**
-   * If-else expects two callbacks and any number of values.
-   * The values are treated as if they were a list and
-   * the callback is executed with no arguments.
+   * FN.ifElse expands upon FN.if by permitting the user
+   * to provide a second callback function to be executed
+   * in the event that the if expression evaluates to false.
    * 
-   * NOTE: Multiple if-elses can be nested inside of the callback functions.
+   * NOTE: Multiple FNi.fElse can be nested inside of the callback functions.
    *
    * Example:
    * FN.ifElse(() => {
@@ -214,6 +216,7 @@ const FN = Object.freeze(Object.create({
    * @param {array} lst - The arguments to rest. Rest takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback.
+   * @see FN.if
    */
   "ifElse": (cb1, cb2, ...lst) => {
     var result = true;
