@@ -236,7 +236,9 @@ const FN = Object.freeze(Object.create({
   *   console.log("Hi my name is " + name + " and I am " + age + " years old.");
   * }, {"age": 29, "name": "Neil Munro"});
   *
-  * @param {function} cb - The callback to execute in the form: () =>  {...}.
+  * @param {function} cb - The callback to execute in the form: function() {...}.
+  * You MUST use the original function() {} form as these bind a 'this' value to
+  * the scope that FN.let provides.
   * @param {object} objectContext - An object containing the key/value pairs
   * that are to be created inside the execution context.
   * @return The return value of the callback function.
@@ -244,8 +246,41 @@ const FN = Object.freeze(Object.create({
   */
   "let": (cb, objectContext) => {
     return(() => {
-      Object.keys(objectContext).forEach((key) => this[key] = objectContext[key]);
-      return cb.call(this);
+      var tmp = {};
+      Object.keys(objectContext).forEach((key) => tmp[key] = objectContext[key]);
+      return cb.bind(tmp)();
     })();
+  },
+
+  /**
+  * FN.range generates and array of numeric values based on criteria that
+  * the programmer enters.
+  *
+  * Example:
+  * FN.range(((lst) => lst), 0, 10, 1);
+  *
+  * @param {function} cb - The callback to execute in the form: (elements) => {...};
+  * @param {array} lst - The array of constraints that can be passed in.
+  * @return The return value of the callback function.
+  */
+  "range": (cb, ...lst) => {
+    var start = (lst.length > 1) ? lst[0] : 0;
+    var stop = (lst[1] !== undefined) ? lst[1] : lst[0];
+    var step = (lst[2] !== undefined) ? lst[2] : 1;
+    var arr = [];
+    var update = ((cb) => {
+      arr.push(start);
+      cb();
+    });
+
+    ((stop - start) >= 0) ?
+      (() => {
+        while(start <= stop) update(() => { start += step; });
+      })() :
+      (() => {
+        while(start >= stop) update(() => { start -= step });
+      })();
+
+    return cb(arr);
   }
 }));

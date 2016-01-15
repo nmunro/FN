@@ -1,7 +1,7 @@
 QUnit.test("Any function", (assert) => {
   var done1 = assert.async();
   var done2 = assert.async();
-  
+
   FN.any(() => {
     assert.ok(true, "Result true if all the rest params evaluate to true.");
     done1();
@@ -43,7 +43,7 @@ QUnit.test("All function", (assert) => {
 QUnit.test("First function", (assert) => {
   var done1 = assert.async();
   var done2 = assert.async();
-  
+
   FN.first((element) => {
     assert.ok(element === 1, "First element in the list [1, 2, 3, 4, 5] is 1.");
     done1();
@@ -61,12 +61,12 @@ QUnit.test("Nth function", (assert) => {
 
   FN.nth((n, element) => {
     assert.ok(element === 3, "The nth element '" + n + "' is '3' in the list [1, 2, 3, 4, 5].")
-    done1(); 
+    done1();
   }, 2, 1, 2, 3, 4, 5);
 
   FN.nth((n, element) => {
     assert.notOk(element === 0, "The nth element '" + n + "' is not '0' in the list [1, 2, 3, 4, 5].")
-    done2(); 
+    done2();
   }, 2, 1, 2, 3, 4, 5);
 });
 
@@ -91,12 +91,12 @@ QUnit.test("Rest function", (assert) => {
 
   FN.rest((rest) => {
     assert.ok(rest.toString() === [2, 3, 4, 5].toString(), "Remainder of the array [1, 2, 3, 4, 5] is equal to [2, 3, 4, 5].");
-    done1();  
+    done1();
   }, 1, 2, 3, 4, 5);
 
   FN.rest((rest) => {
     assert.notOk(rest.toString() === [4, 5].toString(), "Remainder of the array [1, 2, 3, 4, 5] is not equal to [4, 5].");
-    done2();  
+    done2();
   }, 1, 2, 3, 4, 5);
 });
 
@@ -106,29 +106,29 @@ QUnit.test("Take function", (assert) => {
   FN.take((lst) => {
     assert.ok(lst.toString() === ["Lions", "Tigers"].toString(), "Take got the first two elements of the list.");
     done1();
-  }, 2, "Lions", "Tigers", "Bears");  
+  }, 2, "Lions", "Tigers", "Bears");
 });
 
 QUnit.test("If function", (assert) => {
   var done1 = assert.async();
-  
+
   FN.if(() => {
     assert.ok(1 === 1, "FN.if callback function has executed correctly.");
     done1();
   }, 1 === 1, 2 === 2);
-}); 
+});
 
 QUnit.test("If-else function", (assert) => {
   var done1 = assert.async();
   var done2 = assert.async();
-  
+
   FN.ifElse(() => {
     assert.ok(1 === 1, "FN.ifElse callback function has executed correctly for true.");
     done1();
   }, () => {
     return false;
   }, 1 === 1, 2 === 2);
-  
+
   FN.ifElse(() => {
     return false;
   }, () => {
@@ -142,7 +142,7 @@ QUnit.test("Let function", (assert) => {
   var done2 = assert.async();
 
   FN.let(() => {
-    assert.ok(age === 29, "FN.let callback function detects the correct age value");  
+    assert.ok(age === 29, "FN.let callback function detects the correct age value");
     done1();
     assert.notOk(name === "John Smith", "FN.let callback function detects name is NOT 'John Smith'.");
     done2();
