@@ -162,6 +162,12 @@ const FN = Object.freeze(Object.create({
    *   });
    * }, 2, "Lions", "Tigers", "Bears");
    *
+   * FN.take((elements) => {
+   *  elements.forEach((element) => {
+   *    console.log(element);
+   *  });
+   * }, 2, ["Lions", "Tigers", "Bears"]);
+   *
    * @param {function} cb - The callback to execute in the form: (elements) =>  {...}
    * @param {number} n - The number of elements to take from the remaining arguments.
    * @param {array} lst - The arguments to FN.take. FN.take takes a variable number of
@@ -169,7 +175,11 @@ const FN = Object.freeze(Object.create({
    * @return The result of the callback or undefined.
    */
   "take": (cb, n, ...lst) => {
-    return(cb !== undefined && n !== undefined) ? cb(lst.slice(0, n)) : undefined;
+    return(cb !== undefined && n !== undefined && lst.length > 1) ?
+      cb(lst.slice(0, n)) :
+        (cb !== undefined && n !== undefined && lst.length === 1) ?
+          cb(lst[0].slice(0, n)):
+          undefined;
   },
 
   /**
@@ -257,18 +267,17 @@ const FN = Object.freeze(Object.create({
   * the programmer enters.
   *
   * Example:
-  * FN.range(((lst) => lst), 0, 10, 1);
+  * FN.range(0, 10, 1);
   *
-  * @param {function} cb - The callback to execute in the form: (elements) => {...};
   * @param {array} lst - The array of constraints that can be passed in.
-  * @return The return value of the callback function.
+  * @return {array} - The array built from lst.
   */
-  "range": (cb, ...lst) => {
+  "range": (...lst) => {
     var start = (lst.length > 1) ? lst[0] : 0;
-    var stop = (lst[1] !== undefined) ? lst[1] : lst[0];
-    var step = (lst[2] !== undefined) ? lst[2] : 1;
-    var arr = [];
-    var update = ((cb) => {
+    const stop = (lst[1] !== undefined) ? lst[1] : lst[0];
+    const step = (lst[2] !== undefined) ? lst[2] : 1;
+    const arr = [];
+    const update = ((cb) => {
       arr.push(start);
       cb();
     });
@@ -281,6 +290,6 @@ const FN = Object.freeze(Object.create({
         while(start >= stop) update(() => { start -= step });
       })();
 
-    return cb(arr);
+    return arr;
   }
 }));

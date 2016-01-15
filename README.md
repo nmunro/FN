@@ -76,6 +76,11 @@ FN.take((elements) =&gt; {
     console.log(element);
   });
 }, 2, &quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;);</p>
+<p>FN.take((elements) =&gt; {
+ elements.forEach((element) =&gt; {
+   console.log(element);
+ });
+}, 2, [&quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;]);</p>
 </dd>
 <dt><a href="#if">if(cb, lst)</a> ⇒</dt>
 <dd><p>FN.if is a single branch function. It expects a
@@ -107,6 +112,12 @@ Note that it acts as a closure and does have access to outer variables.</p>
 FN.let(() =&gt; {
   console.log(&quot;Hi my name is &quot; + name + &quot; and I am &quot; + age + &quot; years old.&quot;);
 }, {&quot;age&quot;: 29, &quot;name&quot;: &quot;Neil Munro&quot;});</p>
+</dd>
+<dt><a href="#range">range(lst)</a> ⇒ <code>array</code></dt>
+<dd><p>FN.range generates and array of numeric values based on criteria that
+the programmer enters.</p>
+<p>Example:
+FN.range(0, 10, 1);</p>
 </dd>
 </dl>
 
@@ -200,7 +211,7 @@ FN.rest complements FN.first by passing everythingexecept the first element int
 
 <a name="take"></a>
 ## take(cb, n, lst) ⇒
-FN.take runs the supplied callback with a number and alist of items. The supplied callback is executed withan array containing the first n elements in the list ofitems passed into FN.take.Example:FN.take((elements) => {  elements.forEach((element) => {    console.log(element);  });}, 2, "Lions", "Tigers", "Bears");
+FN.take runs the supplied callback with a number and alist of items. The supplied callback is executed withan array containing the first n elements in the list ofitems passed into FN.take.Example:FN.take((elements) => {  elements.forEach((element) => {    console.log(element);  });}, 2, "Lions", "Tigers", "Bears");FN.take((elements) => { elements.forEach((element) => {   console.log(element); });}, 2, ["Lions", "Tigers", "Bears"]);
 
 **Kind**: global function  
 **Returns**: The result of the callback or undefined.  
@@ -248,6 +259,17 @@ FN.let creates a new isolated execution context with a set of values initilised
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute in the form: () =>  {...}. |
+| cb | <code>function</code> | The callback to execute in the form: function() {...}. You MUST use the original function() {} form as these bind a 'this' value to the scope that FN.let provides. |
 | objectContext | <code>object</code> | An object containing the key/value pairs that are to be created inside the execution context. |
+
+<a name="range"></a>
+## range(lst) ⇒ <code>array</code>
+FN.range generates and array of numeric values based on criteria thatthe programmer enters.Example:FN.range(0, 10, 1);
+
+**Kind**: global function  
+**Returns**: <code>array</code> - - The array built from lst.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| lst | <code>array</code> | The array of constraints that can be passed in. |
 
