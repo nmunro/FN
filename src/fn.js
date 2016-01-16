@@ -285,7 +285,7 @@ const FN = Object.freeze(Object.create({
 
     func = ((stop - start) >= 0) ?
       (() => { while(start <= stop) update(() => { start += step; }); })() :
-      (() => { while(start >= stop) update(() => { start -= step }); })();
+      (() => { while(start >= stop) update(() => { start -= step; }); })();
     func();
 
     return arr;

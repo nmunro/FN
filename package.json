@@ -1,11 +1,8 @@
 {
   "name": "fn",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "description": "A library of various functional bits and pieces shamelessly ripped from LISPs.",
   "main": "fn.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/nmunro/FN.git"
@@ -16,9 +13,17 @@
     "js"
   ],
   "author": "Neil Munro <neilmunro@gmail.com>",
-  "license": "BSD-3-Clause",
+  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/nmunro/FN/issues"
   },
-  "homepage": "https://github.com/nmunro/FN#readme"
+  "homepage": "https://github.com/nmunro/FN#readme",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-jsdoc-to-markdown": "^1.2.0"
+  }
 }
