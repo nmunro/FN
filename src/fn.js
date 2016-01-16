@@ -273,6 +273,7 @@ const FN = Object.freeze(Object.create({
   * @return {array} - The array built from lst.
   */
   "range": (...lst) => {
+    var func;
     var start = (lst.length > 1) ? lst[0] : 0;
     const stop = (lst[1] !== undefined) ? lst[1] : lst[0];
     const step = (lst[2] !== undefined) ? lst[2] : 1;
@@ -282,14 +283,39 @@ const FN = Object.freeze(Object.create({
       cb();
     });
 
-    ((stop - start) >= 0) ?
-      (() => {
-        while(start <= stop) update(() => { start += step; });
-      })() :
-      (() => {
-        while(start >= stop) update(() => { start -= step });
-      })();
+    func = ((stop - start) >= 0) ?
+      (() => { while(start <= stop) update(() => { start += step; }); })() :
+      (() => { while(start >= stop) update(() => { start -= step }); })();
+    func();
 
     return arr;
+  },
+
+  /**
+  * FN.cond is analogous to a switch statement. It evaluates each expression
+  * in turn until it first the first one that evaluates to true and runs its 
+  * acompanying function.
+  * 
+  * Example:
+  * FN.cond(
+  *   1 === 2, () => { console.log("first");  },
+  *   2 === 3, () => { console.log("second");  },
+  *   "tmp" === "tmp", () => { console.log("third");  }
+  * );
+  * 
+  * @param {array} lst - An array of expression/function pairs to evaluate/run.
+  * @return The result of the executed function or undefined.
+  */
+  "cond": (...lst) => {
+    var func = ((lst.length % 2) === 0) ? (() => {
+      var tmp;
+      lst.forEach((element, index) => {
+        if((index % 2) === 0)
+          // Expression is true, run the next argument as a function.
+          if(element && tmp === undefined) tmp = index+1;
+      });
+      return (lst[tmp] !== undefined) ? lst[tmp]() : undefined;
+    }) : undefined;
+    return(func !== undefined) ? func() : undefined;
   }
 }));
