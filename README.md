@@ -119,6 +119,17 @@ the programmer enters.</p>
 <p>Example:
 FN.range(0, 10, 1);</p>
 </dd>
+<dt><a href="#cond">cond(lst)</a> ⇒</dt>
+<dd><p>FN.cond is analogous to a switch statement. It evaluates each expression
+in turn until it first the first one that evaluates to true and runs its 
+acompanying function.</p>
+<p>Example:
+FN.cond(
+  1 === 2, () =&gt; { console.log(&quot;first&quot;);  },
+  2 === 3, () =&gt; { console.log(&quot;second&quot;);  },
+  &quot;tmp&quot; === &quot;tmp&quot;, () =&gt; { console.log(&quot;third&quot;);  }
+);</p>
+</dd>
 </dl>
 
 <a name="FN"></a>
@@ -272,4 +283,15 @@ FN.range generates and array of numeric values based on criteria thatthe progra
 | Param | Type | Description |
 | --- | --- | --- |
 | lst | <code>array</code> | The array of constraints that can be passed in. |
+
+<a name="cond"></a>
+## cond(lst) ⇒
+FN.cond is analogous to a switch statement. It evaluates each expressionin turn until it first the first one that evaluates to true and runs its acompanying function.Example:FN.cond(  1 === 2, () => { console.log("first");  },  2 === 3, () => { console.log("second");  },  "tmp" === "tmp", () => { console.log("third");  });
+
+**Kind**: global function  
+**Returns**: The result of the executed function or undefined.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| lst | <code>array</code> | An array of expression/function pairs to evaluate/run. |
 
