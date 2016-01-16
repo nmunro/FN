@@ -242,8 +242,8 @@ const FN = Object.freeze(Object.create({
   * Note that it acts as a closure and does have access to outer variables.
   *
   * Example:
-  * FN.let(() => {
-  *   console.log("Hi my name is " + name + " and I am " + age + " years old.");
+  * FN.let(function() {
+  *   console.log("Hi my name is " + this.name + " and I am " + this.age + " years old.");
   * }, {"age": 29, "name": "Neil Munro"});
   *
   * @param {function} cb - The callback to execute in the form: function() {...}.

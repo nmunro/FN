@@ -109,8 +109,8 @@ FN.ifElse(() =&gt; {
 within the context and visible only for the duration of the callback function.
 Note that it acts as a closure and does have access to outer variables.</p>
 <p>Example:
-FN.let(() =&gt; {
-  console.log(&quot;Hi my name is &quot; + name + &quot; and I am &quot; + age + &quot; years old.&quot;);
+FN.let(function() {
+  console.log(&quot;Hi my name is &quot; + this.name + &quot; and I am &quot; + this.age + &quot; years old.&quot;);
 }, {&quot;age&quot;: 29, &quot;name&quot;: &quot;Neil Munro&quot;});</p>
 </dd>
 <dt><a href="#range">range(lst)</a> ⇒ <code>array</code></dt>
@@ -262,7 +262,7 @@ FN.ifElse expands upon FN.if by permitting the userto provide a second callback
 
 <a name="let"></a>
 ## let(cb, objectContext) ⇒
-FN.let creates a new isolated execution context with a set of values initilisedwithin the context and visible only for the duration of the callback function.Note that it acts as a closure and does have access to outer variables.Example:FN.let(() => {  console.log("Hi my name is " + name + " and I am " + age + " years old.");}, {"age": 29, "name": "Neil Munro"});
+FN.let creates a new isolated execution context with a set of values initilisedwithin the context and visible only for the duration of the callback function.Note that it acts as a closure and does have access to outer variables.Example:FN.let(function() {  console.log("Hi my name is " + this.name + " and I am " + this.age + " years old.");}, {"age": 29, "name": "Neil Munro"});
 
 **Kind**: global function  
 **Returns**: The return value of the callback function.  
