@@ -102,11 +102,17 @@ QUnit.test("Rest function", (assert) => {
 
 QUnit.test("Take function", (assert) => {
   var done1 = assert.async();
+  var done2 = assert.async();
 
   FN.take((lst) => {
     assert.ok(lst.toString() === ["Lions", "Tigers"].toString(), "Take got the first two elements of the list.");
     done1();
   }, 2, "Lions", "Tigers", "Bears");
+  
+  FN.take((lst) => {
+    assert.ok(lst.toString() === [10, 8].toString(), "Take works with range, cool!");  
+    done2();
+  }, 2, FN.range(10, 0, 2)); 
 });
 
 QUnit.test("If function", (assert) => {
@@ -147,4 +153,63 @@ QUnit.test("Let function", (assert) => {
     assert.notOk(this.name === "John Smith", "FN.let callback function detects name is NOT 'John Smith'.");
     done2();
   }, { "age": 29, "name": "Neil Munro" });
+});
+
+// Range isn't an asyncronous function, testing is easy.
+QUnit.test("Range tests", (assert) => {
+  assert.ok(FN.range(0, 5).toString() === [0, 1, 2, 3, 4, 5].toString(), "Forward matches reference array.");  
+  assert.ok(FN.range(5, 0).toString() === [5, 4, 3, 2, 1, 0].toString(), "Backwards matches reference array.");  
+  assert.ok(FN.range(6, 0, 2).toString() === [6, 4, 2, 0].toString(), "Backwards match with step of two matches reference array.");  
+  assert.notOk(FN.range(6, 0, 3).toString() === [6, 4, 2, 0].toString(), "Does not match the reference array.");  
+});
+
+QUnit.test("Cond tests", (assert) => {
+  var done1 = assert.async();  
+  var done2 = assert.async();
+  var done3 = assert.async();
+  
+  FN.cond(
+    1 === 2, () => {
+      assert.ok(false, "The first callback was incorrectly executed.");
+      done1();
+    },
+    2 === 3, () => {
+      assert.ok(false, "The second callback was incorrectly executed.");
+      done1();
+    },
+    "tmp" === "tmp", () => {
+      assert.ok(true, "The third callback was correctly executed.");
+      done1();
+    }
+  );
+  
+  FN.cond(
+    1 === 2, () => {
+      assert.ok(false, "The first callback was incorrectly executed.");
+      done2();
+    },
+    2 === 2, () => {
+      assert.ok(true, "The second callback was correctly executed.");
+      done2();
+    },
+    "tmp" === "tmp", () => {
+      assert.ok(false, "The third callback was incorrectly executed.");
+      done2();
+    }
+  );
+  
+  FN.cond(
+    1 === 1, () => {
+      assert.ok(true, "The first callback was correctly executed.");
+      done3();
+    },
+    2 === 2, () => {
+      assert.ok(false, "The second callback was incorrectly executed.");
+      done3();
+    },
+    "tmp" === "tmp2", () => {
+      assert.ok(false, "The third callback was incorrectly executed.");
+      done3();
+    }
+  );
 });
