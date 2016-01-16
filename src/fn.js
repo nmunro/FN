@@ -278,14 +278,16 @@ const FN = Object.freeze(Object.create({
     const stop = (lst[1] !== undefined) ? lst[1] : lst[0];
     const step = (lst[2] !== undefined) ? lst[2] : 1;
     const arr = [];
+    const f1 = (() => { update(() => { start += step; }); });
+    const f2 = (() => { update(() => { start -= step; });});
     const update = ((cb) => {
       arr.push(start);
       cb();
     });
 
     func = ((stop - start) >= 0) ?
-      (() => { while(start <= stop) update(() => { start += step; }); }) :
-      (() => { while(start >= stop) update(() => { start -= step; }); });
+      (() => { while(start <= stop) f1(); }) :
+      (() => { while(start >= stop) f2(); });
     func();
 
     return arr;
@@ -310,9 +312,8 @@ const FN = Object.freeze(Object.create({
     var func = ((lst.length % 2) === 0) ? (() => {
       var tmp;
       lst.forEach((element, index) => {
-        if((index % 2) === 0)
-          // Expression is true, run the next argument as a function.
-          if(element && tmp === undefined) tmp = index+1;
+        // Expression is true, store the next argument (a function) for later use.
+        if(((index % 2) === 0) && tmp === undefined && element) tmp = index+1;
       });
       return (lst[tmp] !== undefined) ? lst[tmp]() : undefined;
     }) : undefined;
