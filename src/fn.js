@@ -279,7 +279,7 @@ const FN = Object.freeze(Object.create({
     const step = (lst[2] !== undefined) ? lst[2] : 1;
     const arr = [];
     const f1 = (() => { update(() => { start += step; }); });
-    const f2 = (() => { update(() => { start -= step; });});
+    const f2 = (() => { update(() => { start -= step; }); });
     const update = ((cb) => {
       arr.push(start);
       cb();
