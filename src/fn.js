@@ -318,5 +318,22 @@ const FN = Object.freeze(Object.create({
       return (lst[tmp] !== undefined) ? lst[tmp]() : undefined;
     }) : undefined;
     return(func !== undefined) ? func() : undefined;
+  },
+
+  /**
+  * FN.alternate is a function for applying the callback for every N elemet in
+  * an array.
+  *
+  * Example:
+  * FN.alternate((elm) => { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);
+  *
+  * @param {function} cb - The function to apply to n elements of the array.
+  * @param {array} arr - The array containing the elements to apply the function to.
+  * @param {number} step - The interval of steps to apply a function to.
+  */
+  "alternate": (cb, arr, step) => {
+    arr.forEach((element, index) => {
+      if((index % step) === 0) cb(element); 
+    });
   }
 }));
