@@ -205,11 +205,7 @@ fn.prototype = Object.freeze({
    * @see FN.ifElse
    */
   "if": (cb, ...lst) => {
-    var result = true;
-
-    lst.forEach((element) => { if(!element) result = false; });
-
-    return(cb !== undefined && lst !== undefined && lst.length > 0 && result) ? cb() : undefined;
+    return(cb !== undefined && lst !== undefined && lst.length > 0) ? fn.prototype.any(cb, lst) : undefined;
   },
 
   /**
