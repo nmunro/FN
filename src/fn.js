@@ -17,7 +17,12 @@
  * @constructor
  * @author Neil Munro <neilmunro@gmail.com>
  */
-const FN = Object.freeze(Object.create({
+
+const fn = function() { return(this === window) ? new fn() : this; };
+
+fn.prototype = Object.freeze({
+  "name": "FN",
+  "version": "0.0.1",
   /**
    * FN.any is a function which evaluates a number of
    * expressions and runs a callback function if
@@ -33,7 +38,7 @@ const FN = Object.freeze(Object.create({
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    */
-  "any": (cb, ...lst) => {
+  "any": (cb, ...lst) => { 
     var result = false;
 
     lst.forEach((element) => { if(element) result = true; });
@@ -336,4 +341,6 @@ const FN = Object.freeze(Object.create({
       if((index % step) === 0) cb(element); 
     });
   }
-}));
+});
+
+const FN = fn();
