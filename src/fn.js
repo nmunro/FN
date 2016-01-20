@@ -23,6 +23,7 @@ const fn = function() { return(this === window) ? new fn() : this; };
 fn.prototype = Object.freeze({
   "name": "FN",
   "version": "0.0.1",
+  "default": Symbol(":default"),
   /**
    * FN.any is a function which evaluates a number of
    * expressions and runs a callback function if
@@ -331,11 +332,43 @@ fn.prototype = Object.freeze({
   * @param {function} cb - The function to apply to n elements of the array.
   * @param {array} arr - The array containing the elements to apply the function to.
   * @param {number} step - The interval of steps to apply a function to.
+  * @return undefined.
   */
   "alternate": (cb, arr, step) => {
     arr.forEach((element, index) => {
       if((index % step) === 0) cb(element); 
     });
+  },
+  
+  /**
+   * FN.case is a function that evaluates a set of conditions against a sentinal
+   * condition, the acompanying function is ran. A default condition can be passed
+   * and a final callback passed for the default condition.
+   * 
+   * Example:
+   * FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19); 
+   * 
+   * @param {number}/{string} val - The sentinal condition.
+   * @param {array} lst - The condition/function pairs to check against the sentinal
+   * and execute, if true.
+   * @return The result of the executed function or undefined.
+   */
+  "case": (val, ...lst) => {
+    var func = ((lst.length % 2) === 0) ? (() => {
+      var found;
+      var defaultCase;
+      lst.forEach((element, index) => {
+        if(((index % 2) === 0) && found === undefined && element === val) found = index+1;  
+        else if(element === fn.prototype.default) defaultCase = lst[index+1];
+      });
+      
+      return(lst[found] !== undefined) ?
+        lst[found]() :
+        (defaultCase !== undefined) ?
+          defaultCase() :
+          undefined;
+    }) : undefined;
+    return(func !== undefined) ? func() : undefined;
   }
 });
 
