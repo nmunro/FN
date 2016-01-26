@@ -36,7 +36,7 @@ fn.prototype = Object.freeze({
    * }, 1 === 1, 5 === 5);
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}
-   * @param {array} lst - The arguments to FN.any. FN.any takes a variable number of
+   * @param {...boolean} lst - The arguments to FN.any. FN.any takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    */
@@ -55,7 +55,7 @@ fn.prototype = Object.freeze({
    * }, 1 === 1, 5 === 5);
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}
-   * @param {array} lst - The arguments to FN.all. FN.all takes a variable number of
+   * @param {...boolean} lst - The arguments to FN.all. FN.all takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    */
@@ -74,7 +74,7 @@ fn.prototype = Object.freeze({
    * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (firstElement) =>  {...}
-   * @param {array} lst - The arguments to FN.first. FN.first takes a variable number of
+   * @param {...(number|string|array|function|boolean)} lst - The arguments to FN.first. FN.first takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    */
@@ -93,14 +93,17 @@ fn.prototype = Object.freeze({
    * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (lastElement) =>  {...}
-   * @param {array} lst - The arguments to FN.last. FN.last takes a variable number of
+   * @param {...(number|string|array|function|boolean)} lst - The arguments to FN.last. FN.last takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    * @see FN.first
    */
   "last": (cb, ...lst) => {
-    return(cb !== undefined && lst[0] !== undefined) ? cb(lst[lst.length-1]) :
-      (lst[lst.length-1] !== undefined) ? lst[lst.length-1] : undefined;
+    return(cb !== undefined && lst[0] !== undefined) ?
+      cb(lst[lst.length-1]) :
+      (lst[lst.length-1] !== undefined) ?
+        lst[lst.length-1] :
+        undefined;
   },
 
   /**
@@ -117,7 +120,7 @@ fn.prototype = Object.freeze({
    *
    * @param {function} cb - The callback to execute in the form: (nthElement) =>  {...}
    * @param {number} n - The nth element in the list to try and get.
-   * @param {array} lst - The arguments to FN.nth. FN.nth takes a variable number of
+   * @param {...(number|string|array|function|boolean)} lst - The arguments to FN.nth. FN.nth takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    * @see FN.first
@@ -139,7 +142,7 @@ fn.prototype = Object.freeze({
    * }, 1, 2, 3, 4, 5);
    *
    * @param {function} cb - The callback to execute in the form: (remainingElements) =>  {...}
-   * @param {array} lst - The arguments to FN.rest. FN.rest takes a variable number of
+   * @param {...(number|string|array|function|boolean)} lst - The arguments to FN.rest. FN.rest takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    * @see FN.first
@@ -169,7 +172,7 @@ fn.prototype = Object.freeze({
    *
    * @param {function} cb - The callback to execute in the form: (elements) =>  {...}
    * @param {number} n - The number of elements to take from the remaining arguments.
-   * @param {array} lst - The arguments to FN.take. FN.take takes a variable number of
+   * @param {...(string|number|array|function|boolean)} lst - The arguments to FN.take. FN.take takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    */
@@ -193,7 +196,7 @@ fn.prototype = Object.freeze({
    * }, 1 === 1, 2 === 2);
    *
    * @param {function} cb - The callback to execute in the form: () =>  {...}
-   * @param {array} lst - The arguments to FN.if. FN.if takes a variable number of
+   * @param {...boolean} lst - The arguments to FN.if. FN.if takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    * @see FN.ifElse
@@ -218,17 +221,15 @@ fn.prototype = Object.freeze({
    *
    * @param {function} cb1 - The callback to execute in the form: () =>  {...} if true.
    * @param {function} cb2 - The callback to execute in the form: () =>  {...} if false.
-   * @param {array} lst - The arguments to FN.ifElse. FN.ifElse takes a variable number of
+   * @param {...boolean} lst - The arguments to FN.ifElse. FN.ifElse takes a variable number of
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    * @see FN.if
    */
   "ifElse": (cb1, cb2, ...lst) => {
-    var result = true;
-
-    lst.forEach((element) => { if(!element) result = false; });
-
-    return(cb1 !== undefined && cb2 !== undefined && lst !== undefined && lst.length > 0 && result) ? cb1() : cb2();
+    return(cb1 !== undefined && cb2 !== undefined && lst !== undefined && lst.length > 0 && lst.every((elm) => { return elm; })) ?
+      cb1() :
+      cb2();
   },
 
   /**
