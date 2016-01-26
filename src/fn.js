@@ -349,7 +349,7 @@ fn.prototype = Object.freeze({
    * Example:
    * FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19); 
    * 
-   * @param val - The sentinal condition.
+   * @param {(number|string)}  val - The sentinal condition.
    * @param {array} lst - The condition/function pairs to check against the sentinal
    * and execute, if true.
    * @return The result of the executed function or undefined.

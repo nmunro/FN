@@ -337,7 +337,7 @@ FN.case is a function that evaluates a set of conditions against a sentinalcond
 
 | Param | Type | Description |
 | --- | --- | --- |
-| val |  | The sentinal condition. |
+| val | <code>number</code> &#124; <code>string</code> | The sentinal condition. |
 | lst | <code>array</code> | The condition/function pairs to check against the sentinal and execute, if true. |
 
 <a name="sum"></a>
