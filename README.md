@@ -1,7 +1,7 @@
 ## Classes
 
 <dl>
-<dt><a href="#FN">FN</a></dt>
+<dt><a href="#fn">fn</a></dt>
 <dd></dd>
 </dl>
 
@@ -130,14 +130,34 @@ FN.cond(
   &quot;tmp&quot; === &quot;tmp&quot;, () =&gt; { console.log(&quot;third&quot;);  }
 );</p>
 </dd>
+<dt><a href="#alternate">alternate(cb, arr, step)</a> ⇒</dt>
+<dd><p>FN.alternate is a function for applying the callback for every N elemet in
+an array.</p>
+<p>Example:
+FN.alternate((elm) =&gt; { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);</p>
+</dd>
+<dt><a href="#case">case(/{string}, lst)</a> ⇒</dt>
+<dd><p>FN.case is a function that evaluates a set of conditions against a sentinal
+condition, the acompanying function is ran. A default condition can be passed
+and a final callback passed for the default condition.</p>
+<p>Example:
+FN.case(9, 1, () =&gt; 1<em>2, 2, () =&gt; 2</em>2, 3, () =&gt; 3*2, FN.default, () =&gt; 19);</p>
+</dd>
+<dt><a href="#sum">sum()</a></dt>
+<dd><p>FN.sum is a function that takes a variable number of arguments and returns
+the sum of all arguments all arguments must be numbers, if not an error
+will be thrown.</p>
+<p>Example:
+FN.sum(1, 2, 3, 4, 5);</p>
+</dd>
 </dl>
 
-<a name="FN"></a>
-## FN
+<a name="fn"></a>
+## fn
 **Kind**: global class  
 **Author:** Neil Munro <neilmunro@gmail.com>  
-<a name="new_FN_new"></a>
-### new FN()
+<a name="new_fn_new"></a>
+### new fn()
 FN is a functional library providing functionsinspired (ripped off) by LISP/Clojure.No, I have no shame.This is kinda just research, experimenting withfunctional programming in JS. If you howeverfind this library useful let me know and I'llkeep working on it, if you have suggestions, Imight even incorporate your ideas.This is designed to be used from within ES6.Other older versions of ES may not work properly.Copyright (c) Neil Munro 2015-2016.
 
 <a name="any"></a>
@@ -294,4 +314,39 @@ FN.cond is analogous to a switch statement. It evaluates each expressionin turn
 | Param | Type | Description |
 | --- | --- | --- |
 | lst | <code>array</code> | An array of expression/function pairs to evaluate/run. |
+
+<a name="alternate"></a>
+## alternate(cb, arr, step) ⇒
+FN.alternate is a function for applying the callback for every N elemet inan array.Example:FN.alternate((elm) => { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);
+
+**Kind**: global function  
+**Returns**: undefined.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cb | <code>function</code> | The function to apply to n elements of the array. |
+| arr | <code>array</code> | The array containing the elements to apply the function to. |
+| step | <code>number</code> | The interval of steps to apply a function to. |
+
+<a name="case"></a>
+## case(/{string}, lst) ⇒
+FN.case is a function that evaluates a set of conditions against a sentinalcondition, the acompanying function is ran. A default condition can be passedand a final callback passed for the default condition.Example:FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19);
+
+**Kind**: global function  
+**Returns**: The result of the executed function or undefined.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| /{string} | <code>number</code> | val - The sentinal condition. |
+| lst | <code>array</code> | The condition/function pairs to check against the sentinal and execute, if true. |
+
+<a name="sum"></a>
+## sum()
+FN.sum is a function that takes a variable number of arguments and returnsthe sum of all arguments all arguments must be numbers, if not an errorwill be thrown.Example:FN.sum(1, 2, 3, 4, 5);
+
+**Kind**: global function  
+
+| Type | Description |
+| --- | --- |
+| <code>lst</code> | The list of numbers to sum. |
 
