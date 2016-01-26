@@ -349,7 +349,7 @@ fn.prototype = Object.freeze({
    * Example:
    * FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19); 
    * 
-   * @param {(number|string)}  val - The sentinal condition.
+   * @param {(number|string)} val - The sentinal condition.
    * @param {array} lst - The condition/function pairs to check against the sentinal
    * and execute, if true.
    * @return The result of the executed function or undefined.
@@ -380,7 +380,7 @@ fn.prototype = Object.freeze({
    * Example:
    * FN.sum(1, 2, 3, 4, 5);
    * 
-   * @param {lst} - The list of numbers to sum.
+   * @param {...number} lst - The list of numbers to sum.
    * @return The sum of the provided arguments.
    * @throws {InvalidArgumentsException} Arguments must be numbers.
    */
