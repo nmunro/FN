@@ -113,13 +113,13 @@ FN.let(function() {
   console.log(&quot;Hi my name is &quot; + this.name + &quot; and I am &quot; + this.age + &quot; years old.&quot;);
 }, {&quot;age&quot;: 29, &quot;name&quot;: &quot;Neil Munro&quot;});</p>
 </dd>
-<dt><a href="#range">range(lst)</a> ⇒ <code>array</code></dt>
+<dt><a href="#range">range([start], stop, [step])</a> ⇒ <code>array</code></dt>
 <dd><p>FN.range generates and array of numeric values based on criteria that
 the programmer enters.</p>
 <p>Example:
 FN.range(0, 10, 1);</p>
 </dd>
-<dt><a href="#cond">cond(lst)</a> ⇒</dt>
+<dt><a href="#cond">cond(...lst)</a> ⇒</dt>
 <dd><p>FN.cond is analogous to a switch statement. It evaluates each expression
 in turn until it first the first one that evaluates to true and runs its 
 acompanying function.</p>
@@ -136,7 +136,7 @@ an array.</p>
 <p>Example:
 FN.alternate((elm) =&gt; { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);</p>
 </dd>
-<dt><a href="#case">case(val, lst)</a> ⇒</dt>
+<dt><a href="#case">case(val, ...lst)</a> ⇒</dt>
 <dd><p>FN.case is a function that evaluates a set of conditions against a sentinal
 condition, the acompanying function is ran. A default condition can be passed
 and a final callback passed for the default condition.</p>
@@ -294,7 +294,7 @@ FN.let creates a new isolated execution context with a set of values initilised
 | objectContext | <code>object</code> | An object containing the key/value pairs that are to be created inside the execution context. |
 
 <a name="range"></a>
-## range(lst) ⇒ <code>array</code>
+## range([start], stop, [step]) ⇒ <code>array</code>
 FN.range generates and array of numeric values based on criteria thatthe programmer enters.Example:FN.range(0, 10, 1);
 
 **Kind**: global function  
@@ -302,10 +302,12 @@ FN.range generates and array of numeric values based on criteria thatthe progra
 
 | Param | Type | Description |
 | --- | --- | --- |
-| lst | <code>array</code> | The array of constraints that can be passed in. |
+| [start] | <code>number</code> | The number to start from. |
+| stop | <code>number</code> | The number to go to. |
+| [step] | <code>number</code> | The number of steps/intervals. |
 
 <a name="cond"></a>
-## cond(lst) ⇒
+## cond(...lst) ⇒
 FN.cond is analogous to a switch statement. It evaluates each expressionin turn until it first the first one that evaluates to true and runs its acompanying function.Example:FN.cond(  1 === 2, () => { console.log("first");  },  2 === 3, () => { console.log("second");  },  "tmp" === "tmp", () => { console.log("third");  });
 
 **Kind**: global function  
@@ -313,7 +315,7 @@ FN.cond is analogous to a switch statement. It evaluates each expressionin turn
 
 | Param | Type | Description |
 | --- | --- | --- |
-| lst | <code>array</code> | An array of expression/function pairs to evaluate/run. |
+| ...lst | <code>boolean</code> &#124; <code>function</code> | An array of expression/function pairs to evaluate/run. |
 
 <a name="alternate"></a>
 ## alternate(cb, arr, step) ⇒
@@ -329,7 +331,7 @@ FN.alternate is a function for applying the callback for every N elemet inan ar
 | step | <code>number</code> | The interval of steps to apply a function to. |
 
 <a name="case"></a>
-## case(val, lst) ⇒
+## case(val, ...lst) ⇒
 FN.case is a function that evaluates a set of conditions against a sentinalcondition, the acompanying function is ran. A default condition can be passedand a final callback passed for the default condition.Example:FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19);
 
 **Kind**: global function  
@@ -338,7 +340,7 @@ FN.case is a function that evaluates a set of conditions against a sentinalcond
 | Param | Type | Description |
 | --- | --- | --- |
 | val | <code>number</code> &#124; <code>string</code> | The sentinal condition. |
-| lst | <code>array</code> | The condition/function pairs to check against the sentinal and execute, if true. |
+| ...lst | <code>number</code> &#124; <code>string</code> &#124; <code>function</code> | The condition/function pairs to check against the sentinal and execute, if true. |
 
 <a name="sum"></a>
 ## sum(...lst) ⇒
