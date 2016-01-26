@@ -264,7 +264,9 @@ fn.prototype = Object.freeze({
   * Example:
   * FN.range(0, 10, 1);
   *
-  * @param {array} lst - The array of constraints that can be passed in.
+  * @param {number=} start - The number to start from.
+  * @param {number} stop - The number to go to.
+  * @param {number=} step - The number of steps/intervals.
   * @return {array} - The array built from lst.
   */
   "range": (...lst) => {
@@ -300,7 +302,7 @@ fn.prototype = Object.freeze({
   *   "tmp" === "tmp", () => { console.log("third");  }
   * );
   * 
-  * @param {array} lst - An array of expression/function pairs to evaluate/run.
+  * @param {...(boolean|function)} lst - An array of expression/function pairs to evaluate/run.
   * @return The result of the executed function or undefined.
   */
   "cond": (...lst) => {
@@ -342,7 +344,7 @@ fn.prototype = Object.freeze({
    * FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19); 
    * 
    * @param {(number|string)} val - The sentinal condition.
-   * @param {array} lst - The condition/function pairs to check against the sentinal
+   * @param {...(number|string|function)} lst - The condition/function pairs to check against the sentinal
    * and execute, if true.
    * @return The result of the executed function or undefined.
    */
