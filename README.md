@@ -136,7 +136,7 @@ an array.</p>
 <p>Example:
 FN.alternate((elm) =&gt; { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);</p>
 </dd>
-<dt><a href="#case">case(/{string}, lst)</a> ⇒</dt>
+<dt><a href="#case">case({string}, lst)</a> ⇒</dt>
 <dd><p>FN.case is a function that evaluates a set of conditions against a sentinal
 condition, the acompanying function is ran. A default condition can be passed
 and a final callback passed for the default condition.</p>
@@ -329,7 +329,7 @@ FN.alternate is a function for applying the callback for every N elemet inan ar
 | step | <code>number</code> | The interval of steps to apply a function to. |
 
 <a name="case"></a>
-## case(/{string}, lst) ⇒
+## case({string}, lst) ⇒
 FN.case is a function that evaluates a set of conditions against a sentinalcondition, the acompanying function is ran. A default condition can be passedand a final callback passed for the default condition.Example:FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19);
 
 **Kind**: global function  
@@ -337,7 +337,7 @@ FN.case is a function that evaluates a set of conditions against a sentinalcond
 
 | Param | Type | Description |
 | --- | --- | --- |
-| /{string} | <code>number</code> | val - The sentinal condition. |
+| {string} | <code>number</code> | val - The sentinal condition. |
 | lst | <code>array</code> | The condition/function pairs to check against the sentinal and execute, if true. |
 
 <a name="sum"></a>
