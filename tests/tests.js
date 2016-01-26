@@ -213,3 +213,8 @@ QUnit.test("Cond tests", (assert) => {
     }
   );
 });
+
+QUnit.test("Sum tests", (assert) => {
+  assert.ok(FN.sum(1, 2, 3, 4, 5) === 15, "Sum of 1, 2, 3, 4 and 5 is 15.");
+  assert.notOk(FN.sum(1, 2, 3, 4, 5) === 16, "Sum of 1, 2, 3, 4 and 5 is only 15.");
+});
