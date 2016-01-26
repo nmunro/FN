@@ -24,6 +24,7 @@ fn.prototype = Object.freeze({
   "name": "FN",
   "version": "0.0.1",
   "default": Symbol(":default"),
+  
   /**
    * FN.any is a function which evaluates a number of
    * expressions and runs a callback function if
@@ -257,7 +258,7 @@ fn.prototype = Object.freeze({
   * @see FN.if
   */
   "let": (cb, objectContext) => {
-    return(() => {
+    (() => {
       var tmp = {};
       Object.keys(objectContext).forEach((key) => tmp[key] = objectContext[key]);
       return cb.bind(tmp)();
@@ -369,6 +370,25 @@ fn.prototype = Object.freeze({
           undefined;
     }) : undefined;
     return(func !== undefined) ? func() : undefined;
+  },
+  
+  /**
+   * FN.sum is a function that takes a variable number of arguments and returns
+   * the sum of all arguments all arguments must be numbers, if not an error
+   * will be thrown.
+   * 
+   * Example:
+   * FN.sum(1, 2, 3, 4, 5);
+   * 
+   * @param {lst} - The list of numbers to sum.
+   */
+  "sum": (...lst) => {
+    var valid = lst.every((elm) => {
+      return (typeof elm === "number");
+    });
+    
+    if(valid) return lst.reduce((prev, curr) => { return prev + curr; });
+    else throw "Invalid arguments exception";
   }
 });
 
