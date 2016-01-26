@@ -143,7 +143,7 @@ and a final callback passed for the default condition.</p>
 <p>Example:
 FN.case(9, 1, () =&gt; 1<em>2, 2, () =&gt; 2</em>2, 3, () =&gt; 3*2, FN.default, () =&gt; 19);</p>
 </dd>
-<dt><a href="#sum">sum()</a></dt>
+<dt><a href="#sum">sum()</a> ⇒</dt>
 <dd><p>FN.sum is a function that takes a variable number of arguments and returns
 the sum of all arguments all arguments must be numbers, if not an error
 will be thrown.</p>
@@ -341,10 +341,15 @@ FN.case is a function that evaluates a set of conditions against a sentinalcond
 | lst | <code>array</code> | The condition/function pairs to check against the sentinal and execute, if true. |
 
 <a name="sum"></a>
-## sum()
+## sum() ⇒
 FN.sum is a function that takes a variable number of arguments and returnsthe sum of all arguments all arguments must be numbers, if not an errorwill be thrown.Example:FN.sum(1, 2, 3, 4, 5);
 
 **Kind**: global function  
+**Returns**: The sum of the provided arguments.  
+**Throws**:
+
+- <code>InvalidArgumentsException</code> Arguments must be numbers.
+
 
 | Type | Description |
 | --- | --- |

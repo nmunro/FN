@@ -381,14 +381,14 @@ fn.prototype = Object.freeze({
    * FN.sum(1, 2, 3, 4, 5);
    * 
    * @param {lst} - The list of numbers to sum.
+   * @return The sum of the provided arguments.
+   * @throws {InvalidArgumentsException} Arguments must be numbers.
    */
   "sum": (...lst) => {
-    var valid = lst.every((elm) => {
-      return (typeof elm === "number");
-    });
+    var valid = lst.every((elm) => { return(typeof elm === "number"); });
     
     if(valid) return lst.reduce((prev, curr) => { return prev + curr; });
-    else throw "Invalid arguments exception";
+    else throw "Invalid Arguments Exception";
   }
 });
 
