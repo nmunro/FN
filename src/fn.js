@@ -41,11 +41,7 @@ fn.prototype = Object.freeze({
    * @return The result of the callback or undefined.
    */
   "any": (cb, ...lst) => { 
-    var result = false;
-
-    lst.forEach((element) => { if(element) result = true; });
-
-    return(cb !== undefined && result) ? cb() : undefined;
+    return(cb !== undefined && lst.some((elm) => { return elm; })) ? cb() : undefined;
   },
 
   /**
@@ -64,11 +60,7 @@ fn.prototype = Object.freeze({
    * @return The result of the callback or undefined.
    */
   "all": (cb, ...lst) => {
-    var result = true;
-
-    lst.forEach((element) => { if(!element) result = false; });
-
-    return(cb !== undefined && result) ? cb() : undefined;
+    return(cb !== undefined && lst.every((elm) => { return elm; })) ? cb() : undefined;
   },
 
   /**
@@ -380,7 +372,7 @@ fn.prototype = Object.freeze({
    * Example:
    * FN.sum(1, 2, 3, 4, 5);
    * 
-   * @param {...number} lst - The list of numbers to sum.
+   * @param {...number} lst The list of numbers to sum.
    * @return The sum of the provided arguments.
    * @throws {InvalidArgumentsException} Arguments must be numbers.
    */
