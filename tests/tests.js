@@ -108,11 +108,11 @@ QUnit.test("Take function", (assert) => {
     assert.ok(lst.toString() === ["Lions", "Tigers"].toString(), "Take got the first two elements of the list.");
     done1();
   }, 2, "Lions", "Tigers", "Bears");
-  
+
   FN.take((lst) => {
-    assert.ok(lst.toString() === [10, 8].toString(), "Take works with range, cool!");  
+    assert.ok(lst.toString() === [10, 8].toString(), "Take works with range, cool!");
     done2();
-  }, 2, FN.range(10, 0, 2)); 
+  }, 2, FN.range(10, 0, 2));
 });
 
 QUnit.test("If function", (assert) => {
@@ -157,17 +157,17 @@ QUnit.test("Let function", (assert) => {
 
 // Range isn't an asyncronous function, testing is easy.
 QUnit.test("Range tests", (assert) => {
-  assert.ok(FN.range(0, 5).toString() === [0, 1, 2, 3, 4, 5].toString(), "Forward matches reference array.");  
-  assert.ok(FN.range(5, 0).toString() === [5, 4, 3, 2, 1, 0].toString(), "Backwards matches reference array.");  
-  assert.ok(FN.range(6, 0, 2).toString() === [6, 4, 2, 0].toString(), "Backwards match with step of two matches reference array.");  
-  assert.notOk(FN.range(6, 0, 3).toString() === [6, 4, 2, 0].toString(), "Does not match the reference array.");  
+  assert.ok(FN.range(0, 5).toString() === [0, 1, 2, 3, 4, 5].toString(), "Forward matches reference array.");
+  assert.ok(FN.range(5, 0).toString() === [5, 4, 3, 2, 1, 0].toString(), "Backwards matches reference array.");
+  assert.ok(FN.range(6, 0, 2).toString() === [6, 4, 2, 0].toString(), "Backwards match with step of two matches reference array.");
+  assert.notOk(FN.range(6, 0, 3).toString() === [6, 4, 2, 0].toString(), "Does not match the reference array.");
 });
 
 QUnit.test("Cond tests", (assert) => {
-  var done1 = assert.async();  
+  var done1 = assert.async();
   var done2 = assert.async();
   var done3 = assert.async();
-  
+
   FN.cond(
     1 === 2, () => {
       assert.ok(false, "The first callback was incorrectly executed.");
@@ -182,7 +182,7 @@ QUnit.test("Cond tests", (assert) => {
       done1();
     }
   );
-  
+
   FN.cond(
     1 === 2, () => {
       assert.ok(false, "The first callback was incorrectly executed.");
@@ -197,7 +197,7 @@ QUnit.test("Cond tests", (assert) => {
       done2();
     }
   );
-  
+
   FN.cond(
     1 === 1, () => {
       assert.ok(true, "The first callback was correctly executed.");
@@ -212,6 +212,42 @@ QUnit.test("Cond tests", (assert) => {
       done3();
     }
   );
+});
+
+QUnit.test("Alternate tests", (assert) => {
+	FN.alternate((element) => {
+		assert.ok(element === 2 || element === 4 || element === 6, "Element is one of the expected numbers.");
+	}, [1, 2, 3, 4, 5, 6], 2);
+});
+
+QUnit.test("Case tests", (assert) => {
+  assert.ok(FN.case(1,
+		1, () => 1*2,
+		2, () => 2*2,
+		3, () => 3*2,
+		FN.default, () => 19
+	) === 2, "First case occured.");
+
+  assert.ok(FN.case(2,
+		1, () => 1*2,
+		2, () => 2*2,
+		3, () => 3*2,
+		FN.default, () => 19
+	) === 4, "Second case occured.");
+
+  assert.ok(FN.case(3,
+		1, () => 1*2,
+		2, () => 2*2,
+		3, () => 3*2,
+		FN.default, () => 19
+	) === 6, "Third case occured.");
+
+  assert.ok(FN.case(9,
+		1, () => 1*2,
+		2, () => 2*2,
+		3, () => 3*2,
+		FN.default, () => "Other"
+	) === "Other", "Default case occured.");
 });
 
 QUnit.test("Sum tests", (assert) => {
