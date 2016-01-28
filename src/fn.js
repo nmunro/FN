@@ -65,7 +65,7 @@ fn.prototype = Object.freeze({
    * FN.first([1, 2, 3, 4, 5]);
    *
    * @param {array} lst - The list to get the first element of. 
-   * @return {object} The first element of the list or undefined.
+   * @return {(object|undefined)} The first element of the list or undefined.
    */
   "first": (lst) => {
     return (lst[0] !== undefined) ? lst[0] : undefined;
@@ -79,7 +79,7 @@ fn.prototype = Object.freeze({
    * FN.last([1, 2, 3, 4, 5]);
    *
    * @param {array} lst - The arguments to FN.last. 
-   * @return {object} The last element of the list or undefined.
+   * @return {(object|undefined)} The last element of the list or undefined.
    * @see FN.first
    */
   "last": (lst) => {
@@ -97,7 +97,7 @@ fn.prototype = Object.freeze({
    *
    * @param {array} lst - The list to get the nth element of.
    * @param {number} n - The nth element in the list to try and get.
-   * @return {object} The nth element of the list or undefined.
+   * @return {(object|undefined)} The nth element of the list or undefined.
    * @see FN.first
    * @see FN.last
    */

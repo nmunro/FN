@@ -22,17 +22,17 @@ expressions are themselves true.</p>
 <p>Example(s):</p>
 <p>FN.all([1 === 1, 5 === 5]);</p>
 </dd>
-<dt><a href="#first">first(lst)</a> ⇒ <code>object</code></dt>
+<dt><a href="#first">first(lst)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
 <dd><p>FN.first returns the first element of a list.</p>
 <p>Example(s):</p>
 <p>FN.first([1, 2, 3, 4, 5]);</p>
 </dd>
-<dt><a href="#last">last(lst)</a> ⇒ <code>object</code></dt>
+<dt><a href="#last">last(lst)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
 <dd><p>FN.last is the inverse of FN.first and returns the final element in a list.</p>
 <p>Example(s):</p>
 <p>FN.last([1, 2, 3, 4, 5]);</p>
 </dd>
-<dt><a href="#nth">nth(lst, n)</a> ⇒ <code>object</code></dt>
+<dt><a href="#nth">nth(lst, n)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
 <dd><p>FN.nth complements FN.first and FN.last by providing
 a means to grab an arbitrary element in a list by numeric
 index. </p>
@@ -160,22 +160,22 @@ FN.all is a function which evaluates a number ofexpressions and returns true on
 | lst | <code>array</code> | The list of boolean expressions to FN.all. |
 
 <a name="first"></a>
-## first(lst) ⇒ <code>object</code>
+## first(lst) ⇒ <code>object</code> &#124; <code>undefined</code>
 FN.first returns the first element of a list.Example(s):FN.first([1, 2, 3, 4, 5]);
 
 **Kind**: global function  
-**Returns**: <code>object</code> - The first element of the list or undefined.  
+**Returns**: <code>object</code> &#124; <code>undefined</code> - The first element of the list or undefined.  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | lst | <code>array</code> | The list to get the first element of. |
 
 <a name="last"></a>
-## last(lst) ⇒ <code>object</code>
+## last(lst) ⇒ <code>object</code> &#124; <code>undefined</code>
 FN.last is the inverse of FN.first and returns the final element in a list.Example(s):FN.last([1, 2, 3, 4, 5]);
 
 **Kind**: global function  
-**Returns**: <code>object</code> - The last element of the list or undefined.  
+**Returns**: <code>object</code> &#124; <code>undefined</code> - The last element of the list or undefined.  
 **See**: FN.first  
 
 | Param | Type | Description |
@@ -183,11 +183,11 @@ FN.last is the inverse of FN.first and returns the final element in a list.Exa
 | lst | <code>array</code> | The arguments to FN.last. |
 
 <a name="nth"></a>
-## nth(lst, n) ⇒ <code>object</code>
+## nth(lst, n) ⇒ <code>object</code> &#124; <code>undefined</code>
 FN.nth complements FN.first and FN.last by providinga means to grab an arbitrary element in a list by numericindex. Example(s):FN.nth([1, 2, 3, 4, 5], 2);
 
 **Kind**: global function  
-**Returns**: <code>object</code> - The nth element of the list or undefined.  
+**Returns**: <code>object</code> &#124; <code>undefined</code> - The nth element of the list or undefined.  
 **See**
 
 - FN.first
