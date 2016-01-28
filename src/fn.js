@@ -108,7 +108,7 @@ fn.prototype = Object.freeze({
    * FN.rest([1, 2, 3, 4, 5]);
    *
    * @param {array} lst - The arguments to FN.rest.
-   * @return {array} - The rest of the list or undefined.
+   * @return {array} The rest of the list or undefined.
    * @see FN.first
    */
   "rest": (lst) => {
@@ -125,7 +125,7 @@ fn.prototype = Object.freeze({
    *
    * @param {array} lst - The arguments to FN.take. 
    * @param {number} n - The number of elements to take from the array lst.
-   * @return {array} - A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.
+   * @return {array} A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.
    */
   "take": (lst, n) => {
     return lst.filter((element, index) => {
@@ -227,7 +227,7 @@ fn.prototype = Object.freeze({
   * @param {number=} start - The number to start from.
   * @param {number} stop - The number to go to.
   * @param {number=} step - The number of steps/intervals.
-  * @return {array} - The array built from lst.
+  * @return {array} The array built from lst.
   */
   "range": (...lst) => {
     var func;
@@ -335,7 +335,7 @@ fn.prototype = Object.freeze({
    * FN.sum([1, 2, 3, 4, 5]);
    *
    * @param {array} lst The list of numbers to sum.
-   * @return The sum of the provided arguments.
+   * @return {number|undefined} The sum of the provided arguments.
    */
   "sum": (lst) => {
     return(lst.every((elm) => { return(typeof elm === "number"); })) ?
