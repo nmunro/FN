@@ -41,18 +41,8 @@ QUnit.test("All function", (assert) => {
 });
 
 QUnit.test("First function", (assert) => {
-  var done1 = assert.async();
-  var done2 = assert.async();
-
-  FN.first((element) => {
-    assert.ok(element === 1, "First element in the list [1, 2, 3, 4, 5] is 1.");
-    done1();
-  }, 1, 2, 3, 4, 5);
-
-  FN.first((element) => {
-    assert.notOk(element === 2, "First element in the list [1, 2, 3, 4, 5] is NOT 2.");
-    done2();
-  }, 1, 2, 3, 4, 5);
+  assert.ok(FN.first([1, 2, 3, 4, 5]) === 1, "Checking for 1 being the first element.");
+  assert.notOk(FN.first([1, 2, 3, 4, 5]) === 2, "Checking for something other than the first element.");
 });
 
 QUnit.test("Nth function", (assert) => {

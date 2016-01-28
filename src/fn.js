@@ -24,7 +24,7 @@ fn.prototype = Object.freeze({
   "name": "FN",
   "version": "0.0.1",
   "default": Symbol(":default"),
-  
+
   /**
    * FN.any is a function which evaluates a number of
    * expressions and runs a callback function if
@@ -40,7 +40,7 @@ fn.prototype = Object.freeze({
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    */
-  "any": (cb, ...lst) => { 
+  "any": (cb, ...lst) => {
     return(cb !== undefined && lst.some((elm) => { return elm; })) ? cb() : undefined;
   },
 
@@ -78,8 +78,8 @@ fn.prototype = Object.freeze({
    * arguments and processes them all as if they were an array.
    * @return The result of the callback or undefined.
    */
-  "first": (cb, ...lst) => {
-    return(cb !== undefined && lst[0] !== undefined) ? cb(lst[0]) : undefined;
+  "first": (lst) => {
+    return (lst[0] !== undefined) ? lst[0] : undefined;
   },
 
   /**
@@ -293,16 +293,16 @@ fn.prototype = Object.freeze({
 
   /**
   * FN.cond is analogous to a switch statement. It evaluates each expression
-  * in turn until it first the first one that evaluates to true and runs its 
+  * in turn until it first the first one that evaluates to true and runs its
   * acompanying function.
-  * 
+  *
   * Example:
   * FN.cond(
   *   1 === 2, () => { console.log("first");  },
   *   2 === 3, () => { console.log("second");  },
   *   "tmp" === "tmp", () => { console.log("third");  }
   * );
-  * 
+  *
   * @param {...(boolean|function)} lst - An array of expression/function pairs to evaluate/run.
   * @return The result of the executed function or undefined.
   */
@@ -332,18 +332,18 @@ fn.prototype = Object.freeze({
   */
   "alternate": (cb, arr, step) => {
     arr.forEach((element, index) => {
-      if((index % step) === 0) cb(element); 
+      if((index % step) === 0) cb(element);
     });
   },
-  
+
   /**
    * FN.case is a function that evaluates a set of conditions against a sentinal
    * condition, the acompanying function is ran. A default condition can be passed
    * and a final callback passed for the default condition.
-   * 
+   *
    * Example:
-   * FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19); 
-   * 
+   * FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19);
+   *
    * @param {(number|string)} val - The sentinal condition.
    * @param {...(number|string|function)} lst - The condition/function pairs to check against the sentinal
    * and execute, if true.
@@ -354,10 +354,10 @@ fn.prototype = Object.freeze({
       var found;
       var defaultCase;
       lst.forEach((element, index) => {
-        if(((index % 2) === 0) && found === undefined && element === val) found = index+1;  
+        if(((index % 2) === 0) && found === undefined && element === val) found = index+1;
         else if(element === fn.prototype.default) defaultCase = lst[index+1];
       });
-      
+
       return(lst[found] !== undefined) ?
         lst[found]() :
         (defaultCase !== undefined) ?
@@ -366,22 +366,22 @@ fn.prototype = Object.freeze({
     }) : undefined;
     return(func !== undefined) ? func() : undefined;
   },
-  
+
   /**
    * FN.sum is a function that takes a variable number of arguments and returns
    * the sum of all arguments all arguments must be numbers, if not an error
    * will be thrown.
-   * 
+   *
    * Example:
    * FN.sum(1, 2, 3, 4, 5);
-   * 
+   *
    * @param {...number} lst The list of numbers to sum.
    * @return The sum of the provided arguments.
    * @throws {InvalidArgumentsException} Arguments must be numbers.
    */
   "sum": (...lst) => {
     var valid = lst.every((elm) => { return(typeof elm === "number"); });
-    
+
     if(valid) return lst.reduce((prev, curr) => { return prev + curr; });
     else throw "Invalid Arguments Exception";
   }
