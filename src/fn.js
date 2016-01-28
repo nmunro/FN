@@ -30,7 +30,8 @@ fn.prototype = Object.freeze({
    * expressions and returns true if ANY of the expressions
    * themselves are true.
    *
-   * Example:
+   * Example(s):
+   *
    * FN.any([1 === 1, 5 === 5]);
    *
    * @param {array} lst - The list of boolean expressions to FN.any.
@@ -45,7 +46,8 @@ fn.prototype = Object.freeze({
    * expressions and returns true only if ALL of the
    * expressions are themselves true.
    *
-   * Example:
+   * Example(s):
+   *
    * FN.all([1 === 1, 5 === 5]);
    *
    * @param {array} lst - The list of boolean expressions to FN.all. 
@@ -58,7 +60,8 @@ fn.prototype = Object.freeze({
   /**
    * FN.first returns the first element of a list.
    *
-   * Example:
+   * Example(s):
+   *
    * FN.first([1, 2, 3, 4, 5]);
    *
    * @param {array} lst - The list to get the first element of. 
@@ -71,7 +74,8 @@ fn.prototype = Object.freeze({
   /**
    * FN.last is the inverse of FN.first and returns the final element in a list.
    *
-   * Example:
+   * Example(s):
+   *
    * FN.last([1, 2, 3, 4, 5]);
    *
    * @param {array} lst - The arguments to FN.last. 
@@ -87,7 +91,8 @@ fn.prototype = Object.freeze({
    * a means to grab an arbitrary element in a list by numeric
    * index. 
    *
-   * Example:
+   * Example(s):
+   *
    * FN.nth([1, 2, 3, 4, 5], 2);
    *
    * @param {array} lst - The list to get the nth element of.
@@ -104,7 +109,8 @@ fn.prototype = Object.freeze({
    * FN.rest complements FN.first by passing everything
    * execept the first element into a callback.
    *
-   * Example:
+   * Example(s):
+   *
    * FN.rest([1, 2, 3, 4, 5]);
    *
    * @param {array} lst - The arguments to FN.rest.
@@ -119,8 +125,10 @@ fn.prototype = Object.freeze({
    * FN.take returns a new list from the n number of elements from the
    * list passed into it.
    * 
-   * Example:
+   * Example(s):
+   *
    * FN.take(["Lions", "Tigers", "Bears"], 2);
+   *
    * FN.take(FN.range(10, 0, 2), 2);
    *
    * @param {array} lst - The arguments to FN.take. 
@@ -137,7 +145,8 @@ fn.prototype = Object.freeze({
    *
    * NOTE: FN.any and FN.all can be used here.
    *
-   * Example:
+   * Example(s):
+   *
    * FN.if(() => {
    *   console.log("Is true");
    * }, true);
@@ -162,7 +171,8 @@ fn.prototype = Object.freeze({
    *
    * NOTE: Multiple FN.fElse can be nested inside of the callback functions.
    *
-   * Example:
+   * Example(s):
+   *
    * FN.ifElse(() => {
    *   console.log("Is true");
    * }, () => {
@@ -194,7 +204,8 @@ fn.prototype = Object.freeze({
   * within the context and visible only for the duration of the callback function.
   * Note that it acts as a closure and does have access to outer variables.
   *
-  * Example:
+  * Example(s):
+  *
   * FN.let(function() {
   *   console.log("Hi my name is " + this.name + " and I am " + this.age + " years old.");
   * }, {"age": 29, "name": "Neil Munro"});
@@ -219,7 +230,8 @@ fn.prototype = Object.freeze({
   * FN.range generates and array of numeric values based on criteria that
   * the programmer enters.
   *
-  * Example:
+  * Example(s):
+  *
   * FN.range(0, 10, 1);
   *
   * @param {number=} start - The number to start from.
@@ -253,7 +265,8 @@ fn.prototype = Object.freeze({
   * in turn until it first the first one that evaluates to true and runs its
   * acompanying function.
   *
-  * Example:
+  * Example(s):
+  *
   * FN.cond(
   *   1 === 2, () => { console.log("first");  },
   *   2 === 3, () => { console.log("second");  },
@@ -279,7 +292,8 @@ fn.prototype = Object.freeze({
   * FN.everyOther is a function for applying the callback for every N elemet in
   * an array.
   *
-  * Example:
+  * Example(s):
+  *
   * FN.everyOther((elm) => { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);
   *
   * @param {function} cb - The function to apply to n elements of the array.
@@ -298,7 +312,8 @@ fn.prototype = Object.freeze({
    * condition, the acompanying function is ran. A default condition can be passed
    * and a final callback passed for the default condition.
    *
-   * Example:
+   * Example(s):
+   *
    * FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19);
    *
    * @param {(number|string)} val - The sentinal condition.
@@ -329,7 +344,8 @@ fn.prototype = Object.freeze({
    * the sum of all arguments all arguments must be numbers, if not undefined 
    * is returned.
    *
-   * Example:
+   * Example(s):
+   *
    * FN.sum([1, 2, 3, 4, 5]);
    *
    * @param {array} lst The list of numbers to sum.
