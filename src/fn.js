@@ -64,46 +64,30 @@ fn.prototype = Object.freeze({
   },
 
   /**
-   * FN.first runs a callback with the first element of
-   * a list as its one and only parameter. The list
-   * in question is just a set of values passed to first.
+   * FN.first returns the first element of a list.
    *
    * Example:
-   * FN.first((firstElement) => {
-   *   console.log(firstElement);
-   * }, 1, 2, 3, 4, 5);
+   * FN.first([1, 2, 3, 4, 5]);
    *
-   * @param {function} cb - The callback to execute in the form: (firstElement) =>  {...}
-   * @param {...(number|string|array|function|boolean)} lst - The arguments to FN.first. FN.first takes a variable number of
-   * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined.
+   * @param {array} lst - The list to get the first element of. 
+   * @return The first element of the list or undefined.
    */
   "first": (lst) => {
     return (lst[0] !== undefined) ? lst[0] : undefined;
   },
 
   /**
-   * FN.last is the inverse of FN.first and instead of
-   * passing the first element of a list into a callback
-   * passes the last element passed to FN.last.
+   * FN.last is the inverse of FN.first and returns the final element in a list.
    *
    * Example:
-   * FN.last((lastElement) => {
-   *   console.log(lastElement);
-   * }, 1, 2, 3, 4, 5);
+   * FN.last([1, 2, 3, 4, 5]);
    *
-   * @param {function} cb - The callback to execute in the form: (lastElement) =>  {...}
-   * @param {...(number|string|array|function|boolean)} lst - The arguments to FN.last. FN.last takes a variable number of
-   * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined.
+   * @param {array} lst - The arguments to FN.last. 
+   * @return The last element of the list or undefined.
    * @see FN.first
    */
-  "last": (cb, ...lst) => {
-    return(cb !== undefined && lst[0] !== undefined) ?
-      cb(lst[lst.length-1]) :
-      (lst[lst.length-1] !== undefined) ?
-        lst[lst.length-1] :
-        undefined;
+  "last": (lst) => {
+    return (lst[lst.length-1] !== undefined) ? lst[lst.length-1] : undefined;
   },
 
   /**
@@ -114,20 +98,16 @@ fn.prototype = Object.freeze({
    * to the list of items to grab the index of.
    *
    * Example:
-   * FN.nth((nthElement) => {
-   *   console.log(nthElement);
-   * }, 2, 1, 2, 3, 4, 5);
+   * FN.nth([1, 2, 3, 4, 5], 2);
    *
-   * @param {function} cb - The callback to execute in the form: (nthElement) =>  {...}
+   * @param {array} lst - The list to get the nth element of.
    * @param {number} n - The nth element in the list to try and get.
-   * @param {...(number|string|array|function|boolean)} lst - The arguments to FN.nth. FN.nth takes a variable number of
-   * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined.
+   * @return The nth element of the list or undefined.
    * @see FN.first
    * @see FN.last
    */
-  "nth": (cb, n, ...lst) => {
-    return(cb !== undefined && lst[n] !== undefined) ? cb(n, lst[n]) : undefined;
+  "nth": (lst, n) => {
+    return(lst[n] !== undefined) ? lst[n] : undefined;
   },
 
   /**
@@ -135,20 +115,14 @@ fn.prototype = Object.freeze({
    * execept the first element into a callback.
    *
    * Example:
-   * FN.rest((remainingElements) => {
-   *   remainingElements.forEach((element) => {
-   *    console.log(element);
-   *   });
-   * }, 1, 2, 3, 4, 5);
+   * FN.rest([1, 2, 3, 4, 5]);
    *
-   * @param {function} cb - The callback to execute in the form: (remainingElements) =>  {...}
-   * @param {...(number|string|array|function|boolean)} lst - The arguments to FN.rest. FN.rest takes a variable number of
-   * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined.
+   * @param {array} lst - The arguments to FN.rest.
+   * @return The rest of the list or undefined.
    * @see FN.first
    */
-  "rest": (cb, ...lst) => {
-    return(cb !== undefined && lst !== undefined && lst.length > 1) ? cb(lst.slice(1)) : undefined;
+  "rest": (lst) => {
+    return(lst !== undefined && lst.length > 1) ? lst.slice(1) : undefined;
   },
 
   /**
@@ -158,30 +132,16 @@ fn.prototype = Object.freeze({
    * items passed into FN.take.
    *
    * Example:
-   * FN.take((elements) => {
-   *   elements.forEach((element) => {
-   *     console.log(element);
-   *   });
-   * }, 2, "Lions", "Tigers", "Bears");
+   * FN.take(["Lions", "Tigers", "Bears"], 2);
    *
-   * FN.take((elements) => {
-   *  elements.forEach((element) => {
-   *    console.log(element);
-   *  });
-   * }, 2, ["Lions", "Tigers", "Bears"]);
-   *
-   * @param {function} cb - The callback to execute in the form: (elements) =>  {...}
-   * @param {number} n - The number of elements to take from the remaining arguments.
-   * @param {...(string|number|array|function|boolean)} lst - The arguments to FN.take. FN.take takes a variable number of
-   * arguments and processes them all as if they were an array.
-   * @return The result of the callback or undefined.
+   * @param {array} lst - The arguments to FN.take. 
+   * @param {number} n - The number of elements to take from the array lst.
+   * @return A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.
    */
-  "take": (cb, n, ...lst) => {
-    return(cb !== undefined && n !== undefined && lst.length > 1) ?
-      cb(lst.slice(0, n)) :
-        (cb !== undefined && n !== undefined && lst.length === 1) ?
-          cb(lst[0].slice(0, n)):
-          undefined;
+  "take": (lst, n) => {
+    return lst.filter((element, index) => {
+      return(n >= index+1);  
+    });
   },
 
   /**
@@ -319,7 +279,7 @@ fn.prototype = Object.freeze({
   },
 
   /**
-  * FN.alternate is a function for applying the callback for every N elemet in
+  * FN.everyOther is a function for applying the callback for every N elemet in
   * an array.
   *
   * Example:
@@ -330,7 +290,7 @@ fn.prototype = Object.freeze({
   * @param {number} step - The interval of steps to apply a function to.
   * @return undefined.
   */
-  "alternate": (cb, arr, step) => {
+  "everyOther": (cb, arr, step) => {
     arr.forEach((element, index) => {
       if((index % step) === 0) cb(element);
     });

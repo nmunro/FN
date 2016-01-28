@@ -46,63 +46,25 @@ QUnit.test("First function", (assert) => {
 });
 
 QUnit.test("Nth function", (assert) => {
-  var done1 = assert.async();
-  var done2 = assert.async();
-
-  FN.nth((n, element) => {
-    assert.ok(element === 3, "The nth element '" + n + "' is '3' in the list [1, 2, 3, 4, 5].")
-    done1();
-  }, 2, 1, 2, 3, 4, 5);
-
-  FN.nth((n, element) => {
-    assert.notOk(element === 0, "The nth element '" + n + "' is not '0' in the list [1, 2, 3, 4, 5].")
-    done2();
-  }, 2, 1, 2, 3, 4, 5);
+  assert.ok(FN.nth([1, 2, 3, 4, 5], 2) === 3, "The nth element in position 2 is '3' in the list [1, 2, 3, 4, 5].")
+  assert.notOk(FN.nth([1, 2, 3, 4, 5], 2) === 0, "The nth element in position 2 is not '0' in the list [1, 2, 3, 4, 5].");
 });
 
 QUnit.test("Last function", (assert) => {
-  var done1 = assert.async();
-  var done2 = assert.async();
-
-  FN.last((element) => {
-    assert.ok(element === 5, "Last element in the list [1, 2, 3, 4, 5] is 5.");
-    done1();
-  }, 1, 2, 3, 4, 5);
-
-  FN.last((element) => {
-    assert.notOk(element === 0, "Last element in the list [1, 2, 3, 4, 5] is not 0.");
-    done2();
-  }, 1, 2, 3, 4, 5);
+  assert.ok(FN.last([1, 2, 3, 4, 5]) === 5, "Last element in the list [1, 2, 3, 4, 5] is 5.");
+  assert.notOk(FN.last([1, 2, 3, 4, 5]) === 2, "Last element in the list [1, 2, 3, 4, 5] is not 2.");
 });
 
 QUnit.test("Rest function", (assert) => {
-  var done1 = assert.async();
-  var done2 = assert.async();
-
-  FN.rest((rest) => {
-    assert.ok(rest.toString() === [2, 3, 4, 5].toString(), "Remainder of the array [1, 2, 3, 4, 5] is equal to [2, 3, 4, 5].");
-    done1();
-  }, 1, 2, 3, 4, 5);
-
-  FN.rest((rest) => {
-    assert.notOk(rest.toString() === [4, 5].toString(), "Remainder of the array [1, 2, 3, 4, 5] is not equal to [4, 5].");
-    done2();
-  }, 1, 2, 3, 4, 5);
+  assert.ok(FN.rest([1, 2, 3, 4, 5]).toString() === [2, 3, 4, 5].toString(), "Remainder of the array [1, 2, 3, 4, 5] is equal to [2, 3, 4, 5].");
+  assert.notOk(FN.rest([1, 2, 3, 4, 5]).toString() === [4, 5].toString(), "Remainder of the array [1, 2, 3, 4, 5] is not equal to [4, 5].");
 });
 
 QUnit.test("Take function", (assert) => {
-  var done1 = assert.async();
-  var done2 = assert.async();
-
-  FN.take((lst) => {
-    assert.ok(lst.toString() === ["Lions", "Tigers"].toString(), "Take got the first two elements of the list.");
-    done1();
-  }, 2, "Lions", "Tigers", "Bears");
-
-  FN.take((lst) => {
-    assert.ok(lst.toString() === [10, 8].toString(), "Take works with range, cool!");
-    done2();
-  }, 2, FN.range(10, 0, 2));
+  assert.ok(FN.take(["Lions", "Tigers", "Bears"], 2).toString() === ["Lions", "Tigers"].toString(), "Take got the first two elements of the list.");
+  assert.notOk(FN.take(["Lions", "Tigers", "Bears"], 2).toString() === ["Lions", "Tigers", "Bears"].toString(), "Take got the first two elements of the list.");
+  assert.ok(FN.take(FN.range(10, 0, 2), 2).toString() === [10, 8].toString(), "Take works with range, cool!");
+  assert.notOk(FN.take(FN.range(10, 0, 2), 2).toString() === [10].toString(), "Take works with range, cool!");
 });
 
 QUnit.test("If function", (assert) => {
@@ -204,11 +166,11 @@ QUnit.test("Cond tests", (assert) => {
   );
 });
 
-QUnit.test("Alternate tests", (assert) => {
+/*QUnit.test("Alternate tests", (assert) => {
 	FN.alternate((element) => {
 		assert.ok(element === 2 || element === 4 || element === 6, "Element is one of the expected numbers.");
 	}, [1, 2, 3, 4, 5, 6], 2);
-});
+});*/
 
 QUnit.test("Case tests", (assert) => {
   assert.ok(FN.case(1,
