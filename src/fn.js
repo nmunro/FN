@@ -27,40 +27,32 @@ fn.prototype = Object.freeze({
 
   /**
    * FN.any is a function which evaluates a number of
-   * expressions and runs a callback function if
-   * any of the expressions are true.
+   * expressions and returns true if ANY of the expressions
+   * themselves are true.
    *
    * Example:
-   * FN.any(() => {
-   *   console.log("One of the expressions is true.");
-   * }, 1 === 1, 5 === 5);
+   * FN.any([1 === 1, 5 === 5]);
    *
-   * @param {function} cb - The callback to execute in the form: () =>  {...}
-   * @param {...boolean} lst - The arguments to FN.any. FN.any takes a variable number of
-   * arguments and processes them all as if they were an array.
+   * @param {array} lst - The list of boolean expressions to FN.any.
    * @return The result of the callback or undefined.
    */
-  "any": (cb, ...lst) => {
-    return(cb !== undefined && lst.some((elm) => { return elm; })) ? cb() : undefined;
+  "any": (lst) => {
+    return lst.some((elm) => { return elm; });
   },
 
   /**
    * FN.all is a function which evaluates a number of
-   * expressions and runs a callback function if
-   * all of the expressions are true.
+   * expressions and returns true only if ALL of the
+   * expressions are themselves true.
    *
    * Example:
-   * FN.all(() => {
-   *   console.log("All of the expressions are true.");
-   * }, 1 === 1, 5 === 5);
+   * FN.all([1 === 1, 5 === 5]);
    *
-   * @param {function} cb - The callback to execute in the form: () =>  {...}
-   * @param {...boolean} lst - The arguments to FN.all. FN.all takes a variable number of
-   * arguments and processes them all as if they were an array.
+   * @param {array} lst - The list of boolean expressions to FN.all. 
    * @return The result of the callback or undefined.
    */
-  "all": (cb, ...lst) => {
-    return(cb !== undefined && lst.every((elm) => { return elm; })) ? cb() : undefined;
+  "all": (lst) => {
+    return lst.every((elm) => { return elm; });
   },
 
   /**
@@ -133,6 +125,7 @@ fn.prototype = Object.freeze({
    *
    * Example:
    * FN.take(["Lions", "Tigers", "Bears"], 2);
+   * FN.take(FN.range(10, 0, 2), 2);
    *
    * @param {array} lst - The arguments to FN.take. 
    * @param {number} n - The number of elements to take from the array lst.
@@ -146,23 +139,26 @@ fn.prototype = Object.freeze({
 
   /**
    * FN.if is a single branch function. It expects a
-   * callback and any number of values. The values
-   * are treated as if they were a list and the
-   * callback is executed with no arguments.
+   * callback and a single boolean expression.
+   *
+   * NOTE: FN.any and FN.all can be used here.
    *
    * Example:
    * FN.if(() => {
    *   console.log("Is true");
-   * }, 1 === 1, 2 === 2);
+   * }, true);
    *
-   * @param {function} cb - The callback to execute in the form: () =>  {...}
-   * @param {...boolean} lst - The arguments to FN.if. FN.if takes a variable number of
-   * arguments and processes them all as if they were an array.
+   * FN.if(() => {
+   *   console.log("Is true");
+   * }, FN.any([1 === 1, 2 === 2]));
+   *
+   * @param {function} cb - The callback to execute if true.
+   * @param {boolean} cond - The single boolean expression to FN.if.
    * @return The result of the callback or undefined.
    * @see FN.ifElse
    */
-  "if": (cb, ...lst) => {
-    return(cb !== undefined && lst !== undefined && lst.length > 0) ? fn.prototype.any(cb, lst) : undefined;
+  "if": (cb, cond) => {
+    return(cb !== undefined && cond) ? cb() : undefined;
   },
 
   /**
@@ -170,26 +166,33 @@ fn.prototype = Object.freeze({
    * to provide a second callback function to be executed
    * in the event that the if expression evaluates to false.
    *
-   * NOTE: Multiple FNi.fElse can be nested inside of the callback functions.
+   * NOTE: Multiple FN.fElse can be nested inside of the callback functions.
    *
    * Example:
    * FN.ifElse(() => {
    *   console.log("Is true");
    * }, () => {
    *  console.log("Is false");
-   * }, 1 === 1, 2 === 2);
+   * }, true);
+   *
+   * FN.ifElse(() => {
+   *   console.log("Is true");
+   * }, () => {
+   *  console.log("Is false");
+   * }, FN.all([1 === 1, 2 === 2]));
    *
    * @param {function} cb1 - The callback to execute in the form: () =>  {...} if true.
    * @param {function} cb2 - The callback to execute in the form: () =>  {...} if false.
-   * @param {...boolean} lst - The arguments to FN.ifElse. FN.ifElse takes a variable number of
-   * arguments and processes them all as if they were an array.
+   * @param {boolean} cond - The boolean expression to FN.ifElse.
    * @return The result of the callback or undefined.
    * @see FN.if
    */
-  "ifElse": (cb1, cb2, ...lst) => {
-    return(cb1 !== undefined && cb2 !== undefined && lst !== undefined && lst.length > 0 && lst.every((elm) => { return elm; })) ?
-      cb1() :
-      cb2();
+  "ifElse": (cb1, cb2, cond) => {
+    return(cb1 !== undefined && cb2 !== undefined) ? 
+      (cond) ?
+        cb1() :
+        cb2() :
+      undefined;
   },
 
   /**
@@ -233,9 +236,9 @@ fn.prototype = Object.freeze({
   "range": (...lst) => {
     var func;
     var start = (lst.length > 1) ? lst[0] : 0;
-    const stop = (lst[1] !== undefined) ? lst[1] : lst[0];
-    const step = (lst[2] !== undefined) ? lst[2] : 1;
     const arr = [];
+    const step = (lst[2] !== undefined) ? lst[2] : 1;
+    const stop = (lst[1] !== undefined) ? lst[1] : lst[0];
     const f1 = (() => { update(() => { start += step; }); });
     const f2 = (() => { update(() => { start -= step; }); });
     const update = ((cb) => {
@@ -283,7 +286,7 @@ fn.prototype = Object.freeze({
   * an array.
   *
   * Example:
-  * FN.alternate((elm) => { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);
+  * FN.everyOther((elm) => { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);
   *
   * @param {function} cb - The function to apply to n elements of the array.
   * @param {array} arr - The array containing the elements to apply the function to.
@@ -305,7 +308,7 @@ fn.prototype = Object.freeze({
    * FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19);
    *
    * @param {(number|string)} val - The sentinal condition.
-   * @param {...(number|string|function)} lst - The condition/function pairs to check against the sentinal
+   * @param {...(number|string|boolean|function)} lst - The condition/function pairs to check against the sentinal
    * and execute, if true.
    * @return The result of the executed function or undefined.
    */
@@ -329,21 +332,19 @@ fn.prototype = Object.freeze({
 
   /**
    * FN.sum is a function that takes a variable number of arguments and returns
-   * the sum of all arguments all arguments must be numbers, if not an error
-   * will be thrown.
+   * the sum of all arguments all arguments must be numbers, if not undefined 
+   * is returned.
    *
    * Example:
-   * FN.sum(1, 2, 3, 4, 5);
+   * FN.sum([1, 2, 3, 4, 5]);
    *
-   * @param {...number} lst The list of numbers to sum.
+   * @param {array} lst The list of numbers to sum.
    * @return The sum of the provided arguments.
-   * @throws {InvalidArgumentsException} Arguments must be numbers.
    */
-  "sum": (...lst) => {
-    var valid = lst.every((elm) => { return(typeof elm === "number"); });
-
-    if(valid) return lst.reduce((prev, curr) => { return prev + curr; });
-    else throw "Invalid Arguments Exception";
+  "sum": (lst) => {
+    return(lst.every((elm) => { return(typeof elm === "number"); })) ?
+      lst.reduce((prev, curr) => { return prev + curr; }) :
+      undefined;
   }
 });
 

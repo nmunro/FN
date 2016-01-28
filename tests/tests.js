@@ -1,43 +1,13 @@
 QUnit.test("Any function", (assert) => {
-  var done1 = assert.async();
-  var done2 = assert.async();
-
-  FN.any(() => {
-    assert.ok(true, "Result true if all the rest params evaluate to true.");
-    done1();
-  }, true, true);
-
-  FN.any(() => {
-    assert.ok(true, "Result true if only one of the rest params evaluates to true.");
-    done2();
-  }, true, false);
-
-  FN.any(() => {
-    var done3 = assert.async();
-    assert.notOk(false, "This test shouldn't run, if you see this something has gone wrong.");
-    done3();
-  }, false, false);
+  assert.ok(FN.any([true, true]) === true, "Result true if all the rest params evaluate to true.");
+  assert.ok(FN.any([true, false]) === true, "Result true if all the rest params evaluate to true.");
+  assert.ok(FN.any([false, false]) === false, "Result true if only one of the rest params evaluates to true.");
 });
 
 QUnit.test("All function", (assert) => {
-  var done1 = assert.async();
-
-  FN.all(() => {
-    assert.ok(true, "Result true if all rest params evaluate to true.");
-    done1();
-  }, true, true);
-
-  FN.all(() => {
-    var done2 = assert.async();
-    assert.notOk(false, "Result false if even one of the rest params evaluate to false, if working this test shouldn't be executed.");
-    done2();
-  }, true, false);
-
-  FN.all(() => {
-    var done3 = assert.async();
-    assert.notOk(false, "This test shouldn't run, if you see this something has gone wrong.");
-    done3();
-  }, false, false);
+  assert.ok(FN.all([true, true]) === true, "Result true if all the rest params evaluate to true.");
+  assert.ok(FN.all([true, false]) === false, "Result true if all the rest params evaluate to true.");
+  assert.ok(FN.all([false, false]) === false, "Result true if only one of the rest params evaluates to true.");
 });
 
 QUnit.test("First function", (assert) => {
@@ -73,7 +43,7 @@ QUnit.test("If function", (assert) => {
   FN.if(() => {
     assert.ok(1 === 1, "FN.if callback function has executed correctly.");
     done1();
-  }, 1 === 1, 2 === 2);
+  }, [1 === 1, 2 === 2]);
 });
 
 QUnit.test("If-else function", (assert) => {
@@ -85,14 +55,14 @@ QUnit.test("If-else function", (assert) => {
     done1();
   }, () => {
     return false;
-  }, 1 === 1, 2 === 2);
+  }, FN.any([1 === 1, 2 === 3]));
 
   FN.ifElse(() => {
     return false;
   }, () => {
     assert.ok(1 === 1, "FN.ifElse callback function has executed correctly for false.");
     done2();
-  }, 1 === 1, 2 === 3);
+  }, FN.all([1 === 1, 2 === 3]));
 });
 
 QUnit.test("Let function", (assert) => {
@@ -203,6 +173,7 @@ QUnit.test("Case tests", (assert) => {
 });
 
 QUnit.test("Sum tests", (assert) => {
-  assert.ok(FN.sum(1, 2, 3, 4, 5) === 15, "Sum of 1, 2, 3, 4 and 5 is 15.");
-  assert.notOk(FN.sum(1, 2, 3, 4, 5) === 16, "Sum of 1, 2, 3, 4 and 5 is only 15.");
+  assert.ok(FN.sum([1, 2, 3, 4, 5]) === 15, "Sum of [1, 2, 3, 4, 5] is 15.");
+  assert.notOk(FN.sum([1, 2, 3, 4, 5]) === 16, "Sum of [1, 2, 3, 4, 5] is not 16.");
+  assert.ok(FN.sum(["a", 1, 2, 3, 4, 5]) === undefined, "Sum of ['a', 1, 2, 3, 4, 5] is undefined.");
 });

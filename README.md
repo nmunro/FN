@@ -8,23 +8,19 @@
 ## Functions
 
 <dl>
-<dt><a href="#any">any(cb, ...lst)</a> ⇒</dt>
+<dt><a href="#any">any(lst)</a> ⇒</dt>
 <dd><p>FN.any is a function which evaluates a number of
-expressions and runs a callback function if
-any of the expressions are true.</p>
+expressions and returns true if ANY of the expressions
+themselves are true.</p>
 <p>Example:
-FN.any(() =&gt; {
-  console.log(&quot;One of the expressions is true.&quot;);
-}, 1 === 1, 5 === 5);</p>
+FN.any([1 === 1, 5 === 5]);</p>
 </dd>
-<dt><a href="#all">all(cb, ...lst)</a> ⇒</dt>
+<dt><a href="#all">all(lst)</a> ⇒</dt>
 <dd><p>FN.all is a function which evaluates a number of
-expressions and runs a callback function if
-all of the expressions are true.</p>
+expressions and returns true only if ALL of the
+expressions are themselves true.</p>
 <p>Example:
-FN.all(() =&gt; {
-  console.log(&quot;All of the expressions are true.&quot;);
-}, 1 === 1, 5 === 5);</p>
+FN.all([1 === 1, 5 === 5]);</p>
 </dd>
 <dt><a href="#first">first(lst)</a> ⇒</dt>
 <dd><p>FN.first returns the first element of a list.</p>
@@ -57,29 +53,37 @@ list of items. The supplied callback is executed with
 an array containing the first n elements in the list of
 items passed into FN.take.</p>
 <p>Example:
-FN.take([&quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;], 2);</p>
+FN.take([&quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;], 2);
+FN.take(FN.range(10, 0, 2), 2);</p>
 </dd>
-<dt><a href="#if">if(cb, ...lst)</a> ⇒</dt>
+<dt><a href="#if">if(cb, cond)</a> ⇒</dt>
 <dd><p>FN.if is a single branch function. It expects a
-callback and any number of values. The values
-are treated as if they were a list and the
-callback is executed with no arguments.</p>
+callback and a single boolean expression.</p>
+<p>NOTE: FN.any and FN.all can be used here.</p>
 <p>Example:
 FN.if(() =&gt; {
   console.log(&quot;Is true&quot;);
-}, 1 === 1, 2 === 2);</p>
+}, true);</p>
+<p>FN.if(() =&gt; {
+  console.log(&quot;Is true&quot;);
+}, FN.any([1 === 1, 2 === 2]));</p>
 </dd>
-<dt><a href="#ifElse">ifElse(cb1, cb2, ...lst)</a> ⇒</dt>
+<dt><a href="#ifElse">ifElse(cb1, cb2, cond)</a> ⇒</dt>
 <dd><p>FN.ifElse expands upon FN.if by permitting the user
 to provide a second callback function to be executed
 in the event that the if expression evaluates to false.</p>
-<p>NOTE: Multiple FNi.fElse can be nested inside of the callback functions.</p>
+<p>NOTE: Multiple FN.fElse can be nested inside of the callback functions.</p>
 <p>Example:
 FN.ifElse(() =&gt; {
   console.log(&quot;Is true&quot;);
 }, () =&gt; {
  console.log(&quot;Is false&quot;);
-}, 1 === 1, 2 === 2);</p>
+}, true);</p>
+<p>FN.ifElse(() =&gt; {
+  console.log(&quot;Is true&quot;);
+}, () =&gt; {
+ console.log(&quot;Is false&quot;);
+}, FN.all([1 === 1, 2 === 2]));</p>
 </dd>
 <dt><a href="#let">let(cb, objectContext)</a> ⇒</dt>
 <dd><p>FN.let creates a new isolated execution context with a set of values initilised
@@ -111,7 +115,7 @@ FN.cond(
 <dd><p>FN.everyOther is a function for applying the callback for every N elemet in
 an array.</p>
 <p>Example:
-FN.alternate((elm) =&gt; { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);</p>
+FN.everyOther((elm) =&gt; { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);</p>
 </dd>
 <dt><a href="#case">case(val, ...lst)</a> ⇒</dt>
 <dd><p>FN.case is a function that evaluates a set of conditions against a sentinal
@@ -120,12 +124,12 @@ and a final callback passed for the default condition.</p>
 <p>Example:
 FN.case(9, 1, () =&gt; 1<em>2, 2, () =&gt; 2</em>2, 3, () =&gt; 3*2, FN.default, () =&gt; 19);</p>
 </dd>
-<dt><a href="#sum">sum(...lst)</a> ⇒</dt>
+<dt><a href="#sum">sum(lst)</a> ⇒</dt>
 <dd><p>FN.sum is a function that takes a variable number of arguments and returns
-the sum of all arguments all arguments must be numbers, if not an error
-will be thrown.</p>
+the sum of all arguments all arguments must be numbers, if not undefined 
+is returned.</p>
 <p>Example:
-FN.sum(1, 2, 3, 4, 5);</p>
+FN.sum([1, 2, 3, 4, 5]);</p>
 </dd>
 </dl>
 
@@ -138,28 +142,26 @@ FN.sum(1, 2, 3, 4, 5);</p>
 FN is a functional library providing functionsinspired (ripped off) by LISP/Clojure.No, I have no shame.This is kinda just research, experimenting withfunctional programming in JS. If you howeverfind this library useful let me know and I'llkeep working on it, if you have suggestions, Imight even incorporate your ideas.This is designed to be used from within ES6.Other older versions of ES may not work properly.Copyright (c) Neil Munro 2015-2016.
 
 <a name="any"></a>
-## any(cb, ...lst) ⇒
-FN.any is a function which evaluates a number ofexpressions and runs a callback function ifany of the expressions are true.Example:FN.any(() => {  console.log("One of the expressions is true.");}, 1 === 1, 5 === 5);
+## any(lst) ⇒
+FN.any is a function which evaluates a number ofexpressions and returns true if ANY of the expressionsthemselves are true.Example:FN.any([1 === 1, 5 === 5]);
 
 **Kind**: global function  
 **Returns**: The result of the callback or undefined.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute in the form: () =>  {...} |
-| ...lst | <code>boolean</code> | The arguments to FN.any. FN.any takes a variable number of arguments and processes them all as if they were an array. |
+| lst | <code>array</code> | The list of boolean expressions to FN.any. |
 
 <a name="all"></a>
-## all(cb, ...lst) ⇒
-FN.all is a function which evaluates a number ofexpressions and runs a callback function ifall of the expressions are true.Example:FN.all(() => {  console.log("All of the expressions are true.");}, 1 === 1, 5 === 5);
+## all(lst) ⇒
+FN.all is a function which evaluates a number ofexpressions and returns true only if ALL of theexpressions are themselves true.Example:FN.all([1 === 1, 5 === 5]);
 
 **Kind**: global function  
 **Returns**: The result of the callback or undefined.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute in the form: () =>  {...} |
-| ...lst | <code>boolean</code> | The arguments to FN.all. FN.all takes a variable number of arguments and processes them all as if they were an array. |
+| lst | <code>array</code> | The list of boolean expressions to FN.all. |
 
 <a name="first"></a>
 ## first(lst) ⇒
@@ -215,7 +217,7 @@ FN.rest complements FN.first by passing everythingexecept the first element int
 
 <a name="take"></a>
 ## take(lst, n) ⇒
-FN.take runs the supplied callback with a number and alist of items. The supplied callback is executed withan array containing the first n elements in the list ofitems passed into FN.take.Example:FN.take(["Lions", "Tigers", "Bears"], 2);
+FN.take runs the supplied callback with a number and alist of items. The supplied callback is executed withan array containing the first n elements in the list ofitems passed into FN.take.Example:FN.take(["Lions", "Tigers", "Bears"], 2);FN.take(FN.range(10, 0, 2), 2);
 
 **Kind**: global function  
 **Returns**: A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.  
@@ -226,8 +228,8 @@ FN.take runs the supplied callback with a number and alist of items. The suppli
 | n | <code>number</code> | The number of elements to take from the array lst. |
 
 <a name="if"></a>
-## if(cb, ...lst) ⇒
-FN.if is a single branch function. It expects acallback and any number of values. The valuesare treated as if they were a list and thecallback is executed with no arguments.Example:FN.if(() => {  console.log("Is true");}, 1 === 1, 2 === 2);
+## if(cb, cond) ⇒
+FN.if is a single branch function. It expects acallback and a single boolean expression.NOTE: FN.any and FN.all can be used here.Example:FN.if(() => {  console.log("Is true");}, true);FN.if(() => {  console.log("Is true");}, FN.any([1 === 1, 2 === 2]));
 
 **Kind**: global function  
 **Returns**: The result of the callback or undefined.  
@@ -235,12 +237,12 @@ FN.if is a single branch function. It expects acallback and any number of value
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute in the form: () =>  {...} |
-| ...lst | <code>boolean</code> | The arguments to FN.if. FN.if takes a variable number of arguments and processes them all as if they were an array. |
+| cb | <code>function</code> | The callback to execute if true. |
+| cond | <code>boolean</code> | The single boolean expression to FN.if. |
 
 <a name="ifElse"></a>
-## ifElse(cb1, cb2, ...lst) ⇒
-FN.ifElse expands upon FN.if by permitting the userto provide a second callback function to be executedin the event that the if expression evaluates to false.NOTE: Multiple FNi.fElse can be nested inside of the callback functions.Example:FN.ifElse(() => {  console.log("Is true");}, () => { console.log("Is false");}, 1 === 1, 2 === 2);
+## ifElse(cb1, cb2, cond) ⇒
+FN.ifElse expands upon FN.if by permitting the userto provide a second callback function to be executedin the event that the if expression evaluates to false.NOTE: Multiple FN.fElse can be nested inside of the callback functions.Example:FN.ifElse(() => {  console.log("Is true");}, () => { console.log("Is false");}, true);FN.ifElse(() => {  console.log("Is true");}, () => { console.log("Is false");}, FN.all([1 === 1, 2 === 2]));
 
 **Kind**: global function  
 **Returns**: The result of the callback or undefined.  
@@ -250,7 +252,7 @@ FN.ifElse expands upon FN.if by permitting the userto provide a second callback
 | --- | --- | --- |
 | cb1 | <code>function</code> | The callback to execute in the form: () =>  {...} if true. |
 | cb2 | <code>function</code> | The callback to execute in the form: () =>  {...} if false. |
-| ...lst | <code>boolean</code> | The arguments to FN.ifElse. FN.ifElse takes a variable number of arguments and processes them all as if they were an array. |
+| cond | <code>boolean</code> | The boolean expression to FN.ifElse. |
 
 <a name="let"></a>
 ## let(cb, objectContext) ⇒
@@ -291,7 +293,7 @@ FN.cond is analogous to a switch statement. It evaluates each expressionin turn
 
 <a name="everyOther"></a>
 ## everyOther(cb, arr, step) ⇒
-FN.everyOther is a function for applying the callback for every N elemet inan array.Example:FN.alternate((elm) => { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);
+FN.everyOther is a function for applying the callback for every N elemet inan array.Example:FN.everyOther((elm) => { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);
 
 **Kind**: global function  
 **Returns**: undefined.  
@@ -312,20 +314,16 @@ FN.case is a function that evaluates a set of conditions against a sentinalcond
 | Param | Type | Description |
 | --- | --- | --- |
 | val | <code>number</code> &#124; <code>string</code> | The sentinal condition. |
-| ...lst | <code>number</code> &#124; <code>string</code> &#124; <code>function</code> | The condition/function pairs to check against the sentinal and execute, if true. |
+| ...lst | <code>number</code> &#124; <code>string</code> &#124; <code>boolean</code> &#124; <code>function</code> | The condition/function pairs to check against the sentinal and execute, if true. |
 
 <a name="sum"></a>
-## sum(...lst) ⇒
-FN.sum is a function that takes a variable number of arguments and returnsthe sum of all arguments all arguments must be numbers, if not an errorwill be thrown.Example:FN.sum(1, 2, 3, 4, 5);
+## sum(lst) ⇒
+FN.sum is a function that takes a variable number of arguments and returnsthe sum of all arguments all arguments must be numbers, if not undefined is returned.Example:FN.sum([1, 2, 3, 4, 5]);
 
 **Kind**: global function  
 **Returns**: The sum of the provided arguments.  
-**Throws**:
-
-- <code>InvalidArgumentsException</code> Arguments must be numbers.
-
 
 | Param | Type | Description |
 | --- | --- | --- |
-| ...lst | <code>number</code> | The list of numbers to sum. |
+| lst | <code>array</code> | The list of numbers to sum. |
 
