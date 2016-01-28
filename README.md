@@ -35,23 +35,19 @@ FN.last([1, 2, 3, 4, 5]);</p>
 <dt><a href="#nth">nth(lst, n)</a> ⇒</dt>
 <dd><p>FN.nth complements FN.first and FN.last by providing
 a means to grab an arbitrary element in a list by numeric
-index. The callback is executed with the second argument to
-FN.nth being the index and the rest of the arguments converted
-to the list of items to grab the index of.</p>
+index. </p>
 <p>Example:
 FN.nth([1, 2, 3, 4, 5], 2);</p>
 </dd>
-<dt><a href="#rest">rest(lst)</a> ⇒</dt>
+<dt><a href="#rest">rest(lst)</a> ⇒ <code>array</code></dt>
 <dd><p>FN.rest complements FN.first by passing everything
 execept the first element into a callback.</p>
 <p>Example:
 FN.rest([1, 2, 3, 4, 5]);</p>
 </dd>
-<dt><a href="#take">take(lst, n)</a> ⇒</dt>
-<dd><p>FN.take runs the supplied callback with a number and a
-list of items. The supplied callback is executed with
-an array containing the first n elements in the list of
-items passed into FN.take.</p>
+<dt><a href="#take">take(lst, n)</a> ⇒ <code>array</code></dt>
+<dd><p>FN.take returns a new list from the n number of elements from the
+list passed into it.</p>
 <p>Example:
 FN.take([&quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;], 2);
 FN.take(FN.range(10, 0, 2), 2);</p>
@@ -188,7 +184,7 @@ FN.last is the inverse of FN.first and returns the final element in a list.Exa
 
 <a name="nth"></a>
 ## nth(lst, n) ⇒
-FN.nth complements FN.first and FN.last by providinga means to grab an arbitrary element in a list by numericindex. The callback is executed with the second argument toFN.nth being the index and the rest of the arguments convertedto the list of items to grab the index of.Example:FN.nth([1, 2, 3, 4, 5], 2);
+FN.nth complements FN.first and FN.last by providinga means to grab an arbitrary element in a list by numericindex. Example:FN.nth([1, 2, 3, 4, 5], 2);
 
 **Kind**: global function  
 **Returns**: The nth element of the list or undefined.  
@@ -204,11 +200,11 @@ FN.nth complements FN.first and FN.last by providinga means to grab an arbitrar
 | n | <code>number</code> | The nth element in the list to try and get. |
 
 <a name="rest"></a>
-## rest(lst) ⇒
+## rest(lst) ⇒ <code>array</code>
 FN.rest complements FN.first by passing everythingexecept the first element into a callback.Example:FN.rest([1, 2, 3, 4, 5]);
 
 **Kind**: global function  
-**Returns**: The rest of the list or undefined.  
+**Returns**: <code>array</code> - - The rest of the list or undefined.  
 **See**: FN.first  
 
 | Param | Type | Description |
@@ -216,11 +212,11 @@ FN.rest complements FN.first by passing everythingexecept the first element int
 | lst | <code>array</code> | The arguments to FN.rest. |
 
 <a name="take"></a>
-## take(lst, n) ⇒
-FN.take runs the supplied callback with a number and alist of items. The supplied callback is executed withan array containing the first n elements in the list ofitems passed into FN.take.Example:FN.take(["Lions", "Tigers", "Bears"], 2);FN.take(FN.range(10, 0, 2), 2);
+## take(lst, n) ⇒ <code>array</code>
+FN.take returns a new list from the n number of elements from thelist passed into it.Example:FN.take(["Lions", "Tigers", "Bears"], 2);FN.take(FN.range(10, 0, 2), 2);
 
 **Kind**: global function  
-**Returns**: A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.  
+**Returns**: <code>array</code> - - A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.  
 
 | Param | Type | Description |
 | --- | --- | --- |

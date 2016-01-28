@@ -85,9 +85,7 @@ fn.prototype = Object.freeze({
   /**
    * FN.nth complements FN.first and FN.last by providing
    * a means to grab an arbitrary element in a list by numeric
-   * index. The callback is executed with the second argument to
-   * FN.nth being the index and the rest of the arguments converted
-   * to the list of items to grab the index of.
+   * index. 
    *
    * Example:
    * FN.nth([1, 2, 3, 4, 5], 2);
@@ -110,7 +108,7 @@ fn.prototype = Object.freeze({
    * FN.rest([1, 2, 3, 4, 5]);
    *
    * @param {array} lst - The arguments to FN.rest.
-   * @return The rest of the list or undefined.
+   * @return {array} - The rest of the list or undefined.
    * @see FN.first
    */
   "rest": (lst) => {
@@ -118,18 +116,16 @@ fn.prototype = Object.freeze({
   },
 
   /**
-   * FN.take runs the supplied callback with a number and a
-   * list of items. The supplied callback is executed with
-   * an array containing the first n elements in the list of
-   * items passed into FN.take.
-   *
+   * FN.take returns a new list from the n number of elements from the
+   * list passed into it.
+   * 
    * Example:
    * FN.take(["Lions", "Tigers", "Bears"], 2);
    * FN.take(FN.range(10, 0, 2), 2);
    *
    * @param {array} lst - The arguments to FN.take. 
    * @param {number} n - The number of elements to take from the array lst.
-   * @return A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.
+   * @return {array} - A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.
    */
   "take": (lst, n) => {
     return lst.filter((element, index) => {
