@@ -114,7 +114,7 @@ fn.prototype = Object.freeze({
    * FN.rest([1, 2, 3, 4, 5]);
    *
    * @param {array} lst - The arguments to FN.rest.
-   * @return {array} The rest of the list or undefined.
+   * @return {(array|undefined)} The rest of the list or undefined.
    * @see FN.first
    */
   "rest": (lst) => {

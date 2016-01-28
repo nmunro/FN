@@ -39,7 +39,7 @@ index. </p>
 <p>Example(s):</p>
 <p>FN.nth([1, 2, 3, 4, 5], 2);</p>
 </dd>
-<dt><a href="#rest">rest(lst)</a> ⇒ <code>array</code></dt>
+<dt><a href="#rest">rest(lst)</a> ⇒ <code>array</code> | <code>undefined</code></dt>
 <dd><p>FN.rest complements FN.first by passing everything
 execept the first element into a callback.</p>
 <p>Example(s):</p>
@@ -200,11 +200,11 @@ FN.nth complements FN.first and FN.last by providinga means to grab an arbitrar
 | n | <code>number</code> | The nth element in the list to try and get. |
 
 <a name="rest"></a>
-## rest(lst) ⇒ <code>array</code>
+## rest(lst) ⇒ <code>array</code> &#124; <code>undefined</code>
 FN.rest complements FN.first by passing everythingexecept the first element into a callback.Example(s):FN.rest([1, 2, 3, 4, 5]);
 
 **Kind**: global function  
-**Returns**: <code>array</code> - The rest of the list or undefined.  
+**Returns**: <code>array</code> &#124; <code>undefined</code> - The rest of the list or undefined.  
 **See**: FN.first  
 
 | Param | Type | Description |
