@@ -22,17 +22,17 @@ expressions are themselves true.</p>
 <p>Example(s):</p>
 <p>FN.all([1 === 1, 5 === 5]);</p>
 </dd>
-<dt><a href="#first">first(lst)</a> ⇒</dt>
+<dt><a href="#first">first(lst)</a> ⇒ <code>object</code></dt>
 <dd><p>FN.first returns the first element of a list.</p>
 <p>Example(s):</p>
 <p>FN.first([1, 2, 3, 4, 5]);</p>
 </dd>
-<dt><a href="#last">last(lst)</a> ⇒</dt>
+<dt><a href="#last">last(lst)</a> ⇒ <code>object</code></dt>
 <dd><p>FN.last is the inverse of FN.first and returns the final element in a list.</p>
 <p>Example(s):</p>
 <p>FN.last([1, 2, 3, 4, 5]);</p>
 </dd>
-<dt><a href="#nth">nth(lst, n)</a> ⇒</dt>
+<dt><a href="#nth">nth(lst, n)</a> ⇒ <code>object</code></dt>
 <dd><p>FN.nth complements FN.first and FN.last by providing
 a means to grab an arbitrary element in a list by numeric
 index. </p>
@@ -52,7 +52,7 @@ list passed into it.</p>
 <p>FN.take([&quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;], 2);</p>
 <p>FN.take(FN.range(10, 0, 2), 2);</p>
 </dd>
-<dt><a href="#if">if(cb, cond)</a> ⇒</dt>
+<dt><a href="#if">if(cb, cond)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
 <dd><p>FN.if is a single branch function. It expects a
 callback and a single boolean expression.</p>
 <p>NOTE: FN.any and FN.all can be used here.</p>
@@ -64,7 +64,7 @@ callback and a single boolean expression.</p>
   console.log(&quot;Is true&quot;);
 }, FN.any([1 === 1, 2 === 2]));</p>
 </dd>
-<dt><a href="#ifElse">ifElse(cb1, cb2, cond)</a> ⇒</dt>
+<dt><a href="#ifElse">ifElse(cb1, cb2, cond)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
 <dd><p>FN.ifElse expands upon FN.if by permitting the user
 to provide a second callback function to be executed
 in the event that the if expression evaluates to false.</p>
@@ -81,7 +81,7 @@ in the event that the if expression evaluates to false.</p>
  console.log(&quot;Is false&quot;);
 }, FN.all([1 === 1, 2 === 2]));</p>
 </dd>
-<dt><a href="#let">let(cb, objectContext)</a> ⇒</dt>
+<dt><a href="#let">let(cb, objectContext)</a> ⇒ <code>object</code></dt>
 <dd><p>FN.let creates a new isolated execution context with a set of values initilised
 within the context and visible only for the duration of the callback function.
 Note that it acts as a closure and does have access to outer variables.</p>
@@ -96,7 +96,7 @@ the programmer enters.</p>
 <p>Example(s):</p>
 <p>FN.range(0, 10, 1);</p>
 </dd>
-<dt><a href="#cond">cond(...lst)</a> ⇒</dt>
+<dt><a href="#cond">cond(...lst)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
 <dd><p>FN.cond is analogous to a switch statement. It evaluates each expression
 in turn until it first the first one that evaluates to true and runs its
 acompanying function.</p>
@@ -107,13 +107,13 @@ acompanying function.</p>
   &quot;tmp&quot; === &quot;tmp&quot;, () =&gt; { console.log(&quot;third&quot;);  }
 );</p>
 </dd>
-<dt><a href="#everyOther">everyOther(cb, arr, step)</a> ⇒</dt>
+<dt><a href="#everyOther">everyOther(cb, arr, step)</a> ⇒ <code>undefined</code></dt>
 <dd><p>FN.everyOther is a function for applying the callback for every N elemet in
 an array.</p>
 <p>Example(s):</p>
 <p>FN.everyOther((elm) =&gt; { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);</p>
 </dd>
-<dt><a href="#case">case(val, ...lst)</a> ⇒</dt>
+<dt><a href="#case">case(val, ...lst)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
 <dd><p>FN.case is a function that evaluates a set of conditions against a sentinal
 condition, the acompanying function is ran. A default condition can be passed
 and a final callback passed for the default condition.</p>
@@ -160,22 +160,22 @@ FN.all is a function which evaluates a number ofexpressions and returns true on
 | lst | <code>array</code> | The list of boolean expressions to FN.all. |
 
 <a name="first"></a>
-## first(lst) ⇒
+## first(lst) ⇒ <code>object</code>
 FN.first returns the first element of a list.Example(s):FN.first([1, 2, 3, 4, 5]);
 
 **Kind**: global function  
-**Returns**: The first element of the list or undefined.  
+**Returns**: <code>object</code> - The first element of the list or undefined.  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | lst | <code>array</code> | The list to get the first element of. |
 
 <a name="last"></a>
-## last(lst) ⇒
+## last(lst) ⇒ <code>object</code>
 FN.last is the inverse of FN.first and returns the final element in a list.Example(s):FN.last([1, 2, 3, 4, 5]);
 
 **Kind**: global function  
-**Returns**: The last element of the list or undefined.  
+**Returns**: <code>object</code> - The last element of the list or undefined.  
 **See**: FN.first  
 
 | Param | Type | Description |
@@ -183,11 +183,11 @@ FN.last is the inverse of FN.first and returns the final element in a list.Exa
 | lst | <code>array</code> | The arguments to FN.last. |
 
 <a name="nth"></a>
-## nth(lst, n) ⇒
+## nth(lst, n) ⇒ <code>object</code>
 FN.nth complements FN.first and FN.last by providinga means to grab an arbitrary element in a list by numericindex. Example(s):FN.nth([1, 2, 3, 4, 5], 2);
 
 **Kind**: global function  
-**Returns**: The nth element of the list or undefined.  
+**Returns**: <code>object</code> - The nth element of the list or undefined.  
 **See**
 
 - FN.first
@@ -224,11 +224,11 @@ FN.take returns a new list from the n number of elements from thelist passed in
 | n | <code>number</code> | The number of elements to take from the array lst. |
 
 <a name="if"></a>
-## if(cb, cond) ⇒
+## if(cb, cond) ⇒ <code>object</code> &#124; <code>undefined</code>
 FN.if is a single branch function. It expects acallback and a single boolean expression.NOTE: FN.any and FN.all can be used here.Example(s):FN.if(() => {  console.log("Is true");}, true);FN.if(() => {  console.log("Is true");}, FN.any([1 === 1, 2 === 2]));
 
 **Kind**: global function  
-**Returns**: The result of the callback or undefined.  
+**Returns**: <code>object</code> &#124; <code>undefined</code> - The result of the callback or undefined.  
 **See**: FN.ifElse  
 
 | Param | Type | Description |
@@ -237,11 +237,11 @@ FN.if is a single branch function. It expects acallback and a single boolean ex
 | cond | <code>boolean</code> | The single boolean expression to FN.if. |
 
 <a name="ifElse"></a>
-## ifElse(cb1, cb2, cond) ⇒
+## ifElse(cb1, cb2, cond) ⇒ <code>object</code> &#124; <code>undefined</code>
 FN.ifElse expands upon FN.if by permitting the userto provide a second callback function to be executedin the event that the if expression evaluates to false.NOTE: Multiple FN.fElse can be nested inside of the callback functions.Example(s):FN.ifElse(() => {  console.log("Is true");}, () => { console.log("Is false");}, true);FN.ifElse(() => {  console.log("Is true");}, () => { console.log("Is false");}, FN.all([1 === 1, 2 === 2]));
 
 **Kind**: global function  
-**Returns**: The result of the callback or undefined.  
+**Returns**: <code>object</code> &#124; <code>undefined</code> - The result of the callback or undefined.  
 **See**: FN.if  
 
 | Param | Type | Description |
@@ -251,11 +251,11 @@ FN.ifElse expands upon FN.if by permitting the userto provide a second callback
 | cond | <code>boolean</code> | The boolean expression to FN.ifElse. |
 
 <a name="let"></a>
-## let(cb, objectContext) ⇒
+## let(cb, objectContext) ⇒ <code>object</code>
 FN.let creates a new isolated execution context with a set of values initilisedwithin the context and visible only for the duration of the callback function.Note that it acts as a closure and does have access to outer variables.Example(s):FN.let(function() {  console.log("Hi my name is " + this.name + " and I am " + this.age + " years old.");}, {"age": 29, "name": "Neil Munro"});
 
 **Kind**: global function  
-**Returns**: The return value of the callback function.  
+**Returns**: <code>object</code> - The return value of the callback function.  
 **See**: FN.if  
 
 | Param | Type | Description |
@@ -277,22 +277,22 @@ FN.range generates and array of numeric values based on criteria thatthe progra
 | [step] | <code>number</code> | The number of steps/intervals. |
 
 <a name="cond"></a>
-## cond(...lst) ⇒
+## cond(...lst) ⇒ <code>object</code> &#124; <code>undefined</code>
 FN.cond is analogous to a switch statement. It evaluates each expressionin turn until it first the first one that evaluates to true and runs itsacompanying function.Example(s):FN.cond(  1 === 2, () => { console.log("first");  },  2 === 3, () => { console.log("second");  },  "tmp" === "tmp", () => { console.log("third");  });
 
 **Kind**: global function  
-**Returns**: The result of the executed function or undefined.  
+**Returns**: <code>object</code> &#124; <code>undefined</code> - The result of the executed function or undefined.  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | ...lst | <code>boolean</code> &#124; <code>function</code> | An array of expression/function pairs to evaluate/run. |
 
 <a name="everyOther"></a>
-## everyOther(cb, arr, step) ⇒
+## everyOther(cb, arr, step) ⇒ <code>undefined</code>
 FN.everyOther is a function for applying the callback for every N elemet inan array.Example(s):FN.everyOther((elm) => { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);
 
 **Kind**: global function  
-**Returns**: undefined.  
+**Returns**: <code>undefined</code> - everyOther does not return anything it applies a callback forevery other element in a list.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -301,11 +301,11 @@ FN.everyOther is a function for applying the callback for every N elemet inan a
 | step | <code>number</code> | The interval of steps to apply a function to. |
 
 <a name="case"></a>
-## case(val, ...lst) ⇒
+## case(val, ...lst) ⇒ <code>object</code> &#124; <code>undefined</code>
 FN.case is a function that evaluates a set of conditions against a sentinalcondition, the acompanying function is ran. A default condition can be passedand a final callback passed for the default condition.Example(s):FN.case(9, 1, () => 1*2, 2, () => 2*2, 3, () => 3*2, FN.default, () => 19);
 
 **Kind**: global function  
-**Returns**: The result of the executed function or undefined.  
+**Returns**: <code>object</code> &#124; <code>undefined</code> - The result of the executed function or undefined.  
 
 | Param | Type | Description |
 | --- | --- | --- |

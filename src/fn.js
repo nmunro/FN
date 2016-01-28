@@ -65,7 +65,7 @@ fn.prototype = Object.freeze({
    * FN.first([1, 2, 3, 4, 5]);
    *
    * @param {array} lst - The list to get the first element of. 
-   * @return The first element of the list or undefined.
+   * @return {object} The first element of the list or undefined.
    */
   "first": (lst) => {
     return (lst[0] !== undefined) ? lst[0] : undefined;
@@ -79,7 +79,7 @@ fn.prototype = Object.freeze({
    * FN.last([1, 2, 3, 4, 5]);
    *
    * @param {array} lst - The arguments to FN.last. 
-   * @return The last element of the list or undefined.
+   * @return {object} The last element of the list or undefined.
    * @see FN.first
    */
   "last": (lst) => {
@@ -97,7 +97,7 @@ fn.prototype = Object.freeze({
    *
    * @param {array} lst - The list to get the nth element of.
    * @param {number} n - The nth element in the list to try and get.
-   * @return The nth element of the list or undefined.
+   * @return {object} The nth element of the list or undefined.
    * @see FN.first
    * @see FN.last
    */
@@ -157,7 +157,7 @@ fn.prototype = Object.freeze({
    *
    * @param {function} cb - The callback to execute if true.
    * @param {boolean} cond - The single boolean expression to FN.if.
-   * @return The result of the callback or undefined.
+   * @return {(object|undefined)} The result of the callback or undefined.
    * @see FN.ifElse
    */
   "if": (cb, cond) => {
@@ -188,7 +188,7 @@ fn.prototype = Object.freeze({
    * @param {function} cb1 - The callback to execute in the form: () =>  {...} if true.
    * @param {function} cb2 - The callback to execute in the form: () =>  {...} if false.
    * @param {boolean} cond - The boolean expression to FN.ifElse.
-   * @return The result of the callback or undefined.
+   * @return {(object|undefined)} The result of the callback or undefined.
    * @see FN.if
    */
   "ifElse": (cb1, cb2, cond) => {
@@ -215,7 +215,7 @@ fn.prototype = Object.freeze({
   * the scope that FN.let provides.
   * @param {object} objectContext - An object containing the key/value pairs
   * that are to be created inside the execution context.
-  * @return The return value of the callback function.
+  * @return {object} The return value of the callback function.
   * @see FN.if
   */
   "let": (cb, objectContext) => {
@@ -274,7 +274,7 @@ fn.prototype = Object.freeze({
   * );
   *
   * @param {...(boolean|function)} lst - An array of expression/function pairs to evaluate/run.
-  * @return The result of the executed function or undefined.
+  * @return {object|undefined} The result of the executed function or undefined.
   */
   "cond": (...lst) => {
     var func = ((lst.length % 2) === 0) ? (() => {
@@ -299,7 +299,8 @@ fn.prototype = Object.freeze({
   * @param {function} cb - The function to apply to n elements of the array.
   * @param {array} arr - The array containing the elements to apply the function to.
   * @param {number} step - The interval of steps to apply a function to.
-  * @return undefined.
+  * @return {undefined} everyOther does not return anything it applies a callback for
+  * every other element in a list.
   */
   "everyOther": (cb, arr, step) => {
     arr.forEach((element, index) => {
@@ -319,7 +320,7 @@ fn.prototype = Object.freeze({
    * @param {(number|string)} val - The sentinal condition.
    * @param {...(number|string|boolean|function)} lst - The condition/function pairs to check against the sentinal
    * and execute, if true.
-   * @return The result of the executed function or undefined.
+   * @return {(object|undefined)} The result of the executed function or undefined.
    */
   "case": (val, ...lst) => {
     var func = ((lst.length % 2) === 0) ? (() => {
