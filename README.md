@@ -26,61 +26,38 @@ FN.all(() =&gt; {
   console.log(&quot;All of the expressions are true.&quot;);
 }, 1 === 1, 5 === 5);</p>
 </dd>
-<dt><a href="#first">first(cb, ...lst)</a> ⇒</dt>
-<dd><p>FN.first runs a callback with the first element of
-a list as its one and only parameter. The list
-in question is just a set of values passed to first.</p>
+<dt><a href="#first">first(lst)</a> ⇒</dt>
+<dd><p>FN.first returns the first element of a list.</p>
 <p>Example:
-FN.first((firstElement) =&gt; {
-  console.log(firstElement);
-}, 1, 2, 3, 4, 5);</p>
+FN.first([1, 2, 3, 4, 5]);</p>
 </dd>
-<dt><a href="#last">last(cb, ...lst)</a> ⇒</dt>
-<dd><p>FN.last is the inverse of FN.first and instead of
-passing the first element of a list into a callback
-passes the last element passed to FN.last.</p>
+<dt><a href="#last">last(lst)</a> ⇒</dt>
+<dd><p>FN.last is the inverse of FN.first and returns the final element in a list.</p>
 <p>Example:
-FN.last((lastElement) =&gt; {
-  console.log(lastElement);
-}, 1, 2, 3, 4, 5);</p>
+FN.last([1, 2, 3, 4, 5]);</p>
 </dd>
-<dt><a href="#nth">nth(cb, n, ...lst)</a> ⇒</dt>
+<dt><a href="#nth">nth(lst, n)</a> ⇒</dt>
 <dd><p>FN.nth complements FN.first and FN.last by providing
 a means to grab an arbitrary element in a list by numeric
 index. The callback is executed with the second argument to
 FN.nth being the index and the rest of the arguments converted
 to the list of items to grab the index of.</p>
 <p>Example:
-FN.nth((nthElement) =&gt; {
-  console.log(nthElement);
-}, 2, 1, 2, 3, 4, 5);</p>
+FN.nth([1, 2, 3, 4, 5], 2);</p>
 </dd>
-<dt><a href="#rest">rest(cb, ...lst)</a> ⇒</dt>
+<dt><a href="#rest">rest(lst)</a> ⇒</dt>
 <dd><p>FN.rest complements FN.first by passing everything
 execept the first element into a callback.</p>
 <p>Example:
-FN.rest((remainingElements) =&gt; {
-  remainingElements.forEach((element) =&gt; {
-   console.log(element);
-  });
-}, 1, 2, 3, 4, 5);</p>
+FN.rest([1, 2, 3, 4, 5]);</p>
 </dd>
-<dt><a href="#take">take(cb, n, ...lst)</a> ⇒</dt>
+<dt><a href="#take">take(lst, n)</a> ⇒</dt>
 <dd><p>FN.take runs the supplied callback with a number and a
 list of items. The supplied callback is executed with
 an array containing the first n elements in the list of
 items passed into FN.take.</p>
 <p>Example:
-FN.take((elements) =&gt; {
-  elements.forEach((element) =&gt; {
-    console.log(element);
-  });
-}, 2, &quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;);</p>
-<p>FN.take((elements) =&gt; {
- elements.forEach((element) =&gt; {
-   console.log(element);
- });
-}, 2, [&quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;]);</p>
+FN.take([&quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;], 2);</p>
 </dd>
 <dt><a href="#if">if(cb, ...lst)</a> ⇒</dt>
 <dd><p>FN.if is a single branch function. It expects a
@@ -121,7 +98,7 @@ FN.range(0, 10, 1);</p>
 </dd>
 <dt><a href="#cond">cond(...lst)</a> ⇒</dt>
 <dd><p>FN.cond is analogous to a switch statement. It evaluates each expression
-in turn until it first the first one that evaluates to true and runs its 
+in turn until it first the first one that evaluates to true and runs its
 acompanying function.</p>
 <p>Example:
 FN.cond(
@@ -130,8 +107,8 @@ FN.cond(
   &quot;tmp&quot; === &quot;tmp&quot;, () =&gt; { console.log(&quot;third&quot;);  }
 );</p>
 </dd>
-<dt><a href="#alternate">alternate(cb, arr, step)</a> ⇒</dt>
-<dd><p>FN.alternate is a function for applying the callback for every N elemet in
+<dt><a href="#everyOther">everyOther(cb, arr, step)</a> ⇒</dt>
+<dd><p>FN.everyOther is a function for applying the callback for every N elemet in
 an array.</p>
 <p>Example:
 FN.alternate((elm) =&gt; { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);</p>
@@ -185,36 +162,34 @@ FN.all is a function which evaluates a number ofexpressions and runs a callback
 | ...lst | <code>boolean</code> | The arguments to FN.all. FN.all takes a variable number of arguments and processes them all as if they were an array. |
 
 <a name="first"></a>
-## first(cb, ...lst) ⇒
-FN.first runs a callback with the first element ofa list as its one and only parameter. The listin question is just a set of values passed to first.Example:FN.first((firstElement) => {  console.log(firstElement);}, 1, 2, 3, 4, 5);
+## first(lst) ⇒
+FN.first returns the first element of a list.Example:FN.first([1, 2, 3, 4, 5]);
 
 **Kind**: global function  
-**Returns**: The result of the callback or undefined.  
+**Returns**: The first element of the list or undefined.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute in the form: (firstElement) =>  {...} |
-| ...lst | <code>number</code> &#124; <code>string</code> &#124; <code>array</code> &#124; <code>function</code> &#124; <code>boolean</code> | The arguments to FN.first. FN.first takes a variable number of arguments and processes them all as if they were an array. |
+| lst | <code>array</code> | The list to get the first element of. |
 
 <a name="last"></a>
-## last(cb, ...lst) ⇒
-FN.last is the inverse of FN.first and instead ofpassing the first element of a list into a callbackpasses the last element passed to FN.last.Example:FN.last((lastElement) => {  console.log(lastElement);}, 1, 2, 3, 4, 5);
+## last(lst) ⇒
+FN.last is the inverse of FN.first and returns the final element in a list.Example:FN.last([1, 2, 3, 4, 5]);
 
 **Kind**: global function  
-**Returns**: The result of the callback or undefined.  
+**Returns**: The last element of the list or undefined.  
 **See**: FN.first  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute in the form: (lastElement) =>  {...} |
-| ...lst | <code>number</code> &#124; <code>string</code> &#124; <code>array</code> &#124; <code>function</code> &#124; <code>boolean</code> | The arguments to FN.last. FN.last takes a variable number of arguments and processes them all as if they were an array. |
+| lst | <code>array</code> | The arguments to FN.last. |
 
 <a name="nth"></a>
-## nth(cb, n, ...lst) ⇒
-FN.nth complements FN.first and FN.last by providinga means to grab an arbitrary element in a list by numericindex. The callback is executed with the second argument toFN.nth being the index and the rest of the arguments convertedto the list of items to grab the index of.Example:FN.nth((nthElement) => {  console.log(nthElement);}, 2, 1, 2, 3, 4, 5);
+## nth(lst, n) ⇒
+FN.nth complements FN.first and FN.last by providinga means to grab an arbitrary element in a list by numericindex. The callback is executed with the second argument toFN.nth being the index and the rest of the arguments convertedto the list of items to grab the index of.Example:FN.nth([1, 2, 3, 4, 5], 2);
 
 **Kind**: global function  
-**Returns**: The result of the callback or undefined.  
+**Returns**: The nth element of the list or undefined.  
 **See**
 
 - FN.first
@@ -223,35 +198,32 @@ FN.nth complements FN.first and FN.last by providinga means to grab an arbitrar
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute in the form: (nthElement) =>  {...} |
+| lst | <code>array</code> | The list to get the nth element of. |
 | n | <code>number</code> | The nth element in the list to try and get. |
-| ...lst | <code>number</code> &#124; <code>string</code> &#124; <code>array</code> &#124; <code>function</code> &#124; <code>boolean</code> | The arguments to FN.nth. FN.nth takes a variable number of arguments and processes them all as if they were an array. |
 
 <a name="rest"></a>
-## rest(cb, ...lst) ⇒
-FN.rest complements FN.first by passing everythingexecept the first element into a callback.Example:FN.rest((remainingElements) => {  remainingElements.forEach((element) => {   console.log(element);  });}, 1, 2, 3, 4, 5);
+## rest(lst) ⇒
+FN.rest complements FN.first by passing everythingexecept the first element into a callback.Example:FN.rest([1, 2, 3, 4, 5]);
 
 **Kind**: global function  
-**Returns**: The result of the callback or undefined.  
+**Returns**: The rest of the list or undefined.  
 **See**: FN.first  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute in the form: (remainingElements) =>  {...} |
-| ...lst | <code>number</code> &#124; <code>string</code> &#124; <code>array</code> &#124; <code>function</code> &#124; <code>boolean</code> | The arguments to FN.rest. FN.rest takes a variable number of arguments and processes them all as if they were an array. |
+| lst | <code>array</code> | The arguments to FN.rest. |
 
 <a name="take"></a>
-## take(cb, n, ...lst) ⇒
-FN.take runs the supplied callback with a number and alist of items. The supplied callback is executed withan array containing the first n elements in the list ofitems passed into FN.take.Example:FN.take((elements) => {  elements.forEach((element) => {    console.log(element);  });}, 2, "Lions", "Tigers", "Bears");FN.take((elements) => { elements.forEach((element) => {   console.log(element); });}, 2, ["Lions", "Tigers", "Bears"]);
+## take(lst, n) ⇒
+FN.take runs the supplied callback with a number and alist of items. The supplied callback is executed withan array containing the first n elements in the list ofitems passed into FN.take.Example:FN.take(["Lions", "Tigers", "Bears"], 2);
 
 **Kind**: global function  
-**Returns**: The result of the callback or undefined.  
+**Returns**: A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute in the form: (elements) =>  {...} |
-| n | <code>number</code> | The number of elements to take from the remaining arguments. |
-| ...lst | <code>string</code> &#124; <code>number</code> &#124; <code>array</code> &#124; <code>function</code> &#124; <code>boolean</code> | The arguments to FN.take. FN.take takes a variable number of arguments and processes them all as if they were an array. |
+| lst | <code>array</code> | The arguments to FN.take. |
+| n | <code>number</code> | The number of elements to take from the array lst. |
 
 <a name="if"></a>
 ## if(cb, ...lst) ⇒
@@ -308,7 +280,7 @@ FN.range generates and array of numeric values based on criteria thatthe progra
 
 <a name="cond"></a>
 ## cond(...lst) ⇒
-FN.cond is analogous to a switch statement. It evaluates each expressionin turn until it first the first one that evaluates to true and runs its acompanying function.Example:FN.cond(  1 === 2, () => { console.log("first");  },  2 === 3, () => { console.log("second");  },  "tmp" === "tmp", () => { console.log("third");  });
+FN.cond is analogous to a switch statement. It evaluates each expressionin turn until it first the first one that evaluates to true and runs itsacompanying function.Example:FN.cond(  1 === 2, () => { console.log("first");  },  2 === 3, () => { console.log("second");  },  "tmp" === "tmp", () => { console.log("third");  });
 
 **Kind**: global function  
 **Returns**: The result of the executed function or undefined.  
@@ -317,9 +289,9 @@ FN.cond is analogous to a switch statement. It evaluates each expressionin turn
 | --- | --- | --- |
 | ...lst | <code>boolean</code> &#124; <code>function</code> | An array of expression/function pairs to evaluate/run. |
 
-<a name="alternate"></a>
-## alternate(cb, arr, step) ⇒
-FN.alternate is a function for applying the callback for every N elemet inan array.Example:FN.alternate((elm) => { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);
+<a name="everyOther"></a>
+## everyOther(cb, arr, step) ⇒
+FN.everyOther is a function for applying the callback for every N elemet inan array.Example:FN.alternate((elm) => { console.log(elm);  }, [0, 1, 2, 3, 4, 5, 6], 2);
 
 **Kind**: global function  
 **Returns**: undefined.  
