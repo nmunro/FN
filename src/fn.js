@@ -34,7 +34,7 @@ fn.prototype = Object.freeze({
    * FN.any([1 === 1, 5 === 5]);
    *
    * @param {array} lst - The list of boolean expressions to FN.any.
-   * @return The result of the callback or undefined.
+   * @return {boolean} The result of any of the expressions being true.
    */
   "any": (lst) => {
     return lst.some((elm) => { return elm; });
@@ -49,7 +49,7 @@ fn.prototype = Object.freeze({
    * FN.all([1 === 1, 5 === 5]);
    *
    * @param {array} lst - The list of boolean expressions to FN.all. 
-   * @return The result of the callback or undefined.
+   * @return {boolean} The result of all of the expressions being true.
    */
   "all": (lst) => {
     return lst.every((elm) => { return elm; });
@@ -128,9 +128,7 @@ fn.prototype = Object.freeze({
    * @return {array} A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.
    */
   "take": (lst, n) => {
-    return lst.filter((element, index) => {
-      return(n >= index+1);  
-    });
+    return lst.filter((element, index) => { return(n >= index+1); });
   },
 
   /**
@@ -230,8 +228,8 @@ fn.prototype = Object.freeze({
   * @return {array} The array built from lst.
   */
   "range": (...lst) => {
-    var func;
     var start = (lst.length > 1) ? lst[0] : 0;
+
     const arr = [];
     const step = (lst[2] !== undefined) ? lst[2] : 1;
     const stop = (lst[1] !== undefined) ? lst[1] : lst[0];
@@ -242,7 +240,7 @@ fn.prototype = Object.freeze({
       cb();
     });
 
-    func = ((stop - start) >= 0) ?
+    const func = ((stop - start) >= 0) ?
       (() => { while(start <= stop) f1(); }) :
       (() => { while(start >= stop) f2(); });
     func();
