@@ -18,11 +18,11 @@
  * @author Neil Munro <neilmunro@gmail.com>
  */
 
-const fn = function() {
-  return(this === window) ? new fn() : this;
+const FN = function() {
+  return(this === window) ? new FN() : this;
 };
 
-fn.prototype = Object.freeze({
+FN.prototype = Object.freeze({
   "name": "FN",
   "version": "0.0.1",
   "default": Symbol(":default"),
@@ -344,7 +344,7 @@ fn.prototype = Object.freeze({
       var defaultCase;
       lst.forEach((element, index) => {
         if(((index % 2) === 0) && found === undefined && element === val) found = index+1;
-        else if(element === fn.prototype.default) defaultCase = lst[index+1];
+        else if(element === FN.prototype.default) defaultCase = lst[index+1];
       });
 
       return(lst[found] !== undefined) ?
@@ -376,4 +376,4 @@ fn.prototype = Object.freeze({
   }
 });
 
-const FN = fn();
+const fn = FN();

@@ -1,7 +1,7 @@
 ## Classes
 
 <dl>
-<dt><a href="#fn">fn</a></dt>
+<dt><a href="#FN">FN</a></dt>
 <dd></dd>
 </dl>
 
@@ -129,12 +129,12 @@ is returned.</p>
 </dd>
 </dl>
 
-<a name="fn"></a>
-## fn
+<a name="FN"></a>
+## FN
 **Kind**: global class  
 **Author:** Neil Munro <neilmunro@gmail.com>  
-<a name="new_fn_new"></a>
-### new fn()
+<a name="new_FN_new"></a>
+### new FN()
 FN is a functional library providing functionsinspired (ripped off) by LISP/Clojure.No, I have no shame.This is kinda just research, experimenting withfunctional programming in JS. If you howeverfind this library useful let me know and I'llkeep working on it, if you have suggestions, Imight even incorporate your ideas.This is designed to be used from within ES6.Other older versions of ES may not work properly.Copyright (c) Neil Munro 2015-2016.
 
 <a name="any"></a>
