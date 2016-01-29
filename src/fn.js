@@ -19,7 +19,6 @@
  */
 
 const fn = function() {
-  "use strict";
   return(this === window) ? new fn() : this;
 };
 
@@ -345,7 +344,7 @@ fn.prototype = Object.freeze({
       var defaultCase;
       lst.forEach((element, index) => {
         if(((index % 2) === 0) && found === undefined && element === val) found = index+1;
-        else if(element === FN.prototype.default) defaultCase = lst[index+1];
+        else if(element === fn.prototype.default) defaultCase = lst[index+1];
       });
 
       return(lst[found] !== undefined) ?
