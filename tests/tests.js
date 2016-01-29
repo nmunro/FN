@@ -40,41 +40,41 @@ QUnit.test("Take function", (assert) => {
 QUnit.test("If function", (assert) => {
   var done1 = assert.async();
 
-  FN.if(() => {
+  FN.if([1 === 1, 2 === 2], () => {
     assert.ok(1 === 1, "FN.if callback function has executed correctly.");
     done1();
-  }, [1 === 1, 2 === 2]);
+  });
 });
 
 QUnit.test("If-else function", (assert) => {
   var done1 = assert.async();
   var done2 = assert.async();
 
-  FN.ifElse(() => {
+  FN.ifElse(FN.any([1 === 1, 2 === 3]), () => {
     assert.ok(1 === 1, "FN.ifElse callback function has executed correctly for true.");
     done1();
   }, () => {
     return false;
-  }, FN.any([1 === 1, 2 === 3]));
+  });
 
-  FN.ifElse(() => {
+  FN.ifElse(FN.all([1 === 1, 2 === 3]), () => {
     return false;
   }, () => {
     assert.ok(1 === 1, "FN.ifElse callback function has executed correctly for false.");
     done2();
-  }, FN.all([1 === 1, 2 === 3]));
+  });
 });
 
 QUnit.test("Let function", (assert) => {
   var done1 = assert.async();
   var done2 = assert.async();
 
-  FN.let(function() {
+  FN.let({"age": 29, "name": "Neil Munro"}, function() {
     assert.ok(this.age === 29, "FN.let callback function detects the correct age value");
     done1();
     assert.notOk(this.name === "John Smith", "FN.let callback function detects name is NOT 'John Smith'.");
     done2();
-  }, { "age": 29, "name": "Neil Munro" });
+  });
 });
 
 // Range isn't an asyncronous function, testing is easy.

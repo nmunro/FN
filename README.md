@@ -52,43 +52,43 @@ list passed into it.</p>
 <p>FN.take([&quot;Lions&quot;, &quot;Tigers&quot;, &quot;Bears&quot;], 2);</p>
 <p>FN.take(FN.range(10, 0, 2), 2);</p>
 </dd>
-<dt><a href="#if">if(cb, cond)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
+<dt><a href="#if">if(cond, cb)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
 <dd><p>FN.if is a single branch function. It expects a
 callback and a single boolean expression.</p>
 <p>NOTE: FN.any and FN.all can be used here.</p>
 <p>Example(s):</p>
-<p>FN.if(() =&gt; {
+<p>FN.if(true, () =&gt; { console.log(&quot;Is true&quot;); });</p>
+<p>FN.if(FN.any([1 === 1, 2 === 2]), () =&gt; {
   console.log(&quot;Is true&quot;);
-}, true);</p>
-<p>FN.if(() =&gt; {
-  console.log(&quot;Is true&quot;);
-}, FN.any([1 === 1, 2 === 2]));</p>
+});</p>
 </dd>
-<dt><a href="#ifElse">ifElse(cb1, cb2, cond)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
+<dt><a href="#ifElse">ifElse(cond, cb1, cb2)</a> ⇒ <code>object</code> | <code>undefined</code></dt>
 <dd><p>FN.ifElse expands upon FN.if by permitting the user
 to provide a second callback function to be executed
 in the event that the if expression evaluates to false.</p>
 <p>NOTE: Multiple FN.fElse can be nested inside of the callback functions.</p>
 <p>Example(s):</p>
-<p>FN.ifElse(() =&gt; {
+<p>FN.ifElse(true,
+() =&gt; {
+  console.log(&quot;Is true&quot;);
+},() =&gt; {
+ console.log(&quot;Is false&quot;);
+});</p>
+<p>FN.ifElse(FN.all([1 === 1, 2 === 2]),
+() =&gt; {
   console.log(&quot;Is true&quot;);
 }, () =&gt; {
  console.log(&quot;Is false&quot;);
-}, true);</p>
-<p>FN.ifElse(() =&gt; {
-  console.log(&quot;Is true&quot;);
-}, () =&gt; {
- console.log(&quot;Is false&quot;);
-}, FN.all([1 === 1, 2 === 2]));</p>
+});</p>
 </dd>
-<dt><a href="#let">let(cb, objectContext)</a> ⇒ <code>object</code></dt>
+<dt><a href="#let">let(objectContext, cb)</a> ⇒ <code>object</code></dt>
 <dd><p>FN.let creates a new isolated execution context with a set of values initilised
 within the context and visible only for the duration of the callback function.
 Note that it acts as a closure and does have access to outer variables.</p>
 <p>Example(s):</p>
-<p>FN.let(function() {
+<p>FN.let({&quot;age&quot;: 29, &quot;name&quot;: &quot;Neil Munro&quot;}, function() {
   console.log(&quot;Hi my name is &quot; + this.name + &quot; and I am &quot; + this.age + &quot; years old.&quot;);
-}, {&quot;age&quot;: 29, &quot;name&quot;: &quot;Neil Munro&quot;});</p>
+});</p>
 </dd>
 <dt><a href="#range">range([start], stop, [step])</a> ⇒ <code>array</code></dt>
 <dd><p>FN.range generates and array of numeric values based on criteria that
@@ -224,8 +224,8 @@ FN.take returns a new list from the n number of elements from thelist passed in
 | n | <code>number</code> | The number of elements to take from the array lst. |
 
 <a name="if"></a>
-## if(cb, cond) ⇒ <code>object</code> &#124; <code>undefined</code>
-FN.if is a single branch function. It expects acallback and a single boolean expression.NOTE: FN.any and FN.all can be used here.Example(s):FN.if(() => {  console.log("Is true");}, true);FN.if(() => {  console.log("Is true");}, FN.any([1 === 1, 2 === 2]));
+## if(cond, cb) ⇒ <code>object</code> &#124; <code>undefined</code>
+FN.if is a single branch function. It expects acallback and a single boolean expression.NOTE: FN.any and FN.all can be used here.Example(s):FN.if(true, () => { console.log("Is true"); });FN.if(FN.any([1 === 1, 2 === 2]), () => {  console.log("Is true");});
 
 **Kind**: global function  
 **Returns**: <code>object</code> &#124; <code>undefined</code> - The result of the callback or undefined.  
@@ -233,12 +233,12 @@ FN.if is a single branch function. It expects acallback and a single boolean ex
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute if true. |
 | cond | <code>boolean</code> | The single boolean expression to FN.if. |
+| cb | <code>function</code> | The callback to execute if true. |
 
 <a name="ifElse"></a>
-## ifElse(cb1, cb2, cond) ⇒ <code>object</code> &#124; <code>undefined</code>
-FN.ifElse expands upon FN.if by permitting the userto provide a second callback function to be executedin the event that the if expression evaluates to false.NOTE: Multiple FN.fElse can be nested inside of the callback functions.Example(s):FN.ifElse(() => {  console.log("Is true");}, () => { console.log("Is false");}, true);FN.ifElse(() => {  console.log("Is true");}, () => { console.log("Is false");}, FN.all([1 === 1, 2 === 2]));
+## ifElse(cond, cb1, cb2) ⇒ <code>object</code> &#124; <code>undefined</code>
+FN.ifElse expands upon FN.if by permitting the userto provide a second callback function to be executedin the event that the if expression evaluates to false.NOTE: Multiple FN.fElse can be nested inside of the callback functions.Example(s):FN.ifElse(true,() => {  console.log("Is true");},() => { console.log("Is false");});FN.ifElse(FN.all([1 === 1, 2 === 2]),() => {  console.log("Is true");}, () => { console.log("Is false");});
 
 **Kind**: global function  
 **Returns**: <code>object</code> &#124; <code>undefined</code> - The result of the callback or undefined.  
@@ -246,13 +246,13 @@ FN.ifElse expands upon FN.if by permitting the userto provide a second callback
 
 | Param | Type | Description |
 | --- | --- | --- |
+| cond | <code>boolean</code> | The boolean expression to FN.ifElse. |
 | cb1 | <code>function</code> | The callback to execute in the form: () =>  {...} if true. |
 | cb2 | <code>function</code> | The callback to execute in the form: () =>  {...} if false. |
-| cond | <code>boolean</code> | The boolean expression to FN.ifElse. |
 
 <a name="let"></a>
-## let(cb, objectContext) ⇒ <code>object</code>
-FN.let creates a new isolated execution context with a set of values initilisedwithin the context and visible only for the duration of the callback function.Note that it acts as a closure and does have access to outer variables.Example(s):FN.let(function() {  console.log("Hi my name is " + this.name + " and I am " + this.age + " years old.");}, {"age": 29, "name": "Neil Munro"});
+## let(objectContext, cb) ⇒ <code>object</code>
+FN.let creates a new isolated execution context with a set of values initilisedwithin the context and visible only for the duration of the callback function.Note that it acts as a closure and does have access to outer variables.Example(s):FN.let({"age": 29, "name": "Neil Munro"}, function() {  console.log("Hi my name is " + this.name + " and I am " + this.age + " years old.");});
 
 **Kind**: global function  
 **Returns**: <code>object</code> - The return value of the callback function.  
@@ -260,8 +260,8 @@ FN.let creates a new isolated execution context with a set of values initilised
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cb | <code>function</code> | The callback to execute in the form: function() {...}. You MUST use the original function() {} form as these bind a 'this' value to the scope that FN.let provides. |
-| objectContext | <code>object</code> | An object containing the key/value pairs that are to be created inside the execution context. |
+| objectContext | <code>object</code> | An object containing the key/value pairs |
+| cb | <code>function</code> | The callback to execute in the form: function() {...}. You MUST use the original function() {} form as these bind a 'this' value to the scope that FN.let provides. that are to be created inside the execution context. |
 
 <a name="range"></a>
 ## range([start], stop, [step]) ⇒ <code>array</code>

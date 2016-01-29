@@ -147,20 +147,18 @@ fn.prototype = Object.freeze({
    *
    * Example(s):
    *
-   * FN.if(() => {
-   *   console.log("Is true");
-   * }, true);
+   * FN.if(true, () => { console.log("Is true"); });
    *
-   * FN.if(() => {
+   * FN.if(FN.any([1 === 1, 2 === 2]), () => {
    *   console.log("Is true");
-   * }, FN.any([1 === 1, 2 === 2]));
+   * });
    *
-   * @param {function} cb - The callback to execute if true.
    * @param {boolean} cond - The single boolean expression to FN.if.
+   * @param {function} cb - The callback to execute if true.
    * @return {(object|undefined)} The result of the callback or undefined.
    * @see FN.ifElse
    */
-  "if": (cb, cond) => {
+  "if": (cond, cb) => {
     return(cb !== undefined && cond) ? cb() : undefined;
   },
 
@@ -173,25 +171,27 @@ fn.prototype = Object.freeze({
    *
    * Example(s):
    *
-   * FN.ifElse(() => {
+   * FN.ifElse(true,
+   * () => {
+   *   console.log("Is true");
+   * },() => {
+   *  console.log("Is false");
+   * });
+   *
+   * FN.ifElse(FN.all([1 === 1, 2 === 2]),
+   * () => {
    *   console.log("Is true");
    * }, () => {
    *  console.log("Is false");
-   * }, true);
+   * });
    *
-   * FN.ifElse(() => {
-   *   console.log("Is true");
-   * }, () => {
-   *  console.log("Is false");
-   * }, FN.all([1 === 1, 2 === 2]));
-   *
+   * @param {boolean} cond - The boolean expression to FN.ifElse.
    * @param {function} cb1 - The callback to execute in the form: () =>  {...} if true.
    * @param {function} cb2 - The callback to execute in the form: () =>  {...} if false.
-   * @param {boolean} cond - The boolean expression to FN.ifElse.
    * @return {(object|undefined)} The result of the callback or undefined.
    * @see FN.if
    */
-  "ifElse": (cb1, cb2, cond) => {
+  "ifElse": (cond, cb1, cb2) => {
     return(cb1 !== undefined && cb2 !== undefined) ? 
       (cond) ?
         cb1() :
@@ -206,22 +206,22 @@ fn.prototype = Object.freeze({
   *
   * Example(s):
   *
-  * FN.let(function() {
+  * FN.let({"age": 29, "name": "Neil Munro"}, function() {
   *   console.log("Hi my name is " + this.name + " and I am " + this.age + " years old.");
-  * }, {"age": 29, "name": "Neil Munro"});
+  * });
   *
+  * @param {object} objectContext - An object containing the key/value pairs
   * @param {function} cb - The callback to execute in the form: function() {...}.
   * You MUST use the original function() {} form as these bind a 'this' value to
   * the scope that FN.let provides.
-  * @param {object} objectContext - An object containing the key/value pairs
   * that are to be created inside the execution context.
   * @return {object} The return value of the callback function.
   * @see FN.if
   */
-  "let": (cb, objectContext) => {
+  "let": (obj, cb) => {
     (() => {
       var tmp = {};
-      Object.keys(objectContext).forEach((key) => tmp[key] = objectContext[key]);
+      Object.keys(obj).forEach((key) => tmp[key] = obj[key]);
       return cb.bind(tmp)();
     })();
   },
