@@ -18,7 +18,10 @@
  * @author Neil Munro <neilmunro@gmail.com>
  */
 
-const fn = function() { return(this === window) ? new fn() : this; };
+const fn = function() {
+  "use strict";
+  return(this === window) ? new fn() : this;
+};
 
 fn.prototype = Object.freeze({
   "name": "FN",
@@ -38,6 +41,7 @@ fn.prototype = Object.freeze({
    * @return {boolean} The result of any of the expressions being true.
    */
   "any": (lst) => {
+    "use strict";
     return lst.some((elm) => { return elm; });
   },
 
@@ -54,6 +58,7 @@ fn.prototype = Object.freeze({
    * @return {boolean} The result of all of the expressions being true.
    */
   "all": (lst) => {
+    "use strict";
     return lst.every((elm) => { return elm; });
   },
 
@@ -68,6 +73,7 @@ fn.prototype = Object.freeze({
    * @return {(object|undefined)} The first element of the list or undefined.
    */
   "first": (lst) => {
+    "use strict";
     return (lst[0] !== undefined) ? lst[0] : undefined;
   },
 
@@ -83,6 +89,7 @@ fn.prototype = Object.freeze({
    * @see FN.first
    */
   "last": (lst) => {
+    "use strict";
     return (lst[lst.length-1] !== undefined) ? lst[lst.length-1] : undefined;
   },
 
@@ -102,6 +109,7 @@ fn.prototype = Object.freeze({
    * @see FN.last
    */
   "nth": (lst, n) => {
+    "use strict";
     return(lst[n] !== undefined) ? lst[n] : undefined;
   },
 
@@ -118,6 +126,7 @@ fn.prototype = Object.freeze({
    * @see FN.first
    */
   "rest": (lst) => {
+    "use strict";
     return(lst !== undefined && lst.length > 1) ? lst.slice(1) : undefined;
   },
 
@@ -136,6 +145,7 @@ fn.prototype = Object.freeze({
    * @return {array} A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.
    */
   "take": (lst, n) => {
+    "use strict";
     return lst.filter((element, index) => { return(n >= index+1); });
   },
 
@@ -159,6 +169,7 @@ fn.prototype = Object.freeze({
    * @see FN.ifElse
    */
   "if": (cond, cb) => {
+    "use strict";
     return(cb !== undefined && cond) ? cb() : undefined;
   },
 
@@ -192,6 +203,7 @@ fn.prototype = Object.freeze({
    * @see FN.if
    */
   "ifElse": (cond, cb1, cb2) => {
+    "use strict";
     return(cb1 !== undefined && cb2 !== undefined) ? 
       (cond) ?
         cb1() :
@@ -219,6 +231,7 @@ fn.prototype = Object.freeze({
   * @see FN.if
   */
   "let": (obj, cb) => {
+    "use strict";
     (() => {
       var tmp = {};
       Object.keys(obj).forEach((key) => tmp[key] = obj[key]);
@@ -240,6 +253,7 @@ fn.prototype = Object.freeze({
   * @return {array} The array built from lst.
   */
   "range": (...lst) => {
+    "use strict";
     var start = (lst.length > 1) ? lst[0] : 0;
 
     const arr = [];
@@ -277,6 +291,7 @@ fn.prototype = Object.freeze({
   * @return {object|undefined} The result of the executed function or undefined.
   */
   "cond": (...lst) => {
+    "use strict";
     var func = ((lst.length % 2) === 0) ? (() => {
       var tmp;
       lst.forEach((element, index) => {
@@ -303,6 +318,7 @@ fn.prototype = Object.freeze({
   * every other element in a list.
   */
   "everyOther": (cb, arr, step) => {
+    "use strict";
     arr.forEach((element, index) => {
       if((index % step) === 0) cb(element);
     });
@@ -323,12 +339,13 @@ fn.prototype = Object.freeze({
    * @return {(object|undefined)} The result of the executed function or undefined.
    */
   "case": (val, ...lst) => {
+    "use strict";
     var func = ((lst.length % 2) === 0) ? (() => {
       var found;
       var defaultCase;
       lst.forEach((element, index) => {
         if(((index % 2) === 0) && found === undefined && element === val) found = index+1;
-        else if(element === fn.prototype.default) defaultCase = lst[index+1];
+        else if(element === FN.prototype.default) defaultCase = lst[index+1];
       });
 
       return(lst[found] !== undefined) ?
@@ -353,6 +370,7 @@ fn.prototype = Object.freeze({
    * @return {number|undefined} The sum of the provided arguments.
    */
   "sum": (lst) => {
+    "use strict";
     return(lst.every((elm) => { return(typeof elm === "number"); })) ?
       lst.reduce((prev, curr) => { return prev + curr; }) :
       undefined;
