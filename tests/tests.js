@@ -136,11 +136,11 @@ QUnit.test("Cond tests", (assert) => {
   );
 });
 
-/*QUnit.test("Alternate tests", (assert) => {
-	fn.alternate((element) => {
+QUnit.test("everyOther tests", (assert) => {
+	fn.everyOther([1, 2, 3, 4, 5, 6], 2, (element) => {
 		assert.ok(element === 2 || element === 4 || element === 6, "Element is one of the expected numbers.");
-	}, [1, 2, 3, 4, 5, 6], 2);
-});*/
+	});
+});
 
 QUnit.test("Case tests", (assert) => {
   assert.ok(fn.case(1,

@@ -316,10 +316,10 @@ FN.prototype = Object.freeze({
   * @return {undefined} everyOther does not return anything it applies a callback for
   * every other element in a list.
   */
-  "everyOther": (cb, arr, step) => {
+  "everyOther": (arr, step, cb) => {
     "use strict";
     arr.forEach((element, index) => {
-      if((index % step) === 0) cb(element);
+      if(((index+1) % step) === 0) cb(element);
     });
   },
 
