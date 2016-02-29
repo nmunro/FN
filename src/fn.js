@@ -373,6 +373,21 @@ FN.prototype = Object.freeze({
     return(lst.every((elm) => { return(typeof elm === "number"); })) ?
       lst.reduce((prev, curr) => { return prev + curr; }) :
       undefined;
+  },
+  
+  /**
+   * FN.isOdd is a function that determines if a number is odd, or not.
+   * 
+   * Example(s):
+   * 
+   * FN.isOdd(1);
+   * 
+   * @param {number} num The number to test.
+   * @return {boolean} The oddity of the number.
+   */
+  "isOdd": (num) => {
+    "use strict";
+    return num % 2 !== 0;
   }
 });
 
