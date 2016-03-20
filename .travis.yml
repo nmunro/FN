@@ -1,6 +1,7 @@
 sudo: required
 
 before_script:
+  - sudo install nodejs npm
   - sudo npm install -g grunt-cli
   
 script:
