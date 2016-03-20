@@ -1,3 +1,7 @@
+QUnit.test("FN presence", function(assert) {
+  assert.ok(FN !== undefined, "FN present!");  
+});
+
 QUnit.test("Any function", function(assert) {
   assert.ok(FN.any([true, true]) === true, "Result true if all the rest params evaluate to true.");
   assert.ok(FN.any([true, false]) === true, "Result true if all the rest params evaluate to true.");

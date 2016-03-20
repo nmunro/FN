@@ -35,7 +35,7 @@ const FN = Object.create({
    * @return {boolean} The result of any of the expressions being true.
    */
   "any": function(lst) {
-    return lst.some((elm) => { return elm; });
+    return lst.some(elm => elm);
   },
   
   /**
@@ -51,7 +51,7 @@ const FN = Object.create({
    * @return {boolean} The result of all of the expressions being true.
    */
   "all": function(lst) {
-    return lst.every((elm) => { return elm; });
+    return lst.every(elm => elm);
   },
   
   /**
@@ -133,7 +133,7 @@ const FN = Object.create({
    * @return {array} A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.
    */
   "take": function(lst, n) {
-    return lst.filter((element, index) => { return(n >= index+1); });
+    return lst.filter((element, index) => n >= index+1);
   },
   
   /**
@@ -217,7 +217,7 @@ const FN = Object.create({
   */
   "let": function(obj, cb) {
     const f = () => {
-      var tmp = {};
+      const tmp = {};
       Object.keys(obj).forEach((key) => tmp[key] = obj[key]);
       return cb.bind(tmp)();
     };
@@ -239,20 +239,19 @@ const FN = Object.create({
   */
   "range": function(...lst) {
     var start = (lst.length > 1) ? lst[0] : 0;
-
     const arr = [];
     const step = (lst[2] !== undefined) ? lst[2] : 1;
     const stop = (lst[1] !== undefined) ? lst[1] : lst[0];
     const f1 = (() => { update(() => { start += step; }); });
     const f2 = (() => { update(() => { start -= step; }); });
-    const update = ((cb) => {
+    const update = (cb) => {
       arr.push(start);
       cb();
-    });
+    };
 
     const func = ((stop - start) >= 0) ?
-      (() => { while(start <= stop) f1(); }) :
-      (() => { while(start >= stop) f2(); });
+      () => { while(start <= stop) f1(); } :
+      () => { while(start >= stop) f2(); };
     func();
 
     return arr;
@@ -351,8 +350,8 @@ const FN = Object.create({
    * @return {number|undefined} The sum of the provided arguments.
    */
   "sum": function(lst) {
-    return(lst.every((elm) => { return(typeof elm === "number"); })) ?
-      lst.reduce((prev, curr) => { return prev + curr; }) :
+    return(lst.every(elm => (typeof elm === "number"))) ?
+      lst.reduce((prev, curr) => prev + curr) :
       undefined;
   },
   
