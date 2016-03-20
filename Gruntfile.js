@@ -18,13 +18,19 @@ module.exports = function(grunt) {
         src: 'src/fn.js',
         dest: 'README.md'
       }
-    } 
+    },
+    
+    qunit: {
+      files: ['tests/index.html']  
+    }
   });
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-jsdoc-to-markdown');
   
   // Default task(s).
   grunt.registerTask('default', ['jsdoc2md', 'jshint']);
+  grunt.registerTask('test', ['qunit']);
 };
