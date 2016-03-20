@@ -18,15 +18,10 @@
  * @author Neil Munro <neilmunro@gmail.com>
  */
 
-const FN = function() {
-  return(this === window) ? new FN() : this;
-};
-
-FN.prototype = Object.freeze({
-  "name": "FN",
+const FN = Object.create({
   "version": "0.0.1",
   "default": Symbol(":default"),
-
+  
   /**
    * FN.any is a function which evaluates a number of
    * expressions and returns true if ANY of the expressions
@@ -39,11 +34,10 @@ FN.prototype = Object.freeze({
    * @param {array} lst - The list of boolean expressions to FN.any.
    * @return {boolean} The result of any of the expressions being true.
    */
-  "any": (lst) => {
-    "use strict";
+  "any": function(lst) {
     return lst.some((elm) => { return elm; });
   },
-
+  
   /**
    * FN.all is a function which evaluates a number of
    * expressions and returns true only if ALL of the
@@ -56,11 +50,10 @@ FN.prototype = Object.freeze({
    * @param {array} lst - The list of boolean expressions to FN.all. 
    * @return {boolean} The result of all of the expressions being true.
    */
-  "all": (lst) => {
-    "use strict";
+  "all": function(lst) {
     return lst.every((elm) => { return elm; });
   },
-
+  
   /**
    * FN.first returns the first element of a list.
    *
@@ -71,11 +64,10 @@ FN.prototype = Object.freeze({
    * @param {array} lst - The list to get the first element of. 
    * @return {(object|undefined)} The first element of the list or undefined.
    */
-  "first": (lst) => {
-    "use strict";
+  "first": function(lst) {
     return (lst[0] !== undefined) ? lst[0] : undefined;
   },
-
+  
   /**
    * FN.last is the inverse of FN.first and returns the final element in a list.
    *
@@ -87,11 +79,10 @@ FN.prototype = Object.freeze({
    * @return {(object|undefined)} The last element of the list or undefined.
    * @see FN.first
    */
-  "last": (lst) => {
-    "use strict";
+  "last": function(lst) {
     return (lst[lst.length-1] !== undefined) ? lst[lst.length-1] : undefined;
   },
-
+  
   /**
    * FN.nth complements FN.first and FN.last by providing
    * a means to grab an arbitrary element in a list by numeric
@@ -107,11 +98,10 @@ FN.prototype = Object.freeze({
    * @see FN.first
    * @see FN.last
    */
-  "nth": (lst, n) => {
-    "use strict";
+  "nth": function(lst, n) {
     return(lst[n] !== undefined) ? lst[n] : undefined;
   },
-
+  
   /**
    * FN.rest complements FN.first by passing everything
    * execept the first element into a callback.
@@ -124,11 +114,10 @@ FN.prototype = Object.freeze({
    * @return {(array|undefined)} The rest of the list or undefined.
    * @see FN.first
    */
-  "rest": (lst) => {
-    "use strict";
+  "rest": function(lst) {
     return(lst !== undefined && lst.length > 1) ? lst.slice(1) : undefined;
   },
-
+  
   /**
    * FN.take returns a new list from the n number of elements from the
    * list passed into it.
@@ -143,11 +132,10 @@ FN.prototype = Object.freeze({
    * @param {number} n - The number of elements to take from the array lst.
    * @return {array} A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.
    */
-  "take": (lst, n) => {
-    "use strict";
+  "take": function(lst, n) {
     return lst.filter((element, index) => { return(n >= index+1); });
   },
-
+  
   /**
    * FN.if is a single branch function. It expects a
    * callback and a single boolean expression.
@@ -167,11 +155,10 @@ FN.prototype = Object.freeze({
    * @return {(object|undefined)} The result of the callback or undefined.
    * @see FN.ifElse
    */
-  "if": (cond, cb) => {
-    "use strict";
+  "if": function(cond, cb) {
     return(cb !== undefined && cond) ? cb() : undefined;
   },
-
+  
   /**
    * FN.ifElse expands upon FN.if by permitting the user
    * to provide a second callback function to be executed
@@ -201,15 +188,14 @@ FN.prototype = Object.freeze({
    * @return {(object|undefined)} The result of the callback or undefined.
    * @see FN.if
    */
-  "ifElse": (cond, cb1, cb2) => {
-    "use strict";
+  "ifElse": function(cond, cb1, cb2) {
     return(cb1 !== undefined && cb2 !== undefined) ? 
       (cond) ?
         cb1() :
         cb2() :
       undefined;
   },
-
+  
   /**
   * FN.let creates a new isolated execution context with a set of values initilised
   * within the context and visible only for the duration of the callback function.
@@ -229,15 +215,15 @@ FN.prototype = Object.freeze({
   * @return {object} The return value of the callback function.
   * @see FN.if
   */
-  "let": (obj, cb) => {
-    "use strict";
-    (() => {
+  "let": function(obj, cb) {
+    const f = () => {
       var tmp = {};
       Object.keys(obj).forEach((key) => tmp[key] = obj[key]);
       return cb.bind(tmp)();
-    })();
+    };
+    f();
   },
-
+  
   /**
   * FN.range generates and array of numeric values based on criteria that
   * the programmer enters.
@@ -251,8 +237,7 @@ FN.prototype = Object.freeze({
   * @param {number=} step - The number of steps/intervals.
   * @return {array} The array built from lst.
   */
-  "range": (...lst) => {
-    "use strict";
+  "range": function(...lst) {
     var start = (lst.length > 1) ? lst[0] : 0;
 
     const arr = [];
@@ -272,7 +257,7 @@ FN.prototype = Object.freeze({
 
     return arr;
   },
-
+  
   /**
   * FN.cond is analogous to a switch statement. It evaluates each expression
   * in turn until it first the first one that evaluates to true and runs its
@@ -289,9 +274,8 @@ FN.prototype = Object.freeze({
   * @param {...(boolean|function)} lst - An array of expression/function pairs to evaluate/run.
   * @return {object|undefined} The result of the executed function or undefined.
   */
-  "cond": (...lst) => {
-    "use strict";
-    var func = ((lst.length % 2) === 0) ? (() => {
+  "cond": function(...lst) {
+    const func = ((lst.length % 2) === 0) ? (() => {
       var tmp;
       lst.forEach((element, index) => {
         // Expression is true, store the next argument (a function) for later use.
@@ -301,7 +285,7 @@ FN.prototype = Object.freeze({
     }) : undefined;
     return(func !== undefined) ? func() : undefined;
   },
-
+  
   /**
   * FN.everyOther is a function for applying the callback for every N elemet in
   * an array.
@@ -316,13 +300,12 @@ FN.prototype = Object.freeze({
   * @return {undefined} everyOther does not return anything it applies a callback for
   * every other element in a list.
   */
-  "everyOther": (arr, step, cb) => {
-    "use strict";
+  "everyOther": function(arr, step, cb) {
     arr.forEach((element, index) => {
       if(((index+1) % step) === 0) cb(element);
     });
   },
-
+  
   /**
    * FN.case is a function that evaluates a set of conditions against a sentinal
    * condition, the acompanying function is ran. A default condition can be passed
@@ -337,14 +320,13 @@ FN.prototype = Object.freeze({
    * and execute, if true.
    * @return {(object|undefined)} The result of the executed function or undefined.
    */
-  "case": (val, ...lst) => {
-    "use strict";
-    var func = ((lst.length % 2) === 0) ? (() => {
+  "case": function(val, ...lst) {
+    const func = ((lst.length % 2) === 0) ? (() => {
       var found;
       var defaultCase;
       lst.forEach((element, index) => {
         if(((index % 2) === 0) && found === undefined && element === val) found = index+1;
-        else if(element === FN.prototype.default) defaultCase = lst[index+1];
+        else if(element === this.default) defaultCase = lst[index+1];
       });
 
       return(lst[found] !== undefined) ?
@@ -355,7 +337,7 @@ FN.prototype = Object.freeze({
     }) : undefined;
     return(func !== undefined) ? func() : undefined;
   },
-
+  
   /**
    * FN.sum is a function that takes a variable number of arguments and returns
    * the sum of all arguments all arguments must be numbers, if not undefined 
@@ -368,8 +350,7 @@ FN.prototype = Object.freeze({
    * @param {array} lst The list of numbers to sum.
    * @return {number|undefined} The sum of the provided arguments.
    */
-  "sum": (lst) => {
-    "use strict";
+  "sum": function(lst) {
     return(lst.every((elm) => { return(typeof elm === "number"); })) ?
       lst.reduce((prev, curr) => { return prev + curr; }) :
       undefined;
@@ -386,9 +367,6 @@ FN.prototype = Object.freeze({
    * @return {boolean} The oddity of the number.
    */
   "isOdd": (num) => {
-    "use strict";
     return num % 2 !== 0;
   }
 });
-
-const fn = FN();
