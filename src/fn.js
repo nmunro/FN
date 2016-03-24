@@ -365,7 +365,7 @@ const FN = Object.create({
    * @param {number} num The number to test.
    * @return {boolean} The oddity of the number.
    */
-  "isOdd": (num) => {
+  "isOdd": function(num) {
     return num % 2 !== 0;
   }
 });
