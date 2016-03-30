@@ -197,6 +197,29 @@ const FN = Object.create({
   },
   
   /**
+   * FN.unless is a single branch function. It expects a
+   * callback and a single boolean expression.
+   *
+   * NOTE: FN.any and FN.all can be used here.
+   *
+   * Example(s):
+   *
+   * FN.unless(false, () => { console.log("Is False"); });
+   *
+   * FN.unless(FN.any([1 !== 1, 2 !== 2]), () => {
+   *   console.log("Is False");
+   * });
+   *
+   * @param {boolean} cond - The single boolean expression to FN.if.
+   * @param {function} cb - The callback to execute if true.
+   * @return {(object|undefined)} The result of the callback or undefined.
+   * @see FN.if
+   */
+  "unless": function(cond, cb) {
+    return(cb !== undefined && !cond) ? cb() : undefined;
+  },
+  
+  /**
   * FN.let creates a new isolated execution context with a set of values initilised
   * within the context and visible only for the duration of the callback function.
   * Note that it acts as a closure and does have access to outer variables.
