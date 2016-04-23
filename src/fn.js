@@ -55,6 +55,23 @@ const FN = Object.create({
   },
   
   /**
+   * FN.or is a function which evaluates a number
+   * of expressions and returns the first truthy value
+   * or the last value.
+   * 
+   * Example(s):
+   * 
+   * FN.or(0, 0, 1); // returns 1
+   * FN.or(0, 1, 2); // returns 1
+   * FN.or(2, 1, 3); // returns 2
+   * FN.or(false, true, false); // returns true
+   * 
+   */
+  "or": function(...lst) {
+    return lst.find((v) => !!v) || this.last(lst);  
+  },
+  
+  /**
    * FN.first returns the first element of a list.
    *
    * Example(s):
