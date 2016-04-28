@@ -1,5 +1,5 @@
 QUnit.test("FN presence", function(assert) {
-  assert.ok(FN !== undefined, "FN present!");  
+  assert.ok(FN !== undefined, "FN present!");
 });
 
 QUnit.test("Any function", function(assert) {
@@ -180,4 +180,12 @@ QUnit.test("Sum tests", function(assert) {
   assert.ok(FN.sum([1, 2, 3, 4, 5]) === 15, "Sum of [1, 2, 3, 4, 5] is 15.");
   assert.notOk(FN.sum([1, 2, 3, 4, 5]) === 16, "Sum of [1, 2, 3, 4, 5] is not 16.");
   assert.ok(FN.sum(["a", 1, 2, 3, 4, 5]) === undefined, "Sum of ['a', 1, 2, 3, 4, 5] is undefined.");
+});
+
+QUnit.test("Or function", function(assert) {
+  assert.ok(FN.or(31, false, 32) === 31, "Got first truthy value: 31.");
+  assert.ok(FN.or(false, 31) === 31, "Got first truthy value: 31.");
+  assert.ok(FN.or(false, "a") === "a", "Got first truthy value: 'a'.");
+	assert.ok(FN.or(false, false, false) === false, "Got final value: false.");
+	assert.ok(FN.or(false, true, false) === true, "Got first truthy value: true.");
 });

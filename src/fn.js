@@ -21,7 +21,7 @@
 const FN = Object.create({
   "version": "0.0.1",
   "default": Symbol(":default"),
-  
+
   /**
    * FN.any is a function which evaluates a number of
    * expressions and returns true if ANY of the expressions
@@ -37,7 +37,7 @@ const FN = Object.create({
   "any": function(lst) {
     return lst.some(elm => elm);
   },
-  
+
   /**
    * FN.all is a function which evaluates a number of
    * expressions and returns true only if ALL of the
@@ -47,30 +47,31 @@ const FN = Object.create({
    *
    * FN.all([1 === 1, 5 === 5]);
    *
-   * @param {array} lst - The list of boolean expressions to FN.all. 
+   * @param {array} lst - The list of boolean expressions to FN.all.
    * @return {boolean} The result of all of the expressions being true.
    */
   "all": function(lst) {
     return lst.every(elm => elm);
   },
-  
+
   /**
    * FN.or is a function which evaluates a number
    * of expressions and returns the first truthy value
    * or the last value.
-   * 
+   *
    * Example(s):
-   * 
+   *
    * FN.or(0, 0, 1); // returns 1
    * FN.or(0, 1, 2); // returns 1
    * FN.or(2, 1, 3); // returns 2
    * FN.or(false, true, false); // returns true
-   * 
+   *
    */
   "or": function(...lst) {
-    return lst.find((v) => !!v) || this.last(lst);  
+		// Converts the value to logical not of the value, forcing to boolean and flipping it.
+    return lst.find((v) => !!v) || this.last(lst);
   },
-  
+
   /**
    * FN.first returns the first element of a list.
    *
@@ -78,13 +79,13 @@ const FN = Object.create({
    *
    * FN.first([1, 2, 3, 4, 5]);
    *
-   * @param {array} lst - The list to get the first element of. 
+   * @param {array} lst - The list to get the first element of.
    * @return {(object|undefined)} The first element of the list or undefined.
    */
   "first": function(lst) {
     return (lst[0] !== undefined) ? lst[0] : undefined;
   },
-  
+
   /**
    * FN.last is the inverse of FN.first and returns the final element in a list.
    *
@@ -92,18 +93,18 @@ const FN = Object.create({
    *
    * FN.last([1, 2, 3, 4, 5]);
    *
-   * @param {array} lst - The arguments to FN.last. 
+   * @param {array} lst - The arguments to FN.last.
    * @return {(object|undefined)} The last element of the list or undefined.
    * @see FN.first
    */
   "last": function(lst) {
     return (lst[lst.length-1] !== undefined) ? lst[lst.length-1] : undefined;
   },
-  
+
   /**
    * FN.nth complements FN.first and FN.last by providing
    * a means to grab an arbitrary element in a list by numeric
-   * index. 
+   * index.
    *
    * Example(s):
    *
@@ -118,7 +119,7 @@ const FN = Object.create({
   "nth": function(lst, n) {
     return(lst[n] !== undefined) ? lst[n] : undefined;
   },
-  
+
   /**
    * FN.rest complements FN.first by passing everything
    * execept the first element into a callback.
@@ -134,25 +135,25 @@ const FN = Object.create({
   "rest": function(lst) {
     return(lst !== undefined && lst.length > 1) ? lst.slice(1) : undefined;
   },
-  
+
   /**
    * FN.take returns a new list from the n number of elements from the
    * list passed into it.
-   * 
+   *
    * Example(s):
    *
    * FN.take(["Lions", "Tigers", "Bears"], 2);
    *
    * FN.take(FN.range(10, 0, 2), 2);
    *
-   * @param {array} lst - The arguments to FN.take. 
+   * @param {array} lst - The arguments to FN.take.
    * @param {number} n - The number of elements to take from the array lst.
    * @return {array} A new list made up of the n number of elements, if n is bigger than the list the whole list is returned.
    */
   "take": function(lst, n) {
     return lst.filter((element, index) => n >= index+1);
   },
-  
+
   /**
    * FN.if is a single branch function. It expects a
    * callback and a single boolean expression.
@@ -175,7 +176,7 @@ const FN = Object.create({
   "if": function(cond, cb) {
     return(cb !== undefined && cond) ? cb() : undefined;
   },
-  
+
   /**
    * FN.ifElse expands upon FN.if by permitting the user
    * to provide a second callback function to be executed
@@ -206,13 +207,13 @@ const FN = Object.create({
    * @see FN.if
    */
   "ifElse": function(cond, cb1, cb2) {
-    return(cb1 !== undefined && cb2 !== undefined) ? 
+    return(cb1 !== undefined && cb2 !== undefined) ?
       (cond) ?
         cb1() :
         cb2() :
       undefined;
   },
-  
+
   /**
    * FN.unless is a single branch function. It expects a
    * callback and a single boolean expression.
@@ -235,7 +236,7 @@ const FN = Object.create({
   "unless": function(cond, cb) {
     return(cb !== undefined && !cond) ? cb() : undefined;
   },
-  
+
   /**
   * FN.let creates a new isolated execution context with a set of values initilised
   * within the context and visible only for the duration of the callback function.
@@ -256,14 +257,10 @@ const FN = Object.create({
   * @see FN.if
   */
   "let": function(obj, cb) {
-    const f = () => {
-      const tmp = {};
-      Object.keys(obj).forEach((key) => tmp[key] = obj[key]);
-      return cb.bind(tmp)();
-    };
-    f();
+		const f = () => cb.bind(obj)();
+		f();
   },
-  
+
   /**
   * FN.range generates and array of numeric values based on criteria that
   * the programmer enters.
@@ -296,7 +293,7 @@ const FN = Object.create({
 
     return arr;
   },
-  
+
   /**
   * FN.cond is analogous to a switch statement. It evaluates each expression
   * in turn until it first the first one that evaluates to true and runs its
@@ -324,7 +321,7 @@ const FN = Object.create({
     }) : undefined;
     return(func !== undefined) ? func() : undefined;
   },
-  
+
   /**
   * FN.everyOther is a function for applying the callback for every N elemet in
   * an array.
@@ -344,7 +341,7 @@ const FN = Object.create({
       if(((index+1) % step) === 0) cb(element);
     });
   },
-  
+
   /**
    * FN.case is a function that evaluates a set of conditions against a sentinal
    * condition, the acompanying function is ran. A default condition can be passed
@@ -360,7 +357,7 @@ const FN = Object.create({
    * @return {(object|undefined)} The result of the executed function or undefined.
    */
   "case": function(val, ...lst) {
-    const func = ((lst.length % 2) === 0) ? (() => {
+    const func = ((lst.length % 2) === 0) ? () => {
       var found;
       var defaultCase;
       lst.forEach((element, index) => {
@@ -373,13 +370,13 @@ const FN = Object.create({
         (defaultCase !== undefined) ?
           defaultCase() :
           undefined;
-    }) : undefined;
+    } : undefined;
     return(func !== undefined) ? func() : undefined;
   },
-  
+
   /**
    * FN.sum is a function that takes a variable number of arguments and returns
-   * the sum of all arguments all arguments must be numbers, if not undefined 
+   * the sum of all arguments all arguments must be numbers, if not undefined
    * is returned.
    *
    * Example(s):
@@ -394,14 +391,14 @@ const FN = Object.create({
       lst.reduce((prev, curr) => prev + curr) :
       undefined;
   },
-  
+
   /**
    * FN.isOdd is a function that determines if a number is odd, or not.
-   * 
+   *
    * Example(s):
-   * 
+   *
    * FN.isOdd(1);
-   * 
+   *
    * @param {number} num The number to test.
    * @return {boolean} The oddity of the number.
    */
