@@ -18,6 +18,8 @@
  * @author Neil Munro <neilmunro@gmail.com>
  */
 
+ "use strict";
+
 const FN = Object.create({
   "version": "0.0.1",
   "default": Symbol(":default"),
